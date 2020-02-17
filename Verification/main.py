@@ -6,7 +6,7 @@ import Stress
 import math as m
 
 ######################## Part I - parameters as in assignment #######################################
-aircraft = "B737" # Write either A320, F100, CRJ700 or Do228 (bear in mind capitals); this is used for aerodynamic loading
+aircraft = "CRJ700" # Write either A320, F100, CRJ700 or Do228 (bear in mind capitals); this is used for aerodynamic loading
 Ca = 0.605  # m
 la = 2.661  # m
 x1 = 0.172  # m
