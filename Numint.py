@@ -13,6 +13,6 @@ def comp_num_int(a, b, f, n=3):
 
 
 
-        function_value += simpson(fo, f1, f2, xlst(i), xlst(i+1))
+        function_value += simpson(fo, f1, f2, xlst[i], xlst[i+1])
 
 
