@@ -19,14 +19,17 @@ def comp_num_int(x_lst,f_lst):
         while i < len(x_lst)-2:
             function_sum += simpson(f_lst[i], f_lst[i+1], f_lst[i+2], x_lst[i], x_lst[i+2])
             i += 2
+            print('simpsons')
+
         if i != len(x_lst):
             #do trap rule
             while i != len(x_lst)-1:
                 function_sum += trapezoid(f_lst[i],f_lst[i+1],x_lst[i],x_lst[i+1])
+                print('trap')
                 i += 1
         
     else:
         raise Exception('Not equal number of points as function values')
     return function_sum
 
-print(comp_num_int([0,1,2,3,4,5,6,7,8],[1,1,1,1,1,1,1,1,1]))
+print(comp_num_int([0,1,2,3,4,5,6,7,8,9,10,11],[1,1,1,1,1,1,1,1,1,1,1,1]))
