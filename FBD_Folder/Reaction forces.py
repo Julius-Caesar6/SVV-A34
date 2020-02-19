@@ -22,7 +22,7 @@ from FBD_Folder.Constants import *
 # C5,
 # ]])
 
- def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J):
+def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J):
     equations = np.zeros((12,12))
     resultants = np.zeros((12,1))
     # First equation My:
@@ -30,7 +30,7 @@ from FBD_Folder.Constants import *
  #   [Rz1, Ry1, Rz2, Ry2, Rz3, Ry3, Rj, C1, C2, C3, C4, C5]
     row1 = [Macaulay(x1,1,1).result(la), 0,  Macaulay(x2,1,1).result(la), 0, Macaulay(x3,1,1).result(la), 0, Macaulay(x2-(xa/2), np.cos(beta), 1).result(la), 0, 0, 0, 0, 0]
     #b:
-    brow1 = [Macaulay(x2+(xa/2),-p,1).result(la)]
+    brow1 = [Macaulay(x2+(xa/2),-P,1).result(la)]
 
    # Second equation Mz:
     row2 = [0, Macaulay(x1, -1, 1).result(la), 0, Macaulay(x2, -1 ,1).result(la), 0, Macaulay(x3,-1,1).result(la), Macaulay(x2-(xa/2), -np.sin(beta), 1).result(la), 0, 0, 0, 0, 0]
@@ -62,7 +62,7 @@ from FBD_Folder.Constants import *
     # Seventh equation Vy(x2..)
     row7 = [0, (Macaulay(x1, 1/(6*E*Izz), 3).result(x2)) - (Macaulay(x1, (ztilde**2)/(G*J), 1).result(x2)), 0, 0, 0, 0, (Macaulay(x2-(xa/2), np.sin(beta)/(6*E*Izz), 3).result(x2)) - (Macaulay(x2-(xa/2), (ztilde**2)*np.sin(beta)/(G*J), 1).result(x2)), x2, 1, 0, 0, -ztilde]
     #b:
-    brow7: = [] #TODO add loads
+    brow7 = [] #TODO add loads
 
     # Eight equation Vy(x3..)
     row8 = [0, (Macaulay(x1, 1/(6*E*Izz), 3).result(x3))-(Macaulay(x1, (ztilde**2)/(G*J), 1).result(x3)), 0, (Macaulay(x2, 1/(6*E*Izz), 3).result(x3))-(Macaulay(x2, (ztilde**2)/(G*J), 1).result(x3)), 0, 0, (Macaulay(x2-(xa/2), np.sin(beta)/(6*E*Izz), 3).result(x3)) - (Macaulay(x2-(xa/2), (ztilde**2)*np.sin(beta)/(G*J), 1).result(x3)), x3, 1, 0, 0, -ztilde]
