@@ -1,4 +1,4 @@
-"""we are going to make a pretty file to do numerical intergation v1"""
+"""we are going to make a pretty file to do numerical integration v1"""
 import numpy as np
 
 
