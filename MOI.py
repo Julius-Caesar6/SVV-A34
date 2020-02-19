@@ -95,7 +95,7 @@ Steiner_straight_y = 2*(straight*t)*((ca-h/2)/2)**2
 Izz_total = Izz_circle + Izz_straight + Steiner_z + Izz_stringer*17 + Steiner_straight_z + Izz_spar
 Iyy_total = Iyy_circle +Iyy_straight + Steiner_y + Iyy_stringer*17 + Steiner_circle_y + Steiner_straight_y
 
-print(Izz_total, Iyy_straight)
+print(Izz_total, Iyy_total)
 
 #enclosed area
 Am_cell1 = (np.pi*(h/2)**2)/2
