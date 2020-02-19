@@ -23,6 +23,7 @@ from FBD_Folder.Constants import *
 # ]])
 
 def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J):
+    beta = np.radians(beta)
     equations = np.zeros((12,12))
     resultants = np.zeros((12,1))
     # First equation My:
