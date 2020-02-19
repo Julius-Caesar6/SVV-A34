@@ -81,3 +81,19 @@ def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, p, E
     row11 = [0,0,0,0,0,0,0,0,0,x1, 1,0]
     #b:
     brow11 = [d1*np.sin(beta)]
+
+    equations[0] = row1
+    equations[1] = row2
+    equations[2] = row3
+    equations[3] = row4
+    equations[4] = row5
+    equations[5] = row6
+    equations[6] = row7
+    equations[7] = row8
+    equations[8] = row9
+    equations[9] = row10
+    equations[10] = row11
+  #  equations[11] = row12
+
+  
+
