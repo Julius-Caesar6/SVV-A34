@@ -95,5 +95,5 @@ def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, p, E
     equations[10] = row11
   #  equations[11] = row12
 
-  
+
 
