@@ -1,5 +1,7 @@
 from FBD_Folder.Macaulay import Macaulay
 import numpy as np
+from FBD_Folder.Constants import *
+
 #Solving reaction forces using Ax = b
 # A = equations
 # x = unknowns
@@ -20,7 +22,7 @@ import numpy as np
 # C5,
 # ]])
 
-def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, p, E, Izz, Iyy, G, J):
+ def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J):
     equations = np.zeros((12,12))
     resultants = np.zeros((12,1))
     # First equation My:
