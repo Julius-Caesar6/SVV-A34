@@ -1,6 +1,9 @@
 import unittest
 from Numint import simpson, trapezoid,  comp_num_int
 
+class num_int_tests(unittest.Testcase):
+
+    
 
 '''
 class Macaulaytests(unittest.TestCase):
