@@ -45,14 +45,26 @@ for zz in arange:
     graph_straight1.append(-rico * zz + h / 2)
     graph_straight2.append(rico * zz - h / 2)
 
-plt.plot(arange, graph_straight1)
-plt.plot(arange, graph_straight2)
+plt.plot(arange, graph_straight1,"b")
+plt.plot(arange, graph_straight2,"b")
 
 spar_yy = np.arange(-h / 2, h / 2, 0.1)
 spar_xx = np.zeros(len(spar_yy))
 
+c1x = -np.arange(0,h/2+0.01,0.01)
+c1y = -np.sqrt((h/2)**2-c1x*c1x)
+c2x = -np.arange(0,h/2+0.01,0.01)
+c2y = np.sqrt((h/2)**2-c2x*c2x)
+
 plt.plot(spar_xx, spar_yy)
+
+plt.plot(c1x,c1y,"b")
+plt.plot(c2x,c2y,"b")
 plt.show()
+
+
+
+
 
 
 
