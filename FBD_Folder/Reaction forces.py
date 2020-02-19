@@ -1,0 +1,83 @@
+from FBD_Folder.Macaulay import Macaulay
+import numpy as np
+#Solving reaction forces using Ax = b
+# A = equations
+# x = unknowns
+# b = boundary conditions
+
+# Unknowns = np.array([[
+# Rz1,
+# Ry1,
+# Rz2,
+# Ry2,
+# Rz3,
+# Ry3,
+# Rj,
+# C1,
+# C2,
+# C3,
+# C4,
+# C5,
+# ]])
+
+def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, p, E, Izz, Iyy, G, J):
+    equations = np.zeros((12,12))
+    resultants = np.zeros((12,1))
+    # First equation My:
+ #   equations[0] = [Macaulay(x1,1,1).result(c), 0, Macaulay(x2,1,1).result(c)]
+ #   [Rz1, Ry1, Rz2, Ry2, Rz3, Ry3, Rj, C1, C2, C3, C4, C5]
+    row1 = [Macaulay(x1,1,1).result(la), 0,  Macaulay(x2,1,1).result(la), 0, Macaulay(x3,1,1).result(la), 0, Macaulay(x2-(xa/2), np.cos(beta), 1).result(la), 0, 0, 0, 0, 0]
+    #b:
+    brow1 = [Macaulay(x2+(xa/2),-p,1).result(la)]
+
+   # Second equation Mz:
+    row2 = [0, Macaulay(x1, -1, 1).result(la), 0, Macaulay(x2, -1 ,1).result(la), 0, Macaulay(x3,-1,1).result(la), Macaulay(x2-(xa/2), -np.sin(beta), 1).result(la), 0, 0, 0, 0, 0]
+    #b:
+    brow2 = [] #TODO How to do integral?
+
+    # Third equation Tx:
+    row3 = [0, Macaulay(x1,ztilde,0).result(la), 0, Macaulay(x2, ztilde, 0).result(la), 0, Macaulay(x3, ztilde, 0).result(la), Macaulay(x2-(xa/2), ztilde*np.sin(beta), 0).result(la), 0, 0, 0, 0, 0]
+    #b:
+    brow3 = [] #TODO add loads
+
+    # Fourth equation Sy:
+    row4 = [0, Macaulay(x1, -1, 0).result(la), 0, Macaulay(x2, -1,0).result(la), 0, Macaulay(x3, -1, 0).result(la), Macaulay(x2-(xa/2), -np.sin(beta),0).result(la), 0 ,0, 0, 0, 0]
+    #b:
+    brow4 = [] #TODO add loads
+
+    # Fifth equation Sz:
+    row5 = [Macaulay(x1, 1,0).result(la), 0, Macaulay(x2, 1, 0).result(la), 0, Macaulay(x3,1,0).result(la), 0, Macaulay(x2-(xa/2), np.cos(beta),0).result(la), 0, 0, 0, 0, 0]
+    #b:
+    brow5 = [] #TODO add loads
+
+    # Sixth equation Vy(x1) - theta(x1)ztilde
+    row6 = [0,0,0,0,0,0,0, x1, 1, 0, 0, -ztilde]
+    #b:
+    brow6 = [] #TODO add loads
+
+    #   [Rz1, Ry1, Rz2, Ry2, Rz3, Ry3, Rj, C1, C2, C3, C4, C5]
+
+    # Seventh equation Vy(x2..)
+    row7 = [0, (Macaulay(x1, 1/(6*E*Izz), 3).result(x2)) - (Macaulay(x1, (ztilde**2)/(G*J), 1).result(x2)), 0, 0, 0, 0, (Macaulay(x2-(xa/2), np.sin(beta)/(6*E*Izz), 3).result(x2)) - (Macaulay(x2-(xa/2), (ztilde**2)*np.sin(beta)/(G*J), 1).result(x2)), x2, 1, 0, 0, -ztilde]
+    #b:
+    brow7: = [] #TODO add loads
+
+    # Eight equation Vy(x3..)
+    row8 = [0, (Macaulay(x1, 1/(6*E*Izz), 3).result(x3))-(Macaulay(x1, (ztilde**2)/(G*J), 1).result(x3)), 0, (Macaulay(x2, 1/(6*E*Izz), 3).result(x3))-(Macaulay(x2, (ztilde**2)/(G*J), 1).result(x3)), 0, 0, (Macaulay(x2-(xa/2), np.sin(beta)/(6*E*Izz), 3).result(x3)) - (Macaulay(x2-(xa/2), (ztilde**2)*np.sin(beta)/(G*J), 1).result(x3)), x3, 1, 0, 0, -ztilde]
+    #b:
+    brow8 = [] #TODO add loads
+
+    #Ninth equation Vz(x3):
+    row9 = [Macaulay(x1, -1/(6*E*Iyy), 3).result(x3), 0, Macaulay(x2, -1/(6*E*Iyy), 3).result(x3), 0, 0, Macaulay(x2-(xa/2), (-np.cos(beta))/(6*E*Iyy), 3).result(x3), 0, 0, x3, 1, 0]
+    #b:
+    brow9 = [] #TODO add loads
+
+    #Tenth equation Vz(x2):
+    row10 = [Macaulay(x1, -1/(6*E*Iyy), 3).result(x2), 0 ,0 ,0 , 0, 0, Macaulay(x2-(xa/2), (-np.cos(beta))/(6*E*Iyy), 3).result(x2), 0, 0, x2, 1, 0]
+    #b:
+    brow10 = [] #TODO add loads
+
+    #Eleventh equation Vz(x1):
+    row11 = [0,0,0,0,0,0,0,0,0,x1, 1,0]
+    #b:
+    brow11 = [d1*np.sin(beta)]

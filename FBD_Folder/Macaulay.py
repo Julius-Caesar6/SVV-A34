@@ -8,7 +8,7 @@ class Macaulay:
         self.b = b
         self.power = power
 
-    def result(self, x):
+    def result(self, x): #FIXME if power=0, does it always return 1 or 0 in case x<a
         if x < self.a:
             return 0
         else:
@@ -19,11 +19,10 @@ class Macaulay:
         self.b  = self.b / self.power
 
     def differentiate(self):
-        if self.power = 0:
+        if self.power == 0:
             self.b = 0
         else:
             self.b = self.b * self.power
             self.power -= 1
 
 
-macaulayfunction = Macaulay(1,1,1)
