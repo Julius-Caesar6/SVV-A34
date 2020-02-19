@@ -1,3 +1,6 @@
+
+
+
 class Macaulay:
     def __init__(self,a, b, power):
         # Macaulay function in form: b*<x-a>**power.
@@ -15,4 +18,12 @@ class Macaulay:
         self.power += 1
         self.b  = self.b / self.power
 
+    def differentiate(self):
+        if self.power = 0:
+            self.b = 0
+        else:
+            self.b = self.b * self.power
+            self.power -= 1
 
+
+macaulayfunction = Macaulay(1,1,1)
