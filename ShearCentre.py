@@ -13,7 +13,7 @@ for i in output1:
     line1.append(qb1_line)
 #value1 = 1                   #integral (sin(theta).dtheta) from 0 to pi/2
 qb1 = -1/Izz_total*(t*h**2/4*(-output1[-1] + 1 ) + A_stringer*y[1] + A_stringer*y[2])
-line1plot = [q*1 for q in line1]
+line1plot = [q*100 for q in line1]
 
 plt.plot(zvalues1,line1plot)
 
@@ -30,7 +30,7 @@ for j in output2:
 
 #value2 = 37.41125                   #integral (y.dy) from 0 to h/2
 qb2 = -1/Izz_total *t*output2[-1]
-line2plot = [r*1 for r in line2]
+line2plot = [r*100 for r in line2]
 plt.plot(line2plot,yvalues2)
 
 #qb3 -------------------------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ for k in output3:
 
 #value3 =    827.44                #integral (y,dy) from 0 to straight
 qb3 = qb1 + qb2 - 1/Izz_total*t*(h/2 - (h/2)/straight*output3[-1]+ A_stringer*sum(y[3:]))
-line3plot = [b*1 for b in line3]
+line3plot = [b*100 for b in line3]
 
 plt.plot(zvalues3,line3plot)
 
@@ -59,7 +59,7 @@ for l in output4:
 
 #value4 =  827.44                  #integral (y*dy) from 0 to straight
 qb4 = qb3 - 1/Izz_total*t *  ( ((-h/2)/straight)*output4[-1] - A_stringer*sum(y[3:]))
-line4plot = [p*1 for p in line4]
+line4plot = [p*100 for p in line4]
 
 plt.plot(zvalues4, line4plot)
 
@@ -74,7 +74,7 @@ for w in output5:
 
 #value5 =     -37.41125                       #integral (y*dy) from -h/2 to 0
 qb5 = qb4 - 1/Izz_total*tspar*(0-output5[-1])
-line5plot = [a*1 for a in line5]
+line5plot = [a*100 for a in line5]
 
 plt.plot(line5plot,yvalues5)
 #qb6 -------------------------------------------------------------------------------------------------------------------
@@ -84,12 +84,12 @@ zvalues6 = np.linspace(0, -h/2, 100)
 line6 = []
 
 for e in output6:
-    qb6_line =qb4 - qb5 - (1/Izz_total)*t*h**2/4 *(-e+1) - A_stringer*y[1]-A_stringer*y[2]
+    qb6_line =qb4 - qb5 -1/Izz_total*(t*h**2/4 *(-e+1) - A_stringer*y[1]-A_stringer*y[2])
     line6.append(qb6_line)
 
 #value6 =      1               #integral (cos(theta)*dtheta) from -pi/2 to 0
-qb6 = qb4 - qb5 - (1/Izz_total)*t*h**2/4 *(-output6[-1] +1 ) - A_stringer*y[1]-A_stringer*y[2]
-line6plot = [m*1 for m in line6]
+qb6 = qb4 - qb5 - 1/Izz_total*(t*h**2/4 *(-output6[-1] +1 ) - A_stringer*y[1]-A_stringer*y[2])
+line6plot = [m*100 for m in line6]
 
 plt.plot(zvalues6,line6plot)
 #-----------------------------------------------------------------------------------------------------------------------
