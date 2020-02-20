@@ -1,4 +1,4 @@
-from MeshSpaceZ import MeshSpaceZfunc      #not necessarily needed until using the 'real' data
+from MeshSpaceXZ import MeshSpaceZfunc      #not necessarily needed until using the 'real' data
 
 
 #inip is initial power
