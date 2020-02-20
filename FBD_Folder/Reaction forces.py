@@ -85,6 +85,11 @@ def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E
     #b:
     brow11 = [d1*np.sin(beta)]
 
+    #Twelfth equation weird theta one:
+    row12 = [Macaulay(x1, (np.cos(beta))/(-E*Iyy*2), 3).result(x2-(xa/2)), Macaulay(x1, np.sin(beta)/(6*E*Izz), 3).result(x2-(xa/2)) + Macaulay(x1, (-ha*np.cos(beta)*ztilde)/(2*G*J), 1).result(x2-(xa/2)) + Macaulay(x1, ((ztilde**2)*np.sin(beta))/(G*J), 1).result(x2-(xa/2)), 0,0,0,0,0, np.sin(beta)*(x2-(xa/2)), np.sin(beta), np.cos(beta)*(x2-(xa.2)), np.cos(beta), (ztilde*np.sin(beta)) - ((ha/2)*np.cos(beta))]
+    #b:
+    brow12 = ["loads of integrals"]
+
     equations[0] = row1
     equations[1] = row2
     equations[2] = row3
