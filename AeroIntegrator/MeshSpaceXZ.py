@@ -14,8 +14,10 @@ def MeshSpaceZfunc(Nz,Ca):  #Creates a list of nodes on chord   NOTE NEGATIVE RE
 #la is length of aileron span (la = 1.691 [m])
 def MeshSpaceXfunc(Nx,la):  #Creates a list of nodes on span
     lstx = []
-    for i in range(Nz):
-        thetai = (i-1)*np.pi/Nz
-        thetai1 = (i) * np.pi / Nz
-        lstx.append((1/2)*((la/2)*(1-np.cos(thetai))+(la/2)*(1-np.cos(thetai1))))  #verification check, sum() = Nz and lst[-1] ~ Ca
+    for i in range(Nx):
+        thetai = (i-1)*np.pi/Nx
+        thetai1 = (i) * np.pi / Nx
+        lstx.append((1/2)*((la/2)*(1-np.cos(thetai))+(la/2)*(1-np.cos(thetai1))))  #verification check, sum() = Nx and lst[-1] ~ la
     return lstx
+
+#READ VERIFICATION NOTES
