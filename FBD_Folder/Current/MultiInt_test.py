@@ -1,5 +1,4 @@
-from AeroInt import *
-from MeshSpaceXZ import *
+from AeroInt import IntegrateMultiSpline
 
 lst1 = [[1,2,3,4],[5,6,7,8],[5,4,6,3]]  #Nathaniel spline maker
 lst2 = [[1,2,2,1],[4,3,2,1],[2,5,5,6]]
