@@ -1,5 +1,5 @@
 #Shear force analysis
-from MOI import *
+from MOI import z,y,Iyy_total,Izz_total,A_stringer,h,t
 import numpy as np
 
 
