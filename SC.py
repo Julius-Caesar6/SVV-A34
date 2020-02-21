@@ -53,3 +53,19 @@ sc = 2*(F1+F2) + 2*q01*Am_cell1  +  2*q02*Am_cell2
 print(sc)
 
 qb3 = r3+c31*straight+c32*straight**2
+
+
+
+#Torque analysis
+T = 1
+#T = 2*Am_cell1*qso1_t + 2*Am_cell2*qso2_t #equation1
+#G*dtheta/dx = 1/(2*Am_cell1)*((qso1_t *np.pi*(h/2)/t + (qso1_t-qso2_t)*h/tspar)) #equation2
+#G*dtheta/dx = 1/(2*Am_cell2)*((qso2_2*straight/t + (qso2_t-qso1_t)*h/tspar)) #equation3
+
+c = np.array([[2*Am_cell1,2*Am_cell2,0], [ 1/(2*Am_cell1)*((np.pi*(h/2)/t) +h/tspar) , 1/(2*Am_cell1)*(-h/tspar), -1 ] , [1/(2*Am_cell2)*(-h/tspar), 1/(2*Am_cell2)*(h/tspar + 2*straight/t), -1]])
+d = np.array([T,0,0])
+
+matrix_torque = np.linalg.solve(c,d) #0th entry is qso1_t, 1 entry is qso2_t , second entry is G*dtheta/dx
+print("mt",matrix_torque)
+J = 1/(matrix_torque[2])
+print(J)

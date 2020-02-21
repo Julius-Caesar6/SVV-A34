@@ -93,7 +93,7 @@ Steiner_z= 2*A_stringer*(sum(d2_y))
 Steiner_y = A_stringer*(h/2+ y_cen)**2 + 2*A_stringer*(sum(d2_z))
 
 Izz_circle = (np.pi * (h/2)**3 * t)/2
-Iyy_circle = Izz_circle
+Iyy_circle = (h/2)**3*t*(np.pi/2-4/np.pi)
 
 Izz_straight = (t*straight/12)*(straight**2 * (np.sin(alpha))**2)*2
 Iyy_straight = (t*straight/12)*(straight**2 * (np.cos(alpha))**2)*2
