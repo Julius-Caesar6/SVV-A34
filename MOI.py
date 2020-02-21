@@ -118,10 +118,3 @@ print(Am_cell1, Am_cell2)
 
 
 
-
-
-
-
-
-
-
