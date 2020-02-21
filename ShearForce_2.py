@@ -78,18 +78,42 @@ d = np.array([T,0,0])
 matrix_torque = np.linalg.solve(c,d) #0th entry is qso1_t, 1 entry is qso2_t , second entry is dtheta/dx
 
 #total shear flow distributions
-qb1_total= qb1 + matrix_force[0] - matrix_torque[0]
-qb2_total= qb2 - matrix_force[0] + matrix_force[1] - matrix_torque[0] + matrix_torque[1]
-qb3_total = qb3 + matrix_force[1] - matrix_torque[1]
-qb4_total = qb4 + matrix_force[1] - matrix_torque[1]
-qb5_total = qb5 - matrix_force[0] + matrix_force[1] + matrix_torque[0] - matrix_torque[1]
-qb6_total = qb6 + matrix_force[0] - matrix_torque[0]
+q1_total= qb1 + matrix_force[0] - matrix_torque[0]
+q2_total= qb2 - matrix_force[0] + matrix_force[1] - matrix_torque[0] + matrix_torque[1]
+q3_total = qb3 + matrix_force[1] - matrix_torque[1]
+q4_total = qb4 + matrix_force[1] - matrix_torque[1]
+q5_total = qb5 - matrix_force[0] + matrix_force[1] + matrix_torque[0] - matrix_torque[1]
+q6_total = qb6 + matrix_force[0] - matrix_torque[0]
 
 #z-y-q values
-qb1_zvalues = np.linspace(h/2,0,100)
-qb1_yvalues = c2y = np.sqrt((h/2)**2-qb1_zvalues**2)
-qb2_zvalues =  np.zeros(100)
-qb2_yvalues =np.linspace(0,h/2,100)
-qb3_zvalues = np.linspace(0,ca-h/2,100)
-qb3_yvalues =
-plt.plot(qb3_zvalues,qb3_yvalues)
+q1_zvalues = np.linspace(h/2,0,100)
+q1_yvalues =  np.sqrt((h/2)**2-q1_zvalues**2)
+q2_zvalues =  np.zeros(100)
+q2_yvalues =np.linspace(0,h/2,100)
+q3_zvalues = -np.linspace(0,ca-h/2,100)
+q3_yvalues = graph_straight1
+q4_zvalues = -np.linspace(ca-h/2,0,100)
+q4_yvalues = graph_straight1 -h/2*np.ones(100)
+q5_zvalues = np.zeros(100)
+q5_yvalues = np.linspace(-h/2,0,100)
+q6_zvalues = -np.linspace(0,-h/2,100)
+q6_yvalues = -np.sqrt((h/2)**2-q6_zvalues**2)
+
+q_zvalues = []
+q_zvalues.extend(q1_zvalues)
+q_zvalues.extend(q2_zvalues)
+q_zvalues.extend(q3_zvalues)
+q_zvalues.extend(q4_zvalues)
+q_zvalues.extend(q5_zvalues)
+q_zvalues.extend(q6_zvalues)
+
+q_yvalues = []
+q_yvalues.extend(q1_yvalues)
+q_yvalues.extend(q2_yvalues)
+q_yvalues.extend(q3_yvalues)
+q_yvalues.extend(q4_yvalues)
+q_yvalues.extend(q5_yvalues)
+q_yvalues.extend(q6_yvalues)
+
+
+
