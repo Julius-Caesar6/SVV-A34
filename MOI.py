@@ -51,7 +51,7 @@ rico = (h / 2) / (ca - h / 2)
 line = []
 graph_straight1 = []
 graph_straight2 = []
-arange = np.arange(0, ca - h / 2, 0.1)
+arange = np.linspace(0, ca - h / 2, 100)
 for zz in arange:
     line.append(zz)
     graph_straight1.append(-rico * zz + h / 2)
