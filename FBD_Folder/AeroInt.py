@@ -4,6 +4,7 @@ from Constants import *
 from interpolator import *
 
 loaddata = np.genfromtxt('aerodynamicloadcrj700.dat',delimiter=',')  #
+loaddata = np.matrix.transpose(loaddata) #CHEEEEEEEEEEEEEEEEEEEEEEEECK
 
 loaddataverif = np.genfromtxt('verif.dat',delimiter=',')
 
@@ -28,7 +29,7 @@ def denval(inip,repin):
 def IntegratePoly(polylist,ni,startvi,endvi,zp2):  #Returns a number of integrals over specified length          #
     endv = endvi - startvi  #done to account for xi spline issue
     startv = 0
-    print(polylist)
+    #print(polylist)  #Turn on for debuggin nans
     a = (polylist[0])/denval(3+zp2,ni)
     b = (polylist[1])/denval(2+zp2,ni)
     c = (polylist[2])/denval(1+zp2,ni)
@@ -42,7 +43,7 @@ def IntegratePoly(polylist,ni,startvi,endvi,zp2):  #Returns a number of integral
 #nint is number of times integrated
 def IntegrateMultiSpline(ChordMesh,lstlst,nint,zp1):
     if len(ChordMesh) != len(lstlst) + 1:
-        print('Possible Error in IntegrateMultiSpline in AeroInt. The lengths of lists do not match (+1)')#ADD TRUE TEST HERE!
+        print('Error in IntegrateMultiSpline in AeroInt: The lengths of lists do not match (+1). chordmesh: ',len(ChordMesh),' polycoeff: ',len(lstlst))#ADD TRUE TEST HERE!
     Integral = 0
     for i in range(len(ChordMesh)-1):
         Integral = Integral + IntegratePoly(lstlst[i],nint,ChordMesh[i],ChordMesh[i+1],zp1)
@@ -68,9 +69,17 @@ def IntegrateX(x,n,zp):  #standard z once then x [n] times
             xnew.append(val)
     xlst = []
     for idx in range(len(xnew)):
-        xlst.append(IntegrateMultiSpline(MeshZ,interpolate(loaddata[idx],MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
+        xlst.append(IntegrateMultiSpline(MeshZ,interpolate(list(loaddata[idx]),MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
     xlstpoly = interpolate(xlst,xnew).abcd
     return IntegrateMultiSpline(xnew,xlstpoly,n,0)
+
+
+
+
+
+
+
+
 
 
 
@@ -87,7 +96,7 @@ def IntegrateX(x,n,zp):  #standard z once then x [n] times
 #             xnew.append(val)
 #     xlst = []
 #     for idx in range(len(xnew)):
-#         xlst.append(IntegrateMultiSpline(MeshZ,interpolate(loaddataverif[idx],MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
+#         xlst.append(IntegrateMultiSpline(MeshZ,interpolate(list(loaddataverif[idx]),MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
 #     xlstpoly = interpolate(xlst,xnew).abcd
 #     return IntegrateMultiSpline(xnew,xlstpoly,n,0)
 
