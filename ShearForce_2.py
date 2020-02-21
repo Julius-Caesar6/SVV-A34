@@ -2,6 +2,7 @@
 from MOI import *
 import numpy as np
 
+z = np.dot(z,-1)
 
 Sz = 1
 Sy = 1

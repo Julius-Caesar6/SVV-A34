@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-#variables -------------------------------------------------------------------------------------------------------------
+
 h = 17.3 #cm
 ca = 48.4 #cm
 stringers = 13
@@ -11,7 +11,7 @@ t = 1.1/10 #cm
 tspar= 2.5/10 #cm
 
 
-# plotting stringers as booms ------------------------------------------------------------------------------------------
+# plotting stringers as booms
 
 straight = np.sqrt((h / 2) ** 2 + (ca - h / 2) ** 2)  # length of straight section
 
@@ -21,27 +21,30 @@ g = s / (h / 2)
 h1 = g
 
 
-z = [h / 2, np.cos(h1) * (h / 2)]  # stringer positions on curved section
+
+
+# stringer op
+z = [-h / 2, -np.cos(h1) * (h / 2)]  # stringer positions on curved section
 y = [0, np.sin(h1) * (h / 2)]  # stringer positions on curved section
 
 alpha = h / 2 / (ca - h / 2)
 
 rest = 2 * s - np.pi * (h / 4)
-z.append(-rest * np.cos(alpha))  # stringer positions on straight section
+z.append(rest * np.cos(alpha))  # stringer positions on straight section
 y.append(h / 2 - rest * np.sin(alpha))  # stringer positions on straight section
 
 for i in range(1, int((stringers+1)/2-2)):
-    z.append(-(rest + i * s) * np.cos(alpha))
+    z.append((rest + i * s) * np.cos(alpha))
     y.append(h / 2 - (rest + i * s) * np.sin(alpha))
 
-plt.scatter(np.dot(z,-1), y, color = 'green')  # plot upper part
+plt.scatter(z, y, color = 'green')  # plot upper part
 
 z2 = z
 y2 = []
 for y_coord in y:
     y2.append(y_coord * -1)
 
-plt.scatter(np.dot(z2,-1), y2, color = 'green')  # plot under part
+plt.scatter(z2, y2, color = 'green')  # plot under part
 
 rico = (h / 2) / (ca - h / 2)
 line = []
@@ -72,8 +75,8 @@ plt.show()
 
 # moment of inertia
 A_stringer = tst*hst + wst*tst
-z_pos = np.dot(z,-1)
-y_cen = (-(2*(h/2)/(np.pi))*np.pi*(h/2)*t + 2*straight*t*(ca-h/2)/2+sum(A_stringer*np.array(z_pos[1:]))*2+A_stringer*z_pos[0])\
+
+y_cen = (-(2*(h/2)/(np.pi))*np.pi*(h/2)*t + 2*straight*t*(ca-h/2)/2+sum(A_stringer*np.array(z[1:]))*2+A_stringer*z[0])\
         /(np.pi*(h/2)*t+2*straight*t+tspar*h+stringers*A_stringer)
 
 Izz_stringer = 1/12*tst*hst**3
@@ -82,10 +85,10 @@ Iyy_stringer= 1/12*tst*wst**3
 Izz_spar =  1/12*tspar*h**3
 
 d2_y = np.square(y)
-d2_z = np.square(z_pos[1:]-y_cen)
+d2_z = np.square(z[1:]-y_cen)
 
 Steiner_z= 2*A_stringer*(sum(d2_y))
-Steiner_y = A_stringer*(z_pos[0]-y_cen)**2 + 2*A_stringer*(sum(d2_z))
+Steiner_y = A_stringer*(z[0]-y_cen)**2 + 2*A_stringer*(sum(d2_z))
 
 Izz_circle = (np.pi * (h/2)**3 * t)/2
 Iyy_circle = Izz_circle
@@ -108,7 +111,6 @@ Am_cell1 = (np.pi*(h/2)**2)/2
 Am_cell2 = (h*(ca-h/2))/2
 
 print(Am_cell1, Am_cell2)
-
 
 
 
