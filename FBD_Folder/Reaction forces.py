@@ -1,5 +1,6 @@
 from FBD_Folder.Macaulay import Macaulay
 import numpy as np
+from AeroInt import *
 from FBD_Folder.Constants import *
 
 #Solving reaction forces using Ax = b
@@ -37,12 +38,12 @@ def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E
    # Second equation Mz:
     row2 = [0, Macaulay(x1, -1, 1).result(la), 0, Macaulay(x2, -1 ,1).result(la), 0, Macaulay(x3,-1,1).result(la), Macaulay(x2-(xa/2), -np.sin(beta), 1).result(la), 0, 0, 0, 0, 0]
     #b:
-    brow2 = [Macaulay(x2+(xa/2),P*np.sin(beta), 1).result(la) + """integral"""] #TODO add integral
+    brow2 = [Macaulay(x2+(xa/2),P*np.sin(beta), 1).result(la) + Integrate(la,2,0)] #TODO add integral
 
     # Third equation Tx:
     row3 = [0, Macaulay(x1,zhat,0).result(la), 0, Macaulay(x2, zhat, 0).result(la), 0, Macaulay(x3, zhat, 0).result(la), Macaulay(x2-(xa/2), zhat*np.sin(beta), 0).result(la), 0, 0, 0, 0, 0]
     #b:
-    brow3 = [Macaulay(x2+(xa/2), P*ha*np.sin(beta)/2, 0).result(la) - Macaulay(x2+(xa/2), P*np.sin(beta)*(zhat+(ha/2)), 0).result(la) - """Integral"""] #TODO add integral
+    brow3 = [Macaulay(x2+(xa/2), P*ha*np.sin(beta)/2, 0).result(la) - Macaulay(x2+(xa/2), P*np.sin(beta)*(zhat+(ha/2)), 0).result(la) - Integrate(la,1,1) - zhat*Integrate(la,1,0)] #TODO add integral
 
     # Fourth equation Sy:
     row4 = [0, Macaulay(x1, -1, 0).result(la), 0, Macaulay(x2, -1,0).result(la), 0, Macaulay(x3, -1, 0).result(la), Macaulay(x2-(xa/2), -np.sin(beta),0).result(la), 0 ,0, 0, 0, 0]

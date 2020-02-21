@@ -1,6 +1,7 @@
 import numpy as np
 from MeshSpaceXZ import *
 from Constants import *
+from interpolator import *
 
 loaddata = np.genfromtxt('aerodynamicloadcrj700.dat',delimiter=',')  #
 
@@ -24,7 +25,10 @@ def denval(inip,repin):
 #startv is value for integration start
 #endv is value for integration end
 #zp2 is extra z power.
-def IntegratePoly(polylist,ni,startv,endv,zp2):  #Returns a number of integrals over specified length
+def IntegratePoly(polylist,ni,startvi,endvi,zp2):  #Returns a number of integrals over specified length          #
+    endv = endvi - startvi  #done to account for xi spline issue
+    startv = 0
+    print(polylist)
     a = (polylist[0])/denval(3+zp2,ni)
     b = (polylist[1])/denval(2+zp2,ni)
     c = (polylist[2])/denval(1+zp2,ni)
@@ -41,7 +45,6 @@ def IntegrateMultiSpline(ChordMesh,lstlst,nint,zp1):
         print('Possible Error in IntegrateMultiSpline in AeroInt. The lengths of lists do not match (+1)')#ADD TRUE TEST HERE!
     Integral = 0
     for i in range(len(ChordMesh)-1):
-        print(lstlst[i])
         Integral = Integral + IntegratePoly(lstlst[i],nint,ChordMesh[i],ChordMesh[i+1],zp1)
     return Integral
 
@@ -57,36 +60,36 @@ def IntegrateMultiSpline(ChordMesh,lstlst,nint,zp1):
 #n is the number of times integrated
 #zp is the extra power for z (eg zp = 1 if inside integral is multiplied by z)
 def IntegrateX(x,n,zp):  #standard z once then x [n] times
+    MeshZ = MeshSpaceZfunc(Nz,Ca)
+    MeshX = MeshSpaceXfunc(Nx,la)
     xnew = []
-    for val in MeshSpaceXfunc(Nx,la):
+    for val in MeshX:
         if val < x:
             xnew.append(val)
-    zlst = []
+    xlst = []
     for idx in range(len(xnew)):
-        zlst.append(IntegrateMultiSpline(MeshSpaceZfunc(Nz,Ca),NathanielFunc(loaddata[idx]),1,zp))  #integrating along z for all chordwise data lines until x position
-    zlstpoly = NathanielFunc(zlst)
-    return IntegrateMultiSpline(xnew,zlstpoly,n,0)
+        xlst.append(IntegrateMultiSpline(MeshZ,interpolate(loaddata[idx],MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
+    xlstpoly = interpolate(xlst,xnew).abcd
+    return IntegrateMultiSpline(xnew,xlstpoly,n,0)
 
 
 
 
-#VERIF (attempted)
-def TempSpline1(num):
-    return [[1,2,3,4],[1,2,3,4],[1,2,3,4]]
-def TempSpline2(num):
-    return [[4,3,2,1],[5,3,2,1]]
 
-def IntegrateXverif(x,n,zp):  #standard z once then x [n] times
-    xnew = []
+#VERIF BELOW
 
-    for val in [1,2,4,6]:
-        if val < x:
-            xnew.append(val)
-    zlst = []
-    for idx in range(len(xnew)):
-        zlst.append(IntegrateMultiSpline([1,3,5,8],TempSpline1(loaddataverif[idx]),1,zp))  #integrating along z for all chordwise data lines until x position
-    zlstpoly = TempSpline2(zlst)
-    return IntegrateMultiSpline(xnew,zlstpoly,n,0)
+# def IntegrateXverif(x,n,zp):  #standard z once then x [n] times
+#     MeshZ = [1,2,4]
+#     MeshX =  [1,2,3,6,7,9]
+#     xnew = []
+#     for val in MeshX:
+#         if val < x:
+#             xnew.append(val)
+#     xlst = []
+#     for idx in range(len(xnew)):
+#         xlst.append(IntegrateMultiSpline(MeshZ,interpolate(loaddataverif[idx],MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
+#     xlstpoly = interpolate(xlst,xnew).abcd
+#     return IntegrateMultiSpline(xnew,xlstpoly,n,0)
 
+#print(IntegrateXverif(2.3,1,1))
 
-print(IntegrateXverif(5,1,))
