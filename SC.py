@@ -15,8 +15,8 @@ tspar= 2.5/10 #cm
 q01_c1 = h*np.pi/(2*t) + h/tspar
 q02_c1 = -h/tspar
 
-c1 = 1/Izz_total * t*h**4/4
-r1 = 1/Izz_total*(A_stringer*(y[1])  -  t*h**4/4)
+c1 = 1/Izz_total * t*h**2/4
+r1 = 1/Izz_total*(-A_stringer*(y[1])  -  t*h**4/4)
 R1 = h/t*(c1+r1*np.pi/2)
 
 c2 = -tspar/Izz_total/2
@@ -51,3 +51,5 @@ F2 = np.cos(alpha)*h/2*(r3*straight+c31*straight**2/2+c32*straight**3/3)
 print(F1,F2)
 sc = 2*(F1+F2) + 2*q01*Am_cell1  +  2*q02*Am_cell2
 print(sc)
+
+print(r1)

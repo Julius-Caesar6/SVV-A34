@@ -40,7 +40,7 @@ print(np.array(z)+h/2)
 print(y)
 plt.scatter(z, y, color = 'green')  # plot upper part
 
-z2 = z
+z2 = np.array(z)
 y2 = []
 for y_coord in y:
     y2.append(y_coord * -1)
@@ -113,10 +113,6 @@ Am_cell1 = (np.pi*(h/2)**2)/2
 Am_cell2 = (h*(ca-h/2))/2
 
 print(Am_cell1, Am_cell2)
-
-
-
-
 
 
 
