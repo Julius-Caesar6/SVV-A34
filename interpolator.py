@@ -25,8 +25,7 @@ class interpolate:
                 co_matrix[i-1][i]   = self.h[i]/6
 
             #f matrix is shifted because i is defined weird due to m0 and mn being 0 and not part of the comatrixes
-            #part1 = (data[i+2] - data[i+1])/self.h[i+1]
-            #part2 = (data[i+1] - data[i])/self.h[i]
+
 
             f_matrix[i][0]          = (data[i+2] - data[i+1])/self.h[i+1] - (data[i+1] - data[i])/self.h[i]
         
@@ -48,7 +47,7 @@ class interpolate:
             ci  = (self.data[i+1] - self.data[i]) / self.h[i] - self.h[i] / 3 * m_matrix[i] - self.h[i] / 6 * m_matrix[i+1]
             di  = self.data[i]
 
-            self.abcd[i] = [ai,bi,di,di]
+            self.abcd[i] = [ai,bi,ci,di]
 
 
 
