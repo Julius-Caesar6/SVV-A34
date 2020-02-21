@@ -5,7 +5,7 @@ x1=1.149
 x2=0.553
 x3=1.541
 xa=0.272
-h=0.173
+ha=0.173
 tsk=0.0011
 tsp=0.0025
 tst=0.0012
@@ -20,4 +20,4 @@ P=37900
 G=28*10**9
 E=73*10**9
 
-reaction_solver(zhat, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J)
+reaction_solver(0.1, C, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J)
