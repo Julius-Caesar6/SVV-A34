@@ -6,24 +6,24 @@ import Stress
 import math as m
 
 ######################## Part I - parameters as in assignment #######################################
-aircraft = "CRJ700" # Write either A320, F100, CRJ700 or Do228 (bear in mind capitals); this is used for aerodynamic loading
-Ca = 0.484  # m
-la = 1.691  # m
-x1 = 0.149  # m
-x2 = 0.554  # m
-x3 = 1.541  # m
-xa = 0.273  # m
-ha = 0.173  # m
+aircraft = "B737" # Write either A320, F100, CRJ700 or Do228 (bear in mind capitals); this is used for aerodynamic loading
+Ca = 0.605  # m
+la = 2.661  # m
+x1 = 0.172  # m
+x2 = 1.211  # m
+x3 = 2.591  # m
+xa = 0.35   # m
+ha = 0.205  # m
 tsk = 1.1/1000  # m
-tsp = 2.5/1000  # m
+tsp = 2.8/1000  # m
 tst = 1.2/1000  # m
-hst = 14./1000   # m
-wst = 18./1000   # m
-nst = 13  # -
-d1 = 0.681  # m
-d3 = 2.030  # m
-theta = m.radians(26)  # rad
-P = 37.9*1000  # N
+hst = 16./1000   # m
+wst = 19./1000   # m
+nst = 15  # -
+d1 = 0.01154  # m
+d3 = 0.01840  # m
+theta = m.radians(28)  # rad
+P = 97.4*1000  # N
 
 ######################## Part II - bending stiffness calculations #######################################
 ### Create the cross-section object
