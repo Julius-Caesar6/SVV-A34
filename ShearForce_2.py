@@ -115,5 +115,13 @@ q_yvalues.extend(q4_yvalues)
 q_yvalues.extend(q5_yvalues)
 q_yvalues.extend(q6_yvalues)
 
+q_qvalues = []
+q_qvalues.extend(q1_total)
+q_qvalues.extend(q2_total)
+q_qvalues.extend(q3_total)
+q_qvalues.extend(q4_total)
+q_qvalues.extend(q5_total)
+q_qvalues.extend(q6_total)
+
 
 
