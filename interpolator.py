@@ -2,6 +2,8 @@
 import numpy as np
 
 class interpolate:
+
+    ''' see example below for how to get the coefficients. Keep in mind its ai(x-xi)^3 etc'''
     def __init__(self, data, pos):
         self.data   = data
         self.n      = len(data)
@@ -56,4 +58,4 @@ class interpolate:
 #Example 4.2 from the ANA reader
 #data = [0,0.2624,0.6419,1.0296]
 #pos = [0,0.1,0.3,0.6]
-#interpolate(data,pos)
+#print(interpolate(data,pos).abcd)
