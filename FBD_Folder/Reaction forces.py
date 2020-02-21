@@ -107,3 +107,4 @@ def reaction_solver(zhat, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, 
 
     return np.linalg.solve(equations,resultants)
 
+print(reaction_solver(0.1, C, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, 4450.51334476632, 581.8812431242068 , G, J))
