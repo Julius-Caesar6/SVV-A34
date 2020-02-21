@@ -24,7 +24,7 @@ from FBD_Folder.Constants import *
 # C5,
 # ]])
 
-def reaction_solver(ztilde, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J): #TODO : ADJUST FOR UNITS!!
+def reaction_solver(zhat, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J): #TODO : ADJUST FOR UNITS!!
     beta = np.radians(beta)
     equations = np.zeros((12,12))
     resultants = np.zeros((12,1))
