@@ -90,6 +90,7 @@ qb1_zvalues = np.linspace(h/2,0,100)
 qb1_yvalues = c2y = np.sqrt((h/2)**2-qb1_zvalues**2)
 qb2_zvalues =  np.zeros(100)
 qb2_yvalues =np.linspace(0,h/2,100)
-qb3_zvalues = np.linspace(0,ca-h/2,100)
-qb3_yvalues = h/2 - (h/2)/straight*qb3_zvalues
-plt.plot(qb3_zvalues,qb3_yvalues)
+
+3qb3_zvalues = np.linspace(0,ca-h/2,100)
+#qb3_yvalues = h/2 - (h/2)/straight*qb3_zvalues
+#plt.plot(qb3_zvalues,qb3_yvalues)
