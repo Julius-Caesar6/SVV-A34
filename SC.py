@@ -46,7 +46,7 @@ print("q01",q01,"q02",q02)
 ## calculating shear centre
 
 F1 = h**2/4*(c1+r1*np.pi/2   )
-F2 = np.cos(alpha)*h/2*(r1*straight+c31*straight**2/2+c32*straight**3/3)
+F2 = np.cos(alpha)*h/2*(r3*straight+c31*straight**2/2+c32*straight**3/3)
 
 print(F1,F2)
 sc = 2*(F1+F2) + 2*q01*Am_cell1  +  2*q02*Am_cell2
