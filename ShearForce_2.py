@@ -27,7 +27,7 @@ qb3 = qb1[-1] + qb2[-1] - Sz/Iyy_total *( t* (ca-h/2)/straight*(range3**2/2) - A
 #qb4 -------------------------------------------------------------------------------------------------------------------
 #negative values of z, negative values of y
 range4 = np.linspace(0,straight,100)
-qb4 = qb3[-1] - Sz/Iyy_total* (t*  (   (ca-h/2)/straight*range4**2/2 + (ca-h/2)*range1   ) - A_stringer*sum(z[2:])) - Sy/Izz_total*(-t*h/straight*(range4**2/2) - A_stringer*sum(y[2:]))
+qb4 = qb3[-1] - Sz/Iyy_total* (t*  (   (ca-h/2)/straight*range4**2/2 + (ca-h/2)*range4   ) - A_stringer*sum(z[2:])) - Sy/Izz_total*(-t*(h/2)/straight*(range4**2/2) - A_stringer*sum(y[2:]))
 
 #qb5 -------------------------------------------------------------------------------------------------------------------
 #negative y, zero z
@@ -40,7 +40,7 @@ qb6 = qb4[-1] - qb5[-1] - Sz/Iyy_total*(t*h**2/4*np.sin(range6) + A_stringer/2*z
 
 #moment around point 0 -------------------------------------------------------------------------------------------------
 integral1 = 1 #integral of qb1*(h/2)**2*dTheta from 0 to pi/2
-integral2 =1 #integral of qb3*cos(alpha)*h/2*ds from 0 to straight
+integral2 =1 #integral of qb3*np.cos(alpha)*h/2*ds from 0 to straight
 
 #0 = Sy*z_sc + 2*integral1 + 2*integral2 + 2*Am_cell1*qso1 + 2*Am_cell2*qso2 #equation1
 
@@ -72,8 +72,8 @@ T = 1
 #G*dtheta/dx = 1/(2*Am_cell1)*((qso1_t *np.pi*(h/2)/t + (qso1_t-qso2_t)*h/tspar)) #equation2
 #G*dtheta/dx = 1/(2*Am_cell2)*((qso2_2*straight/t + (qso2_t-qso1_t)*h/tspar)) #equation3
 
-c = np.array([[2*Am_cell1,2*Am_cell2,0], [ 1/(2*Am_cell1)*(np.pi*(h/2)/t), 1/(2*Am_cell1)*-h/tspar, -G ] , [1/(2*Am_cell2)*(-h/tspar), 1/(2*Am_cell2)*(h/tspar + 2*straight/t), -G]])
-d = np.array([-T,0,0])
+c = np.array([[2*Am_cell1,2*Am_cell2,0], [ 1/(2*Am_cell1)*((np.pi*(h/2)/t) +h/tspar) , 1/(2*Am_cell1)*-h/tspar, -G ] , [1/(2*Am_cell2)*(-h/tspar), 1/(2*Am_cell2)*(h/tspar + 2*straight/t), -G]])
+d = np.array([T,0,0])
 
 matrix_torque = np.linalg.solve(c,d) #0th entry is qso1_t, 1 entry is qso2_t , second entry is dtheta/dx
 
@@ -91,6 +91,6 @@ qb1_yvalues = c2y = np.sqrt((h/2)**2-qb1_zvalues**2)
 qb2_zvalues =  np.zeros(100)
 qb2_yvalues =np.linspace(0,h/2,100)
 
-3qb3_zvalues = np.linspace(0,ca-h/2,100)
+#qb3_zvalues = np.linspace(0,ca-h/2,100)
 #qb3_yvalues = h/2 - (h/2)/straight*qb3_zvalues
 #plt.plot(qb3_zvalues,qb3_yvalues)
