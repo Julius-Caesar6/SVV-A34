@@ -20,3 +20,4 @@ P=37900
 G=28*10**9
 E=73*10**9
 
+reaction_solver(zhat, c, B, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J)
