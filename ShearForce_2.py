@@ -7,7 +7,7 @@ z = np.dot(z,-1)
 
 Sz = 0
 Sy = 1
-z_sc = 1
+z_sc = np.abs(1)
 G = 1
 #Shear force analysis
 
@@ -41,8 +41,8 @@ range6 = np.linspace(-np.pi/2,0,100)
 qb6 = qb4[-1] - qb5[-0] - Sz/Iyy_total*(t*h**2/4*np.sin(range6) + A_stringer/2*z[0] + A_stringer*z[1]) - Sy/Izz_total*(t*h**2/2*(-np.cos(range6)+1) - A_stringer/2*y[0] - A_stringer*y[1])
 
 #moment around point 0 -------------------------------------------------------------------------------------------------
-integral1 = 1 #integral of qb1*(h/2)**2*dTheta from 0 to pi/2
-integral2 =1 #integral of qb3*np.cos(alpha)*h/2*ds from 0 to straight
+integral1 = comp_num_int(np.linspace(0,np.pi/2,100),qb1*(h/2)**2) #integral of qb1*(h/2)**2*dTheta from 0 to pi/2
+integral2 =comp_num_int(np.linspace(0,straight,100),qb3*np.cos(alpha)*h/2) #integral of qb3*np.cos(alpha)*h/2*ds from 0 to straight
 
 #0 = Sy*z_sc + 2*integral1 + 2*integral2 + 2*Am_cell1*qso1 + 2*Am_cell2*qso2 #equation1
 
