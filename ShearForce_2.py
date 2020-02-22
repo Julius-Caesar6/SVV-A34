@@ -1,6 +1,6 @@
 #Shear force analysis
 from MOI import *
-from NumericalIntegrator import comp_num_int
+from NumericalIntegrator import *
 import numpy as np
 
 z = np.dot(z,-1)
@@ -47,18 +47,18 @@ integral2 =1 #integral of qb3*np.cos(alpha)*h/2*ds from 0 to straight
 
 #rate of twist----------------------------------------------------------------------------------------------------------
 #cell 1
-integral3= 1 #integral of qb1*h/2*dtheta from 0 to pi/2
-integral4 = 1 #integral of qb2*-dy from h/2 to 0
-integral5 = 1 #integral of qb5*-dy from 0 to -h/2
-integral6 = 1#integral of qb6*h/2*dtheta from -pi/2 to 0
+integral3= comp_num_int(np.linspace(0,np.pi/2,100),qb1*(h/2)) #integral of qb1*h/2*dtheta from 0 to pi/2
+integral4 = comp_num_int(np.linspace(h/2,0,100),-qb2)  #integral of qb2*-dy from h/2 to 0
+integral5 = comp_num_int(np.linspace(0,-h/2,100),-qb5) #integral of qb5*-dy from 0 to -h/2
+integral6 = comp_num_int(np.linspace(-np.pi/2,0,100),qb6*h/2) #integral of qb6*h/2*dtheta from -pi/2 to 0
 
 #G*dtheta = 1/(2*Am_cell1) *((integral3+qso1)/t + (integral4+qso1-qso2)/tspar + (integral5+qso1-qso2)/tspar + (integral6+qso1)/t)  #equation2
 
 #cell2
-integral7 = 1 #integral of qb2*dy from 0 to h/2
-integral8 =1 #integral of qb3*ds from 0 to straight
-integral9 =1 #integral of qb4*ds from 0 to straight
-integral10=1 #integral of qb5*dy from -h/2 to straight
+integral7 = comp_num_int(np.linspace(0,h/2,100),qb2) #integral of qb2*dy from 0 to h/2
+integral8 = comp_num_int(np.linspace(0,straight,100),qb3) #integral of qb3*ds from 0 to straight
+integral9 = comp_num_int(np.linspace(0,straight,100),qb4) #integral of qb4*ds from 0 to straight
+integral10= comp_num_int(np.linspace(-h/2,straight,100),qb5) #integral of qb5*dy from -h/2 to straight
 
 #G*dtheta = 1/(2*Am_cell2)*((integral7+qso2-qso1)/tspar + (integral8+qso2)/t + (integral9+qso2)/t + (integral10+qso2-qso1)/tspar) #equation3
 
