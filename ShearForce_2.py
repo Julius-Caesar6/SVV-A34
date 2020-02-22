@@ -64,7 +64,7 @@ integral10= comp_num_int(np.linspace(-h/2,0,100),qb5) #integral of qb5*dy from -
 #G*dtheta = 1/(2*Am_cell2)*((integral7+qso2-qso1)/tspar + (integral8+qso2)/t + (integral9+qso2)/t + (integral10+qso2-qso1)/tspar) #equation3
 
 #solving matrix of 3 equations
-a = np.array( [[2*Am_cell1,2*Am_cell2,0], [1/(2*Am_cell1)*(np.pi*h/4/t + (h/2)/tspar + (h/2)/tspar +(np.pi*h4)/t), 1/(2*Am_cell1)*(-(h/2)/tspar - (h/2)/tspar), -G],[1/(2*Am_cell2)*((-h/2)/tspar -(h/2)/tspar), 1/(2*Am_cell2)*((h/2)/tspar+ straight/t + straight/t + (h/2)/tspar), -G]])
+a = np.array( [[2*Am_cell1,2*Am_cell2,0], [1/(2*Am_cell1)*(np.pi*h/4/t + (h/2)/tspar + (h/2)/tspar +(np.pi*h/4)/t), 1/(2*Am_cell1)*(-(h/2)/tspar - (h/2)/tspar), -G],[1/(2*Am_cell2)*((-h/2)/tspar -(h/2)/tspar), 1/(2*Am_cell2)*((h/2)/tspar+ straight/t + straight/t + (h/2)/tspar), -G]])
 b = np.array([-Sy*z_sc - 2*integral1 - 2*integral2, -1/(2*Am_cell1)*(integral3/t + integral4/tspar + integral5/tspar + integral6/tspar), -1/(2*Am_cell2)*(integral7/tspar + integral8/t + integral9/t +integral10/tspar)])
 matrix_force = np.linalg.solve(a,b) #0th entry qso1, 1th entry qso2, 2nd entry, dtheta/dx
 
@@ -81,7 +81,7 @@ matrix_torque = np.linalg.solve(c,d) #0th entry is qso1_t, 1 entry is qso2_t , s
 
 #total shear flow distributions
 q1_total= qb1 + matrix_force[0] - matrix_torque[0]
-q2_total= qb2 - matrix_force[0] + matrix_force[1] - matrix_torque[0] + matrix_torque[1]
+q2_total= qb2 - matrix_force[0] + matrix_force[1] + matrix_torque[0] - matrix_torque[1]
 q3_total = qb3 + matrix_force[1] - matrix_torque[1]
 q4_total = qb4 + matrix_force[1] - matrix_torque[1]
 q5_total = qb5 - matrix_force[0] + matrix_force[1] + matrix_torque[0] - matrix_torque[1]
