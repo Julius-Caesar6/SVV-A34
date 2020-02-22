@@ -1,5 +1,6 @@
 #Shear force analysis
 from MOI import *
+from NumericalIntegrator import comp_num_int
 import numpy as np
 
 z = np.dot(z,-1)
