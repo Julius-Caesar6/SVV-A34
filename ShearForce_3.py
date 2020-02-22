@@ -38,43 +38,25 @@ for i in range(len(range3)):
     #print(i)
     for p in range(2,len(z)):
         if range3[i] > z[p]*straight/(-ca + h/2):
-            #print('Added A',p)
+            #print('Added A',p,z[p])
             qb3[i] = qb3[i] - Sz/Iyy_total *( A_stringer*(z[p])) - Sy/Izz_total*( A_stringer*(y[p]))
 
 
 #qb4 -------------------------------------------------------------------------------------------------------------------
 #negative values of z, negative values of y
 range4 = np.linspace(0,straight,100)
-qb4 = qb3[-1] - Sz/Iyy_total* ( (t* (ca-h/2))/straight*range4**2/2 + t*(-ca+h/2)*range4  ) - Sy/Izz_total*(t*(-h/2)/straight*(range4**2/2))
-
-
-for i in range(len(range4)):
-    print(i)
-    for p in range(0,len(z)-2):
-        if range4[i] > straight*(z[-p] + ca - h/2)/(ca - h/2):
-            print('Added A',-p)
-            qb4[i] = qb4[i] - Sz/Iyy_total* (A_stringer*(z[-p])) - Sy/Izz_total*(- A_stringer*(y[-p]))
-
+qb4 = qb3[::-1]
 
 #qb5 -------------------------------------------------------------------------------------------------------------------
 #negative y, zero z
 #range5 = np.linspace(0,h/2,100)
 range5 = np.linspace(-h/2,0,100)
 #qb5 = qb4[-1] - Sy/Izz_total*(tspar*(-h/2*range5 + range5**2/2))
-qb5 = qb4[-1] - Sy/Izz_total*(tspar*(range5**2/2 - h**2/8))
+qb5 = qb2[::-1]
 
 #qb6 -------------------------------------------------------------------------------------------------------------------
 range6 = np.linspace(-np.pi/2,0,100)
-qb6 = qb4[-1] - qb5[-0] - Sz/Iyy_total*(t*h**2/4*np.sin(range6) ) - Sy/Izz_total*(t*h**2/2*(-np.cos(range6)+1))
-
-for i in range(len(qb6)):
-    #print(i)
-    if range6[i] > -np.arccos(z[1]*2/h):
-        #print('added A_',z[1])
-        qb6[i] = qb6[i]  - Sz/Iyy_total*(A_stringer*z[1]) - Sy/Izz_total*(A_stringer*y[1])
-
-qb6[-1] = qb6[-1]  - Sz/Iyy_total*(A_stringer/2*z[0]) - Sy/Izz_total*(A_stringer/2*y[0])
-
+qb6 = qb1[::-1]
 
 
 #moment around point 0 -------------------------------------------------------------------------------------------------
