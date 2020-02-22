@@ -139,4 +139,4 @@ tau_values.extend(q5_total/tspar)
 tau_values.extend(q6_total/t)
 
 #maximum shear stress in the figure
-tau_max = np.max(tau_values) 
+tau_max = np.max(tau_values)
