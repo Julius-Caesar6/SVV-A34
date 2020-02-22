@@ -21,4 +21,33 @@ Bending_RF_assembly =  pd.read_csv('Reaction_Forces/Bending_RF_assembly.csv',  d
 Jam_Bent_RF_assembly =  pd.read_csv('Reaction_Forces/Jam_Bent_RF_assembly.csv',  delimiter ="\s+" )
 Jam_Straight_RF_assembly =  pd.read_csv('Reaction_Forces/Jam_Straight_RF_assembly.csv',  delimiter ="\s+" )
 
+# Process Stress data
+# Taking mean of Loc1 and Loc2 for shear and von mises stress.
+Bending_stress_R1['S.Mises.mean'] = Bending_stress_R1[['S.Mises1','S.Mises2']].mean(axis=1)
+Bending_stress_R1['S.S12.mean'] = Bending_stress_R1[['S.S121','S.S122']].mean(axis=1)
+Bending_stress_R1 = Bending_stress_R1[['Node','S.Mises.mean', 'S.S12.mean']]  # Leaving other columns and keeping only relevant columns
+
+Bending_stress_R2['S.Mises.mean'] = Bending_stress_R2[['S.Mises1','S.Mises2']].mean(axis=1)
+Bending_stress_R2['S.S12.mean'] = Bending_stress_R2[['S.S121','S.S122']].mean(axis=1)
+Bending_stress_R2 = Bending_stress_R2[['Node','S.Mises.mean', 'S.S12.mean']]  # Leaving other columns and keeping only relevant columns
+
+
+Jam_Bent_stress_R1['S.Mises.mean'] = Jam_Bent_stress_R1[['S.Mises1','S.Mises2']].mean(axis=1)
+Jam_Bent_stress_R1['S.S12.mean'] = Jam_Bent_stress_R1[['S.S121','S.S122']].mean(axis=1)
+Jam_Bent_stress_R1 = Jam_Bent_stress_R1[['Node','S.Mises.mean', 'S.S12.mean']]  # Leaving other columns and keeping only relevant columns
+
+Jam_Bent_stress_R2['S.Mises.mean'] = Jam_Bent_stress_R2[['S.Mises1','S.Mises2']].mean(axis=1)
+Jam_Bent_stress_R2['S.S12.mean'] = Jam_Bent_stress_R2[['S.S121','S.S122']].mean(axis=1)
+Jam_Bent_stress_R2 = Jam_Bent_stress_R2[['Node','S.Mises.mean', 'S.S12.mean']]  # Leaving other columns and keeping only relevant columns
+
+
+
+Jam_Straight_stress_R1['S.Mises.mean'] = Jam_Straight_stress_R1[['S.Mises1','S.Mises2']].mean(axis=1)
+Jam_Straight_stress_R1['S.S12.mean'] = Jam_Straight_stress_R1[['S.S121','S.S122']].mean(axis=1)
+Jam_Straight_stress_R1 = Jam_Straight_stress_R1[['Node','S.Mises.mean', 'S.S12.mean']]  # Leaving other columns and keeping only relevant columns
+
+Jam_Straight_stress_R2['S.Mises.mean'] = Jam_Straight_stress_R2[['S.Mises1','S.Mises2']].mean(axis=1)
+Jam_Straight_stress_R2['S.S12.mean'] = Jam_Straight_stress_R2[['S.S121','S.S122']].mean(axis=1)
+Jam_Straight_stress_R2 = Jam_Straight_stress_R2[['Node','S.Mises.mean', 'S.S12.mean']]  # Leaving other columns and keeping only relevant columns
+
 
