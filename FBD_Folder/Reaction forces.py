@@ -103,4 +103,4 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
 
 
 
-print(reaction_solver(0.1, Ca, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, 1.0280189203385745e+05, 8.651211860639685e+05 , G, 0.00022293131689593327e+05))
+print(reaction_solver(0.1, Ca, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, 1.0280189203385745e-05, 8.651211860639685e-05 , G, 0.00022293131689593327e-05))
