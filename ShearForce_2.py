@@ -33,8 +33,10 @@ qb4 = qb3[-1] - Sz/Iyy_total* ( (t* (ca-h/2))/straight*range4**2/2 + t*(-ca+h/2)
 
 #qb5 -------------------------------------------------------------------------------------------------------------------
 #negative y, zero z
-range5 = np.linspace(0,h/2,100)
-qb5 = qb4[-1] - Sy/Izz_total*(tspar*(-h/2*range5 + range5**2/2))
+#range5 = np.linspace(0,h/2,100)
+range5 = np.linspace(-h/2,0,100)
+#qb5 = qb4[-1] - Sy/Izz_total*(tspar*(-h/2*range5 + range5**2/2))
+qb5 = qb4[-1] - Sy/Izz_total*(tspar*(range5**2/2 - h**2/8))
 
 #qb6 -------------------------------------------------------------------------------------------------------------------
 range6 = np.linspace(-np.pi/2,0,100)
