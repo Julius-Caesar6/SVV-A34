@@ -95,7 +95,10 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     resultants = np.array([brow1, brow2, brow3, brow4, brow5, brow6, brow7, brow8, brow9, brow10, brow11, brow12])
 
     df = DataFrame(equations)
+    df.columns = ['Rz1',  'Ry1', 'Rz2', 'Ry2', 'Rz3', 'Ry3', 'Rj', 'C1', 'C2', 'C3', 'C4', 'C5']
   #  xvalues = np.linalg.solve(equations,resultants)
+    test1 = (Macaulay(x1, 1/(6*E*Izz), 3).result(x2))
+    test2 = (Macaulay(x1, (zhat**2)/(G*J), 1).result(x2))
     return df
 
 
