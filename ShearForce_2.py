@@ -103,7 +103,7 @@ q5_yvalues = np.linspace(-h/2,0,100)
 q6_zvalues = -np.linspace(0,-h/2,100)
 q6_yvalues = -np.sqrt((h/2)**2-q6_zvalues**2)
 
-q_zvalues = []
+q_zvalues = [] #list if all z values following the shear flow direction as in sketch
 q_zvalues.extend(q1_zvalues)
 q_zvalues.extend(q2_zvalues)
 q_zvalues.extend(q3_zvalues)
@@ -111,7 +111,7 @@ q_zvalues.extend(q4_zvalues)
 q_zvalues.extend(q5_zvalues)
 q_zvalues.extend(q6_zvalues)
 
-q_yvalues = []
+q_yvalues = [] #list of all y values following the shear flow direction as in sketch
 q_yvalues.extend(q1_yvalues)
 q_yvalues.extend(q2_yvalues)
 q_yvalues.extend(q3_yvalues)
@@ -119,7 +119,7 @@ q_yvalues.extend(q4_yvalues)
 q_yvalues.extend(q5_yvalues)
 q_yvalues.extend(q6_yvalues)
 
-q_qvalues = []
+q_qvalues = [] #list of all q values following the shear flow direction as in sketch
 q_qvalues.extend(q1_total)
 q_qvalues.extend(q2_total)
 q_qvalues.extend(q3_total)
@@ -128,4 +128,15 @@ q_qvalues.extend(q5_total)
 q_qvalues.extend(q6_total)
 
 
+#maximum stress
+# tau= qmax/tmin
+tau_values = [] #list of all tau values following the shear flow direction as in sketch
+tau_values.extend(q1_total/t)
+tau_values.extend(q2_total/tspar)
+tau_values.extend(q3_total/t)
+tau_values.extend(q4_total/t)
+tau_values.extend(q5_total/tspar)
+tau_values.extend(q6_total/t)
 
+#maximum shear stress in the figure
+tau_max = np.max(tau_values) 
