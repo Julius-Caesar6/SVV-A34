@@ -36,8 +36,8 @@ y.append(h / 2 - rest * np.sin(alpha))  # stringer positions on straight section
 for i in range(1, int((stringers+1)/2-2)):
     z.append((rest + i * s) * np.cos(alpha))
     y.append(h / 2 - (rest + i * s) * np.sin(alpha))
-print(np.array(z)+h/2)
-print(y)
+# print(np.array(z)+h/2)
+# print(y)
 plt.scatter(z, y, color = 'green')  # plot upper part
 
 z2 = np.array(z)
@@ -45,6 +45,9 @@ y2 = []
 for y_coord in y:
     y2.append(y_coord * -1)
 
+print('y',y)
+print('y2',y2)
+print('z',z)
 plt.scatter(z2, y2, color = 'green')  # plot under part
 
 rico = (h / 2) / (ca - h / 2)
@@ -79,7 +82,7 @@ A_stringer = tst*hst + wst*tst
 
 y_cen = (-(2*(h/2)/(np.pi))*np.pi*(h/2)*t + 2*straight*t*(ca-h/2)/2+sum(A_stringer*np.array(z[1:]))*2+A_stringer*z[0])\
         /(np.pi*(h/2)*t+2*straight*t+tspar*h+stringers*A_stringer)
-print(y_cen)
+# print(y_cen)
 
 Izz_stringer = 1/12*tst*hst**3
 Iyy_stringer= 1/12*tst*wst**3
