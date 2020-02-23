@@ -103,8 +103,3 @@ def IntegrateX(x,n,zp):  #standard z once then x [n] times
 #print(IntegrateXverif(2.3,1,1))
 
 
-al = []
-for i in range(41):
-    al.append(sum(loaddata[i]))
-
-print(sum(al)/(81*41))
