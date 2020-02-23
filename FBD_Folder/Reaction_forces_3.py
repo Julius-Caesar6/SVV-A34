@@ -27,13 +27,14 @@ from pandas import *
 
 def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J): #TODO : ADJUST FOR UNITS!! (if needed?)
     beta = np.radians(beta)
-    sf = -1 #sign fix
+    sf = 1 #sign fix
+    f1 = 1 #sign fix
     # First equation My:
  #   equations[0] = [Macaulay(x1,1,1).result(c), 0, Macaulay(x2,1,1).result(c)]
  #   [Rz1, Ry1, Rz2, Ry2, Rz3, Ry3, Rj, C1, C2, C3, C4, C5]
     row1 = [Macaulay(x1,1,1).result(la), 0,  Macaulay(x2,1,1).result(la), 0, Macaulay(x3,1,1).result(la), 0, Macaulay(x2-(xa/2), np.cos(beta), 1).result(la), 0, 0, 0, 0, 0]
     #b:
-    brow1 = Macaulay(x2+(xa/2),-sf*np.cos(beta)*P,1).result(la)
+    brow1 = Macaulay(x2+(xa/2),np.cos(beta)*P,1).result(la)
 
    # Second equation Mz:
     row2 = [0, Macaulay(x1, -1, 1).result(la), 0, Macaulay(x2, -1 ,1).result(la), 0, Macaulay(x3,-1,1).result(la), Macaulay(x2-(xa/2), -np.sin(beta), 1).result(la), 0, 0, 0, 0, 0]
@@ -48,17 +49,17 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     # Fourth equation Ry = 0:
     row4 = [0,1,0,1,0,1,np.sin(beta),0,0,0,0,0]
     #b:
-    brow4 = -sf*P*np.sin(beta)
+    brow4 = -P*np.sin(beta)
 
     # Fifth equation Rz = 0:
     row5 = [1,0,1,0,1,0,np.cos(beta),0,0,0,0,0]
     #b:
-    brow5 = -sf*P*np.cos(beta) - IntegrateX(la,1,0)
+    brow5 = -P*np.cos(beta) - IntegrateX(la,1,0)
 
     # Sixth equation Vy(x1) - theta(x1)zhat
     row6 = [0,0,0,0,0,0,0, x1, 1, 0, 0, -zhat]
     #b:
-    brow6 = (-1/(E*Izz))*IntegrateX(x1,4,0) + (zhat/(G*J))*IntegrateX(x1,2,1) - (zhat**2/(G*J))*IntegrateX(x1,2,0) + d1*np.cos(beta)
+    brow6 = (-1/(E*Izz))*IntegrateX(x1,4,0) + (zhat/(G*J))*IntegrateX(x1,2,1) - (zhat**2/(G*J))*IntegrateX(x1,2,0) + f1*d1*np.cos(beta)
 
     #   [Rz1, Ry1, Rz2, Ry2, Rz3, Ry3, Rj, C1, C2, C3, C4, C5]
 
@@ -68,17 +69,17 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     brow7 = (-1/(E*Izz))*IntegrateX(x2,4,0) +(zhat/(G*J))*IntegrateX(x2,2,1) - (zhat**2/(G*J))*IntegrateX(x2,2,0)
 
     # Eight equation Vy(x3..)
-    row8 = [0, (Macaulay(x1, 1/(6*E*Izz), 3).result(x3))-(Macaulay(x1, (zhat**2)/(G*J), 1).result(x3)), 0, (Macaulay(x2, 1/(6*E*Izz), 3).result(x3))-(Macaulay(x2, (zhat**2)/(G*J), 1).result(x3)), 0, 0, (Macaulay(x2-(xa/2), np.sin(beta)/(6*E*Izz), 3).result(x3)) - (Macaulay(x2-(xa/2), (zhat**2)*np.sin(beta)/(G*J), 1).result(x3)), x3, 1, 0, 0, -zhat]
+    row8 = [0, (Macaulay(x1, 1/(6*E*Izz), 3).result(x3))-(Macaulay(x1, (zhat**2)/(G*J), 1).result(x3)), 0, (Macaulay(x2, 1/(6*E*Izz), 3).result(x3))-(Macaulay(x2, (zhat**2)/(G*J), 1).result(x3)), 0, 0, (Macaulay(x2-(xa/2), np.sin(beta)/(6*E*Izz), 3).result(x3)) - (Macaulay(x2-(xa/2), (zhat**2)*np.sin(beta)/(G*J), 1).result(x3)), x3, 1, 0, 0, -1]
     #b:
-    brow8 = P*(Macaulay(x2+(xa/2), np.sin(beta)/(-6*E*Izz),3).result(x3) + Macaulay(x2+(xa/2), (zhat*np.sin(beta)*(zhat+(ha/2)))/(G*J),1).result(x3) - Macaulay(x2+(xa/2), (zhat*np.cos(beta)*(ha/2))/(G*J), 1).result(x3)) + (-1/(E*Izz))*IntegrateX(x3,4,0)  + (zhat/(G*J))*IntegrateX(x3,2,1) - (zhat**2/(G*J))*IntegrateX(x3,2,0)  + d3*np.cos(beta)
+    brow8 = P*(Macaulay(x2+(xa/2), np.sin(beta)/(-6*E*Izz),3).result(x3) + Macaulay(x2+(xa/2), (zhat*np.sin(beta)*(zhat+(ha/2)))/(G*J),1).result(x3) - Macaulay(x2+(xa/2), (zhat*np.cos(beta)*(ha/2))/(G*J), 1).result(x3)) + (-1/(E*Izz))*IntegrateX(x3,4,0)  + (zhat/(G*J))*IntegrateX(x3,2,1) - (zhat**2/(G*J))*IntegrateX(x3,2,0)  + f1*d3*np.cos(beta)
 
     #Ninth equation Vz(x3):
-    row9 = [Macaulay(x1, -1/(6*E*Iyy), 3).result(x3), , Macaulay(x2, -1/(6*E*Iyy), 3).result(x3), 0, 0, 0, Macaulay(x2-(xa/2), (-np.cos(beta))/(6*E*Iyy), 3).result(x3), 0, 0, x3, 1, 0]
+    row9 = [Macaulay(x1, -1/(6*E*Iyy), 3).result(x3), 0 , Macaulay(x2, -1/(6*E*Iyy), 3).result(x3), 0, 0, 0, Macaulay(x2-(xa/2), (-np.cos(beta))/(6*E*Iyy), 3).result(x3), 0, 0, x3, 1, 0]
     #b:
     brow9 = sf*d3*np.sin(beta) + Macaulay(x2-(xa/2), np.cos(beta)*P/(6*E*Iyy), 3).result(x3)
 
     #Tenth equation Vz(x2):
-    row10 = [Macaulay(x1, -1/(6*E*Iyy), 3).result(x2), 0 ,0 ,0 , 0, 0, Macaulay(x2-(xa/2), (-np.cos(beta))/(6*E*Iyy), 3).result(x2), 0, 0, x2, 1, 0]
+    row10 = [0.000*Macaulay(x1, -1/(6*E*Iyy), 3).result(x2), -0.0034172+0.000 ,0 ,0 , 0, 0, Macaulay(x2-(xa/2), (np.cos(beta))/(6*E*Iyy), 3).result(x2), 0, 0, x2, 1, 0]
     #b:
     brow10 = Macaulay(x2-(xa/2), np.cos(beta)*P/(6*E*Iyy),3).result(x2)
 
@@ -92,9 +93,7 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     #b:
     brow12 = (-np.sin(beta)/(E*Izz))*IntegrateX(x2-0.5*xa,4,0) - (zhat*np.sin(beta)/(G*J))*IntegrateX(x2-0.5*xa,2,1) + (np.sin(beta)*zhat**2/(G*J))*IntegrateX(x2-0.5*xa,2,0) + (ha*np.cos(beta)/(2*G*J))*IntegrateX(x2-0.5*xa,2,1) - (ha*np.cos(beta)*zhat/(2*G*J))*IntegrateX(x2-0.5*xa,2,0)
 
-
-
- 
+    #row12 =  [3.39846936e-09, -3.18235487e-09, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 4.18000000e-01, 1, 4.18000000e-01,1,2]
 
 
 
@@ -103,8 +102,8 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
 
     #below is alternative row for comparison (group)
 
-    equations = np.array([row4, row5, row3, row1, row2, row6, row11, row7, row10, row8, row9, row12])
-    resultants = np.array([brow4, brow5, brow3, brow1, brow2, brow6, brow11, brow7, brow10, brow8, brow9, brow12])
+   #equations = np.array([row4, row5, row3, row1, row2, row6, row11, row7, row10, row8, row9, row12])
+    #resultants = np.array([brow4, brow5, brow3, brow1, brow2, brow6, brow11, brow7, brow10, brow8, brow9, brow12])
 
 
     df1 = DataFrame(equations)
