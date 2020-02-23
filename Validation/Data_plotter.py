@@ -8,21 +8,39 @@ def select_elements(stress_df, Elements):
     TF_df = Elements['Element'].isin(stress_df['Element'])
     return Elements.loc[TF_df]
 
-def coords_from_nodes (nodes_df, inputs):
-    TF_df = inputs['Node'].isin(nodes_df)
+def coords_from_nodes (node_df, inputs):
+    TF_df = inputs['Node'].isin(node_df)
     return inputs.loc[TF_df]
 
 
+# Stresses
+Elem = select_elements(Bending_stress_R1, Elements)
+print(coords_from_nodes(Elem['NodeLT'], inputs))
+# Elem['LTX'] = Elem['NodeLT'].apply(coords_from_nodes, , axis=1)
 
 
-# Stressese
-s1 = Bending_stress_R1
-elements = s1['Element'] # All elements covered in output
-# Max = 6634, len = 5778
+# node1 = coords_from_nodes(Elem['NodeLT'], inputs)
+# node2 = coords_from_nodes(Elem['NodeRT'], inputs)
+# node3 = coords_from_nodes(Elem['NodeLB'], inputs)
+# node4 = coords_from_nodes(Elem['NodeRB'], inputs)
+# xaxis = 1
+# yaxis = pd.DataFrame([node1['y'], node2['y'], node3['y'], node4['y']])
+# zaxis = pd.DataFrame([node1['z'], node2['z'], node3['z'], node4['z']])
 
-R = Elements['Element'].isin(elements)
-U = Elements.loc[R]
-print(U)
+# xaxis['mean'] = xaxis.mean(axis=1)
+
+
+# Element_means = pd.DataFrame([xaxis.mean(axis=1), yaxis.mean(axis=1), zaxis.mean(axis=1)])
+
+
+
+# s1 = Bending_stress_R1
+# elements = s1['Element'] # All elements covered in output
+# # Max = 6634, len = 5778
+#
+# R = Elements['Element'].isin(elements)
+# U = Elements.loc[R]
+# print(U)
 
 
 
