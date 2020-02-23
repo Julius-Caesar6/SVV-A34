@@ -38,7 +38,7 @@ for i in range(1, int((stringers+1)/2-2)):
     y.append(h / 2 - (rest + i * s) * np.sin(alpha))
 # print(np.array(z)+h/2)
 # print(y)
-plt.scatter(z, y, color = 'green')  # plot upper part
+#plt.scatter(z, y, color = 'green')  # plot upper part    TEMP - TURNED OFF
 
 z2 = np.array(z)
 y2 = []
