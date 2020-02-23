@@ -48,7 +48,7 @@ for y_coord in y:
 print('y',y)
 print('y2',y2)
 print('z',z)
-plt.scatter(z2, y2, color = 'green')  # plot under part
+#plt.scatter(z2, y2, color = 'green')  # plot under part TEMP_ TURNED OFF
 
 rico = (h / 2) / (ca - h / 2)
 line = []
