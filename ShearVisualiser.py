@@ -20,7 +20,7 @@ y5 = -y2[::-1]
 
 z6 = z1[::-1]
 y6 = -y1[::-1]
-print(z6)
+
 #left curve
 zcl = np.concatenate((z6,z1))
 ycl = np.concatenate((y6,y1))
@@ -37,15 +37,17 @@ fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.set_aspect('equal')
 
-ax.plot_surface(zcl,ycl,[qbl,qbl*0]) #with shear
-ax.plot_surface(zcr,ycr,[qbr,qbr*0]) #with shear
+#ax.plot_surface(zcl,ycl,[qbl,qbl*0]) #with shear
+#ax.plot_surface(zcr,ycr,[qbr,qbr*0]) #with shear
 
 
-ix = np.linspace(-h/2, h/2)
-iy = func(ix)
-verts = [(a, 0), *zip(ix, iy), (b, 0)]
-poly = Polygon(verts, facecolor='0.9', edgecolor='0.5')
-ax.add_patch(poly)
+#below is a bad way of trying to draw the surface but i couldnt figure it out with plot_surface
+for i in range(len(zcl)):
+    ax.plot([zcl[i],zcl[i]],[ycl[i],ycl[i]],[qbl[i],0],color='y')
+
+for i in range(len(zcr)):
+    ax.plot([zcr[i],zcr[i]],[ycr[i],ycr[i]],[qbr[i],0],color='y')
+
 
 ax.plot(zcl,ycl,0,color='b')   #wing profile
 ax.plot(zcl,ycl,qbl,color='r') #with shear
