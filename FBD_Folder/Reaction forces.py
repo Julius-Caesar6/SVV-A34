@@ -47,12 +47,12 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     # Fourth equation Sy:
     row4 = [0, Macaulay(x1, -1, 0).result(la), 0, Macaulay(x2, -1,0).result(la), 0, Macaulay(x3, -1, 0).result(la), Macaulay(x2-(xa/2), -np.sin(beta),0).result(la), 0 ,0, 0, 0, 0]
     #b:
-    brow4 = Macaulay(x2+(xa/2), P*np.sin(beta),0).result(la)  - IntegrateX(la,1,0)
+    brow4 = Macaulay(x2+(xa/2), P*np.sin(beta),0).result(la)  + IntegrateX(la,1,0)
 
     # Fifth equation Sz:
     row5 = [Macaulay(x1, 1,0).result(la), 0, Macaulay(x2, 1, 0).result(la), 0, Macaulay(x3,1,0).result(la), 0, Macaulay(x2-(xa/2), np.cos(beta),0).result(la), 0, 0, 0, 0, 0]
     #b:
-    brow5 = Macaulay(x2+(xa/2), -P, 0).result(la)
+    brow5 = Macaulay(x2+(xa/2), -P*np.cos(beta), 0).result(la)
 
     # Sixth equation Vy(x1) - theta(x1)zhat
     row6 = [0,0,0,0,0,0,0, x1, 1, 0, 0, -zhat]
