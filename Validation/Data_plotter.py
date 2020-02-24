@@ -17,88 +17,68 @@ def coords_from_nodes (node, inputs):
 
 
 # Stresses
-Elem = select_elements(Bending_stress_R1, Elements)
-LTx = []
-RTx = []
-LBx = []
-RBx = []
+def Element_to_coordinates(stress_df):
+    Elem = select_elements(stress_df, Elements)
+    LTx = []
+    RTx = []
+    LBx = []
+    RBx = []
 
-LTy = []
-RTy = []
-LBy = []
-RBy = []
+    LTy = []
+    RTy = []
+    LBy = []
+    RBy = []
 
-LTz = []
-RTz = []
-LBz = []
-RBz = []
+    LTz = []
+    RTz = []
+    LBz = []
+    RBz = []
 
-for index, row in Elem.iterrows():
-    LTx.append(float(coords_from_nodes(row['NodeLT'], inputs)['x']))
-    RTx.append(float(coords_from_nodes(row['NodeRT'], inputs)['x']))
-    LBx.append(float(coords_from_nodes(row['NodeLB'], inputs)['x']))
-    RBx.append(float(coords_from_nodes(row['NodeRB'], inputs)['x']))
+    for index, row in Elem.iterrows():
+        LTx.append(float(coords_from_nodes(row['NodeLT'], inputs)['x']))
+        RTx.append(float(coords_from_nodes(row['NodeRT'], inputs)['x']))
+        LBx.append(float(coords_from_nodes(row['NodeLB'], inputs)['x']))
+        RBx.append(float(coords_from_nodes(row['NodeRB'], inputs)['x']))
 
-    LTy.append(float(coords_from_nodes(row['NodeLT'], inputs)['y']))
-    RTy.append(float(coords_from_nodes(row['NodeRT'], inputs)['y']))
-    LBy.append(float(coords_from_nodes(row['NodeLB'], inputs)['y']))
-    RBy.append(float(coords_from_nodes(row['NodeRB'], inputs)['y']))
+        LTy.append(float(coords_from_nodes(row['NodeLT'], inputs)['y']))
+        RTy.append(float(coords_from_nodes(row['NodeRT'], inputs)['y']))
+        LBy.append(float(coords_from_nodes(row['NodeLB'], inputs)['y']))
+        RBy.append(float(coords_from_nodes(row['NodeRB'], inputs)['y']))
 
-    LTz.append(float(coords_from_nodes(row['NodeLT'], inputs)['z']))
-    RTz.append(float(coords_from_nodes(row['NodeRT'], inputs)['z']))
-    LBz.append(float(coords_from_nodes(row['NodeLB'], inputs)['z']))
-    RBz.append(float(coords_from_nodes(row['NodeRB'], inputs)['z']))
+        LTz.append(float(coords_from_nodes(row['NodeLT'], inputs)['z']))
+        RTz.append(float(coords_from_nodes(row['NodeRT'], inputs)['z']))
+        LBz.append(float(coords_from_nodes(row['NodeLB'], inputs)['z']))
+        RBz.append(float(coords_from_nodes(row['NodeRB'], inputs)['z']))
 
-cordsx = pd.DataFrame(Elem['Element'])
-cordsx['LTx'] = LTx
-cordsx['RTx'] = RTx
-cordsx['LBx'] = LBx
-cordsx['RBx'] = RBx
-print(cordsx)
+    cordsx = pd.DataFrame(Elem['Element'])
+    cordsx['LTx'] = LTx
+    cordsx['RTx'] = RTx
+    cordsx['LBx'] = LBx
+    cordsx['RBx'] = RBx
+    cordsx['mean'] = cordsx[['LTx', 'RTx', 'LBx', 'RBx']].mean(axis=1)
 
-cordsy = pd.DataFrame(Elem['Element'])
-cordsy['LTy'] = LTy
-cordsy['RTy'] = RTy
-cordsy['LBy'] = LBy
-cordsy['RBy'] = RBy
-print(cordsy)
+    cordsy = pd.DataFrame(Elem['Element'])
+    cordsy['LTy'] = LTy
+    cordsy['RTy'] = RTy
+    cordsy['LBy'] = LBy
+    cordsy['RBy'] = RBy
+    cordsy['mean'] = cordsy[['LTy', 'RTy', 'LBy', 'RBy']].mean(axis=1)
 
-cordsz = pd.DataFrame(Elem['Element'])
-cordsz['LTz'] = LTz
-cordsz['RTz'] = RTz
-cordsz['LBz'] = LBz
-cordsz['RBz'] = RBz
-print(cordsz)
+    cordsz = pd.DataFrame(Elem['Element'])
+    cordsz['LTz'] = LTz
+    cordsz['RTz'] = RTz
+    cordsz['LBz'] = LBz
+    cordsz['RBz'] = RBz
+    cordsz['mean'] = cordsz[['LTz', 'RTz', 'LBz', 'RBz']].mean(axis=1)
 
+    stress_df['intpointx'] = cordsx['mean']
+    stress_df['intpointy'] = cordsy['mean']
+    stress_df['intpointz'] = cordsz['mean']
 
+    return stress_df
 
+test1 = Element_to_coordinates(Bending_stress_R1)
 
-# Elem['LTX'] = Elem['NodeLT'].apply(coords_from_nodes, , axis=1)
-
-
-# node1 = coords_from_nodes(Elem['NodeLT'], inputs)
-# node2 = coords_from_nodes(Elem['NodeRT'], inputs)
-# node3 = coords_from_nodes(Elem['NodeLB'], inputs)
-# node4 = coords_from_nodes(Elem['NodeRB'], inputs)
-# xaxis = 1
-# yaxis = pd.DataFrame([node1['y'], node2['y'], node3['y'], node4['y']])
-# zaxis = pd.DataFrame([node1['z'], node2['z'], node3['z'], node4['z']])
-
-# xaxis['mean'] = xaxis.mean(axis=1)
-
-
-# Element_means = pd.DataFrame([xaxis.mean(axis=1), yaxis.mean(axis=1), zaxis.mean(axis=1)])
-
-
-
-# s1 = Bending_stress_R1
-# elements = s1['Element'] # All elements covered in output
-# # Max = 6634, len = 5778
-#
-# R = Elements['Element'].isin(elements)
-# U = Elements.loc[R]
-# print(U)
-
-
+print(test1)
 
 
