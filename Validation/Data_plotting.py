@@ -1,9 +1,15 @@
 import matplotlib.pyplot as plt
+import pandas as pd
 from mpl_toolkits import mplot3d
-from Validation.Data_processor import *
 
-Bending_s_r1 = Element_to_coordinates(Bending_stress_R1)
-print(Bending_s_r1)
+# Load Stress DataFrames
+Bending_stress_R1 = pd.read_csv('Stress_plots/Bending_sr1.csv')
+Bending_stress_R2 = pd.read_csv('Stress_plots/Bending_sr2.csv')
+Jam_Bent_stress_R1 = pd.read_csv('Stress_plots/Jam_Bent_sr1.csv')
+Jam_Bent_stress_R2 = pd.read_csv('Stress_plots/Jam_Bent_sr2.csv')
+Jam_Straight_stress_R1 = pd.read_csv('Stress_plots/Jam_straight_sr1.csv')
+Jam_Straight_stress_R2 = pd.read_csv('Stress_plots/Jam_straight_sr2.csv')
+
 
 fig = plt.figure()
 ax = plt.axes(projection='3d')

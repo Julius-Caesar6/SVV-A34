@@ -77,20 +77,20 @@ def Element_to_coordinates(stress_df):
 
     return stress_df
 
-
-Bending_s_r1 = Element_to_coordinates(Bending_stress_R1)
-Bending_s_r2 = Element_to_coordinates(Bending_stress_R2)
-Jam_Bent_s_r1 = Element_to_coordinates(Jam_Bent_stress_R1)
-Jam_Bent_s_r2 = Element_to_coordinates(Jam_Bent_stress_R2)
+#
+# Bending_s_r1 = Element_to_coordinates(Bending_stress_R1)
+# Bending_s_r2 = Element_to_coordinates(Bending_stress_R2)
+# Jam_Bent_s_r1 = Element_to_coordinates(Jam_Bent_stress_R1)
+# Jam_Bent_s_r2 = Element_to_coordinates(Jam_Bent_stress_R2)
 Jam_Straight_s_r1 = Element_to_coordinates(Jam_Straight_stress_R1)
 Jam_Straight_s_r2 = Element_to_coordinates(Jam_Straight_stress_R2)
 
-Bending_s_r1.to_csv('Bending_sr1.csv')
-Bending_s_r2.to_csv('Bending_sr2.csv')
-Jam_Bent_s_r1.to_csv('Jam_Bent_sr1.csv')
-Jam_Bent_s_r2.to_csv('Jam_Bent_sr2.csv')
+# Bending_s_r1.to_csv('Bending_sr1.csv')
+# Bending_s_r2.to_csv('Bending_sr2.csv')
+# Jam_Bent_s_r1.to_csv('Jam_Bent_sr1.csv')
+# Jam_Bent_s_r2.to_csv('Jam_Bent_sr2.csv')
 Jam_Straight_s_r1.to_csv('Jam_straight_sr1.csv')
-Jam_Straight_s_r2.to_csv('Jam_straight_sr1.csv')
+Jam_Straight_s_r2.to_csv('Jam_straight_sr2.csv')
 
 
 
