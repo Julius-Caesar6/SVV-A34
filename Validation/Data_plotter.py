@@ -81,4 +81,3 @@ test1 = Element_to_coordinates(Bending_stress_R1)
 
 print(test1)
 
-
