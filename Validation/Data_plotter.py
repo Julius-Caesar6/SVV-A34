@@ -8,14 +8,71 @@ def select_elements(stress_df, Elements):
     TF_df = Elements['Element'].isin(stress_df['Element'])
     return Elements.loc[TF_df]
 
-def coords_from_nodes (node_df, inputs):
-    TF_df = inputs['Node'].isin(node_df)
-    return inputs.loc[TF_df]
+def coords_from_nodes (node, inputs):
+    return inputs.loc[inputs['Node']==node]
+
+# def coords_from_nodes (node_df, inputs):
+#     TF_df = inputs['Node'].isin(node_df)
+#     return inputs.loc[TF_df]
 
 
 # Stresses
 Elem = select_elements(Bending_stress_R1, Elements)
-print(coords_from_nodes(Elem['NodeLT'], inputs))
+LTx = []
+RTx = []
+LBx = []
+RBx = []
+
+LTy = []
+RTy = []
+LBy = []
+RBy = []
+
+LTz = []
+RTz = []
+LBz = []
+RBz = []
+
+for index, row in Elem.iterrows():
+    LTx.append(float(coords_from_nodes(row['NodeLT'], inputs)['x']))
+    RTx.append(float(coords_from_nodes(row['NodeRT'], inputs)['x']))
+    LBx.append(float(coords_from_nodes(row['NodeLB'], inputs)['x']))
+    RBx.append(float(coords_from_nodes(row['NodeRB'], inputs)['x']))
+
+    LTy.append(float(coords_from_nodes(row['NodeLT'], inputs)['y']))
+    RTy.append(float(coords_from_nodes(row['NodeRT'], inputs)['y']))
+    LBy.append(float(coords_from_nodes(row['NodeLB'], inputs)['y']))
+    RBy.append(float(coords_from_nodes(row['NodeRB'], inputs)['y']))
+
+    LTz.append(float(coords_from_nodes(row['NodeLT'], inputs)['z']))
+    RTz.append(float(coords_from_nodes(row['NodeRT'], inputs)['z']))
+    LBz.append(float(coords_from_nodes(row['NodeLB'], inputs)['z']))
+    RBz.append(float(coords_from_nodes(row['NodeRB'], inputs)['z']))
+
+cordsx = pd.DataFrame(Elem['Element'])
+cordsx['LTx'] = LTx
+cordsx['RTx'] = RTx
+cordsx['LBx'] = LBx
+cordsx['RBx'] = RBx
+print(cordsx)
+
+cordsy = pd.DataFrame(Elem['Element'])
+cordsy['LTy'] = LTy
+cordsy['RTy'] = RTy
+cordsy['LBy'] = LBy
+cordsy['RBy'] = RBy
+print(cordsy)
+
+cordsz = pd.DataFrame(Elem['Element'])
+cordsz['LTz'] = LTz
+cordsz['RTz'] = RTz
+cordsz['LBz'] = LBz
+cordsz['RBz'] = RBz
+print(cordsz)
+
+
+
+
 # Elem['LTX'] = Elem['NodeLT'].apply(coords_from_nodes, , axis=1)
 
 
