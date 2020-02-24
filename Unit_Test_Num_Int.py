@@ -1,6 +1,7 @@
 import unittest
 from Numint import simpson, trapezoid,  comp_num_int
 import numpy as np
+import matplotlib.pyplot as plt
 
 class int_test(unittest.TestCase):
     def testpolythree(self):
@@ -78,6 +79,37 @@ class comp_test(unittest.TestCase):
             f_lst.append(2*np.exp(i) + 4*i*np.cos(i)+ i**5)
         area = (2*np.exp(x_lst[-1]) + np.cos(x_lst[-1]) + 4*x_lst[-1]*np.sin(x_lst[-1]) + 1/6*x_lst[-1]**6) - (2*np.exp(x_lst[0]) + np.cos(x_lst[0]) + 4*x_lst[0]*np.sin(x_lst[0]) + 1/6*x_lst[0]**6)
         self.assertAlmostEqual(comp_num_int(x_lst, f_lst), area, delta= 1)
+
+#Making a quick function to make it easier to write the convergence test function
+def f_convergence(x_value,int_lvl=0):
+    if int_lvl == 0:
+        return 2*np.exp(2*x_value) + 4*x_value*np.cos(x_value) + x_value**5
+
+    elif int_lvl == 1:
+        return 4*x_value*np.sin(x_value) + 4*np.cos(x_value) + np.exp(2*x_value) + x_value**6/6
+
+
+class convergence_test(unittest.TestCase):
+    def test_rate_of_convergence(self):
+        #we want to plot the log of the error vs the log of the mesh spacing
+        e_lst   = []
+        dx_lst  = [1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01, 0.005, 0.002, 0.001, 0.0005, 0.0002, 0.0001, 0.00005, 0.00002, 0.00001, 0.000005, 0.000002, 0.000001]
+        #We want a function that won't be given exactly. 
+        xmin    = 1
+        xmax    = 7
+        t_area  = f_convergence(xmax,int_lvl=1) - f_convergence(xmin,int_lvl=1)
+        
+        i = 0
+        for dx in dx_lst:
+            num_steps = int((xmax-xmin)/dx)
+            x_lst = np.linspace(xmin,xmax,num=num_steps)
+            f_lst = f_convergence(x_lst)
+            e_lst.append(abs(comp_num_int(x_lst,f_lst)-t_area))
+        
+        plt.plot( np.log10(dx_lst), np.log10(e_lst) )
+        plt.show()
+
+
 
 
 if __name__ == '__main__':
