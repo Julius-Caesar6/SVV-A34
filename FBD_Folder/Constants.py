@@ -17,8 +17,8 @@ d2=0
 d3=0.02030
 beta=26 #degrees (please leave)
 P=37900
-G=28*10**9
-E=73*10**9
+E = 73.1*10**9       # E-modulus (Pa)
+G = 28*10**9       # G-modulus (Pa)
 Nz = 81
 Nx = 41
 

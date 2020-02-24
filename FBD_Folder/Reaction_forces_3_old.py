@@ -125,5 +125,5 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
 
 
 
-aa = (reaction_solver(-0.098, Ca, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, 5.11386e-06, 3.7895e-05 , G, 0.000187828))
+aa = (reaction_solver(-0.0008, Ca, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, 5.11386e-06, 3.7895e-05 , G, 0.000187828))
 print(aa)
