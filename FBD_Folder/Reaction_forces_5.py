@@ -94,12 +94,11 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
 
 
 
- 
-
-
 
     equations = np.array([row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12])
     resultants = np.array([brow1, brow2, brow3, brow4, brow5, brow6, brow7, brow8, brow9, brow10, brow11, brow12])
+
+
 
     #below is alternative row for comparison (group)
 
@@ -117,14 +116,6 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     #df2.rows = [['Rz1'], ['Ry1'],['Rz2'], ['Ry2'], ['Rz3'], ['Ry3'], ['Rj'], ['C1'], ['C2'], ['C3'], ['C4'], ['C5']]
 
 
-    # for i in range(12):
-    #     for l in range(12):
-    #         if abs(equations[i,l]) < 10**(-8) and abs(equations[i,l]) != 0:
-    #             equations[i,l] = 0
-    #             print("small")
-
-
-
 
     xvalues = np.linalg.solve(equations,resultants)
 
@@ -132,9 +123,21 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
 
 
 
-aa = (reaction_solver(-0.008, Ca, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, 5.11386e-06, 3.7895e-05 , G, 0.000187828))
-print(aa)
+xparam = (reaction_solver(-0.008, Ca, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, 5.11386e-06, 3.7895e-05 , G, 0.000187828))
 
-#TURN INTEGRATION ONNNNNNNNNNNN
+f2 = open("FBDvalues.py",'w')
+f2.writelines('Rz1 = '+str(xparam[0])+'\n')
+f2.writelines('Ry1 = '+str(xparam[1])+'\n')
+f2.writelines('Rz2 = '+str(xparam[2])+'\n')
+f2.writelines('Ry2 = '+str(xparam[3])+'\n')
+f2.writelines('Rz3 = '+str(xparam[4])+'\n')
+f2.writelines('Ry3 = '+str(xparam[5])+'\n')
+f2.writelines('Rj = '+str(xparam[6])+'\n')
+f2.writelines('C1 = '+str(xparam[7])+'\n')
+f2.writelines('C2 = '+str(xparam[8])+'\n')
+f2.writelines('C3 = '+str(xparam[9])+'\n')
+f2.writelines('C4 = '+str(xparam[10])+'\n')
+f2.writelines('C5 = '+str(xparam[11])+'\n')
+f2.close()
 
 
