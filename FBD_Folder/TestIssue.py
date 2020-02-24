@@ -46,3 +46,6 @@ Pm = np.matrix([[ 1.00000000e+00 , 1.00000000e+00,  1.00000000e+00 , 4.38371147e
 
 dff = DataFrame(Pm)
 dff.columns = ['F_1y', 'F_2y', 'F_3y', 'F_I', 'F_1z', 'F_2z', 'F_3z', 'c1', 'c2', 'c3', 'c4', 'c5']
+
+ab = np.matrix([[1,2],[3,4]])
+

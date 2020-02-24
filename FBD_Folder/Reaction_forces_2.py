@@ -73,7 +73,7 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     brow8 = P*(Macaulay(x2+(xa/2), np.sin(beta)/(-6*E*Izz),3).result(x3) + Macaulay(x2+(xa/2), (zhat*np.sin(beta)*(zhat+(ha/2)))/(G*J),1).result(x3) - Macaulay(x2+(xa/2), (zhat*np.cos(beta)*(ha/2))/(G*J), 1).result(x3)) + (-1/(E*Izz))*IntegrateX(x3,4,0)  + (zhat/(G*J))*IntegrateX(x3,2,1) - (zhat**2/(G*J))*IntegrateX(x3,2,0)  + d3*np.cos(beta)
 
     #Ninth equation Vz(x3):
-    row9 = [Macaulay(x1, -1/(6*E*Iyy), 3).result(x3), , Macaulay(x2, -1/(6*E*Iyy), 3).result(x3), 0, 0, 0, Macaulay(x2-(xa/2), (-np.cos(beta))/(6*E*Iyy), 3).result(x3), 0, 0, x3, 1, 0]
+    row9 = [Macaulay(x1, -1/(6*E*Iyy), 3).result(x3), 0, Macaulay(x2, -1/(6*E*Iyy), 3).result(x3), 0, 0, 0, Macaulay(x2-(xa/2), (-np.cos(beta))/(6*E*Iyy), 3).result(x3), 0, 0, x3, 1, 0]
     #b:
     brow9 = sf*d3*np.sin(beta) + Macaulay(x2-(xa/2), np.cos(beta)*P/(6*E*Iyy), 3).result(x3)
 
@@ -115,7 +115,10 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     #df2.rows = [['Rz1'], ['Ry1'],['Rz2'], ['Ry2'], ['Rz3'], ['Ry3'], ['Rj'], ['C1'], ['C2'], ['C3'], ['C4'], ['C5']]
 
 
-
+    # for i in range(12):
+    #     for l in range(12):
+    #         if abs(equations[i,l]) < 10**(-8):
+    #             equations[i,l] = 0
 
 
 
