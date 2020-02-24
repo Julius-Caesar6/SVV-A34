@@ -38,7 +38,7 @@ for i in range(1, int((stringers+1)/2-2)):
     y.append(h / 2 - (rest + i * s) * np.sin(alpha))
 # print(np.array(z)+h/2)
 # print(y)
-#plt.scatter(z, y, color = 'green')  # plot upper part    TEMP - TURNED OFF
+plt.scatter(z, y, color = 'green')  # plot upper part    TEMP - TURNED OFF
 
 z2 = np.array(z)
 y2 = []
@@ -48,7 +48,7 @@ for y_coord in y:
 print('y',y)
 print('y2',y2)
 print('z',z)
-#plt.scatter(z2, y2, color = 'green')  # plot under part TEMP_ TURNED OFF
+plt.scatter(z2, y2, color = 'green')  # plot under part TEMP_ TURNED OFF
 
 rico = (h / 2) / (ca - h / 2)
 line = []

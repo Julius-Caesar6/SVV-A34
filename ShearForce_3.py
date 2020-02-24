@@ -14,13 +14,13 @@ G = 1
 #qb1--------------------------------------------------------------------------------------------------------------------
 #positive z values and positive y values
 range1 = np.linspace(0,np.pi/2,100)
-qb1 = -Sz/Iyy_total * (t*h**2/4 *(np.sin(range1)-0)) - Sy/Izz_total *(t*h**2/4*(-np.cos(range1)+1))
+qb1 = -Sz/Iyy_total * (t*h**2/4 *(np.sin(range1)-0) + A_stringer/2*z[0] ) - Sy/Izz_total *(t*h**2/4*(-np.cos(range1)+1) + A_stringer/2*y[0])
 
 for i in range(len(qb1)):
     #print(i)
     if range1[i] > np.arccos(z[1]*2/h):
         #print('added A1',z[1])
-        qb1[i] = qb1[i] -Sz/Iyy_total * (A_stringer/2*z[0] + A_stringer*z[1]) - Sy/Izz_total *(A_stringer/2*y[0] + A_stringer*y[1])
+        qb1[i] = qb1[i] -Sz/Iyy_total * (A_stringer*z[1]) - Sy/Izz_total *( A_stringer*y[1])
 
 
 
@@ -35,10 +35,10 @@ range3 = np.linspace(0,straight,100)
 qb3 = qb1[-1] + qb2[-1] - Sz/Iyy_total *( t* (-ca+h/2)/straight*(range3**2/2) ) - Sy/Izz_total*( t*(h/2)*range3 - (t*(h/2))/straight*range3**2/2  )
 
 for i in range(len(range3)):
-    #print(i)
+    print(i)
     for p in range(2,len(z)):
         if range3[i] > z[p]*straight/(-ca + h/2):
-            #print('Added A',p,z[p])
+            print('Added A',p,z[p])
             qb3[i] = qb3[i] - Sz/Iyy_total *( A_stringer*(z[p])) - Sy/Izz_total*( A_stringer*(y[p]))
 
 
