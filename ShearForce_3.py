@@ -7,7 +7,7 @@ z = np.dot(z,-1)
 #print(z)
 Sz = 10
 Sy = 10
-z_sc = np.abs(1)
+z_sc = np.abs(0.8*10**(-2)) #m
 G = 28*10^9
 T = 1
 
@@ -95,7 +95,7 @@ matrix_force = np.linalg.solve(a,b) #0th entry qso1, 1th entry qso2, 2nd entry, 
 #G*dtheta/dx = 1/(2*Am_cell1)*((qso1_t *np.pi*(h/2)/t + (qso1_t-qso2_t)*h/tspar)) #equation2
 #G*dtheta/dx = 1/(2*Am_cell2)*((qso2_2*straight/t + (qso2_t-qso1_t)*h/tspar)) #equation3
 
-c = np.array([[2*Am_cell1,2*Am_cell2,0], [ 1/(2*Am_cell1)*((np.pi*(h/2)/t) +h/tspar) , 1/(2*Am_cell1)*-h/tspar, -G ] , [1/(2*Am_cell2)*(-h/tspar), 1/(2*Am_cell2)*(h/tspar + 2*straight/t), -G]])
+c = np.array([[2*Am_cell1,2*Am_cell2,0], [ 1/(2*Am_cell1)*((np.pi*(h/2)/t) +h/tspar) , 1/(2*Am_cell1)*(-h/tspar), -G ] , [1/(2*Am_cell2)*(-h/tspar), 1/(2*Am_cell2)*(h/tspar + 2*straight/t), -G]])
 d = np.array([T,0,0])
 
 matrix_torque = np.linalg.solve(c,d) #0th entry is qso1_t, 1 entry is qso2_t , second entry is dtheta/dx
