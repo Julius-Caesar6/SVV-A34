@@ -5,8 +5,8 @@ import numpy as np
 
 z = np.dot(z,-1)
 print(z)
-Sz = 1
-Sy = 1
+Sz = 10
+Sy = 10
 z_sc = np.abs(1)
 G = 1
 #Shear force analysis
