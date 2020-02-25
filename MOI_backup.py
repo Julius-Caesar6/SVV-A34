@@ -1,14 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-h = 17.3*10**(-2) #m
-ca = 48.4*10**(-2) #m
+h = 17.3 #cm
+ca = 48.4 #cm
 stringers = 13
-hst = 1.4*10**(-2) #m
-wst = 1.8*10**(-2) #m
-tst = 1.2*10**(-3) #m
-t = 1.1*10**(-3) #m
-tspar= 2.5*10**(-3) #m
+hst = 1.4 #cm
+wst = 1.8 #cm
+tst = 1.2/10 #cm
+t = 1.1/10 #cm
+tspar= 2.5/10 #cm
 
 
 # plotting stringers as booms
@@ -63,12 +63,12 @@ for zz in arange:
 plt.plot(arange, graph_straight1,"b")
 plt.plot(arange, graph_straight2,"b")
 
-spar_yy = np.linspace(-h/2, h/2, 100)
+spar_yy = np.arange(-h / 2, h / 2, 0.1)
 spar_xx = np.zeros(len(spar_yy))
 
-c1x = -np.linspace(0,h/2,100)
+c1x = -np.arange(0,h/2+0.01,0.01)
 c1y = -np.sqrt((h/2)**2-c1x*c1x)
-c2x = -np.linspace(0,h/2,100)
+c2x = -np.arange(0,h/2+0.01,0.01)
 c2y = np.sqrt((h/2)**2-c2x*c2x)
 
 plt.plot(spar_xx, spar_yy, 'r')

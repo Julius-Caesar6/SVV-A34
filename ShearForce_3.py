@@ -8,7 +8,9 @@ print(z)
 Sz = 10
 Sy = 10
 z_sc = np.abs(1)
-G = 1
+G = 28*10^9
+T = 1
+
 #Shear force analysis
 
 #qb1--------------------------------------------------------------------------------------------------------------------
@@ -35,10 +37,10 @@ range3 = np.linspace(0,straight,100)
 qb3 = qb1[-1] + qb2[-1] - Sz/Iyy_total *( t* (-ca+h/2)/straight*(range3**2/2) ) - Sy/Izz_total*( t*(h/2)*range3 - (t*(h/2))/straight*range3**2/2  )
 
 for i in range(len(range3)):
-    print(i)
+    #print(i)
     for p in range(2,len(z)):
         if range3[i] > z[p]*straight/(-ca + h/2):
-            print('Added A',p,z[p])
+            #print('Added A',p,z[p])
             qb3[i] = qb3[i] - Sz/Iyy_total *( A_stringer*(z[p])) - Sy/Izz_total*( A_stringer*(y[p]))
 
 
@@ -88,7 +90,7 @@ b = np.array([-Sy*z_sc - 2*integral1 - 2*integral2, -1/(2*Am_cell1)*(integral3/t
 matrix_force = np.linalg.solve(a,b) #0th entry qso1, 1th entry qso2, 2nd entry, dtheta/dx
 
 #Torque analysis
-T = 1
+#T = 1
 #T = 2*Am_cell1*qso1_t + 2*Am_cell2*qso2_t #equation1
 #G*dtheta/dx = 1/(2*Am_cell1)*((qso1_t *np.pi*(h/2)/t + (qso1_t-qso2_t)*h/tspar)) #equation2
 #G*dtheta/dx = 1/(2*Am_cell2)*((qso2_2*straight/t + (qso2_t-qso1_t)*h/tspar)) #equation3
@@ -157,3 +159,7 @@ tau_values.extend(q6_total/t)
 
 #maximum shear stress in the figure
 tau_max = np.max(tau_values)
+
+#polar moment of inertia
+J = T/(G*matrix_torque[2])
+
