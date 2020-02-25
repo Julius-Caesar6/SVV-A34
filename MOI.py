@@ -87,7 +87,7 @@ Izz_spar =  1/12*tspar*h**3
 
 d2_y = np.square(y)
 d2_z = np.square(z[1:]-y_cen)
-#print(d2_z, 'd2z')
+print(d2_z, 'd2z')
 
 Steiner_z= 2*A_stringer*(sum(d2_y))
 Steiner_y = A_stringer*(h/2+ y_cen)**2 + 2*A_stringer*(sum(d2_z))
