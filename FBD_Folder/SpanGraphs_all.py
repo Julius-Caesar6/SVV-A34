@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 xshow = True  #show x1,x2, etc
 
-topval = 50
+topval = 20
 x = np.linspace(0.01,la,topval)
 Txa = []
 Mya = []
@@ -19,7 +19,7 @@ thetaa = []
 vydera = []
 vzdera = []
 for i in range(len(x)):
-    if int(i%(5/(100/topval))) == 0:
+    if int(i%(10/(100/topval))) == 0:
         print(int(100*i/topval),'%')
     Txa.append(Tx(x[i]))
     Mya.append(My(x[i]))
@@ -59,7 +59,8 @@ axs2[0, 1].set_title("""vy slope """)
 axs2[1, 1].plot(x, Sya, 'tab:cyan')
 axs2[1, 1].set_title('Sy')
 
-fig, axs3 = plt.subplots(1, 2)
+
+fig, axs3 = plt.subplots(2, 2)
 axs3[0, 0].plot(x, thetaa, 'tab:cyan')
 axs3[0, 0].set_title('twist')
 #axs3[1, 0].plot(x, Mya, 'tab:cyan')

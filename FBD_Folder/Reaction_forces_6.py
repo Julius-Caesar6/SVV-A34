@@ -27,8 +27,9 @@ from pandas import *
 
 def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz, Iyy, G, J): #TODO : ADJUST FOR UNITS!! (if needed?)
     beta = np.radians(beta)
-    sf = -1 #sign verification purposes (for displacements in z, + is good) #leave for now
-    bcsf = 1 #BC sign verification
+    sf = -1 #sign verification purposes (for displacements in z, - is good) #leave for now
+    bcsf = 0 #BC sign verification, extra rot
+    pf = -1  #P sign convention x2,x3
 
 
     # First equation My:
@@ -46,7 +47,7 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     # Third equation Tx:
     row3 = [0, Macaulay(x1,zhat,0).result(la), 0, Macaulay(x2, zhat, 0).result(la), 0, Macaulay(x3, zhat, 0).result(la), Macaulay(x2-(xa/2), zhat*np.sin(beta), 0).result(la) + Macaulay(x2-(xa/2),-np.cos(beta)*ha/2,0).result(la), 0, 0, 0, 0, 0]
     #b:
-    brow3 = Macaulay(x2+(xa/2), P*ha*np.cos(beta)/2, 0).result(la) + Macaulay(x2+(xa/2), -P*np.sin(beta)*(zhat+(ha/2)), 0).result(la) - IntegrateX(la,1,1) + zhat*IntegrateX(la,1,0)
+    brow3 = Macaulay(x2+(xa/2), P*ha*np.cos(beta)/2, 0).result(la) + Macaulay(x2+(xa/2), -P*np.sin(beta)*(zhat), 0).result(la) - IntegrateX(la,1,1) + zhat*IntegrateX(la,1,0)
 
     # Fourth equation Ry = 0:
     row4 = [0,1,0,1,0,1,np.sin(beta),0,0,0,0,0]
@@ -73,17 +74,17 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     # Eight equation Vy(x3..)
     row8 = [0, (Macaulay(x1, 1/(6*E*Izz), 3).result(x3))-(Macaulay(x1, (zhat**2)/(G*J), 1).result(x3)), 0, (Macaulay(x2, 1/(6*E*Izz), 3).result(x3))-(Macaulay(x2, (zhat**2)/(G*J), 1).result(x3)), 0, 0, (Macaulay(x2-(xa/2), np.sin(beta)/(6*E*Izz), 3).result(x3)) - (Macaulay(x2-(xa/2), (zhat**2)*np.sin(beta)/(G*J), 1).result(x3)) + Macaulay(x2-0.5*xa,zhat*ha*np.cos(beta)/(2*G*J),1).result(x3), x3, 1, 0, 0, -zhat]
     #b:
-    brow8 = P*(Macaulay(x2+(xa/2), np.sin(beta)/(-6*E*Izz),3).result(x3) + Macaulay(x2+(xa/2), (zhat*np.sin(beta)*(zhat+(ha/2)))/(G*J),1).result(x3) - Macaulay(x2+(xa/2), (zhat*np.cos(beta)*(ha/2))/(G*J), 1).result(x3)) + (-1/(E*Izz))*IntegrateX(x3,4,0)  + (zhat/(G*J))*IntegrateX(x3,2,1) - (zhat**2/(G*J))*IntegrateX(x3,2,0)  + d3*np.cos(beta)
+    brow8 = P*(Macaulay(x2+(xa/2), np.sin(beta)/(-6*E*Izz),3).result(x3) + Macaulay(x2+(xa/2), (zhat*np.sin(beta)*(zhat))/(G*J),1).result(x3) - Macaulay(x2+(xa/2), (zhat*np.cos(beta)*(ha/2))/(G*J), 1).result(x3)) + (-1/(E*Izz))*IntegrateX(x3,4,0)  + (zhat/(G*J))*IntegrateX(x3,2,1) - (zhat**2/(G*J))*IntegrateX(x3,2,0)  + d3*np.cos(beta)
 
     #Ninth equation Vz(x3):
     row9 = [Macaulay(x1, -1/(6*E*Iyy), 3).result(x3), 0, Macaulay(x2, -1/(6*E*Iyy), 3).result(x3), 0, 0, 0, Macaulay(x2-(xa/2), (-np.cos(beta))/(6*E*Iyy), 3).result(x3), 0, 0, x3, 1, 0]
     #b:
-    brow9 = sf*d3*np.sin(beta) + Macaulay(x2-(xa/2), np.cos(beta)*P/(6*E*Iyy), 3).result(x3)
+    brow9 = sf*d3*np.sin(beta) + pf * Macaulay(x2-(xa/2), -np.cos(beta)*P/(6*E*Iyy), 3).result(x3)
 
     #Tenth equation Vz(x2):
     row10 = [Macaulay(x1, -1/(6*E*Iyy), 3).result(x2), 0 ,0 ,0 , 0, 0, Macaulay(x2-(xa/2), (-np.cos(beta))/(6*E*Iyy), 3).result(x2), 0, 0, x2, 1, 0]
     #b:
-    brow10 = Macaulay(x2-(xa/2), np.cos(beta)*P/(6*E*Iyy),3).result(x2)
+    brow10 = pf * Macaulay(x2-(xa/2), -np.cos(beta)*P/(6*E*Iyy),3).result(x2)
 
     #Eleventh equation Vz(x1):
     row11 = [0,0,0,0,0,0,0,0,0,x1, 1,0]
