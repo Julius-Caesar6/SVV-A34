@@ -29,7 +29,7 @@ def denval(inip,repin):
 def IntegratePoly(polylist,ni,startvi,endvi,zp2):  #Returns a number of integrals over specified length          #
     endv = endvi - startvi  #done to account for xi spline issue
     startv = 0
-    #print(polylist)  #Turn on for debuggin nans
+    print(polylist)  #Turn on for debuggin nans
     a = (polylist[0])/denval(3+zp2,ni)
     b = (polylist[1])/denval(2+zp2,ni)
     c = (polylist[2])/denval(1+zp2,ni)
@@ -82,24 +82,21 @@ def IntegrateX(x,n,zp):  #standard z once then x [n] times
 
 
 
-
-
-
 #VERIF BELOW
 
-# def IntegrateXverif(x,n,zp):  #standard z once then x [n] times
-#     MeshZ = [1,2,4]
-#     MeshX =  [1,2,3,6,7,9]
-#     xnew = []
-#     for val in MeshX:
-#         if val < x:
-#             xnew.append(val)
-#     xlst = []
-#     for idx in range(len(xnew)):
-#         xlst.append(IntegrateMultiSpline(MeshZ,interpolate(list(loaddataverif[idx]),MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
-#     xlstpoly = interpolate(xlst,xnew).abcd
-#     return IntegrateMultiSpline(xnew,xlstpoly,n,0)
+def IntegrateXverif(x,n,zp):  #standard z once then x [n] times
+    MeshZ = [1,2,4]
+    MeshX =  [1,2,4,6]
+    xnew = []
+    for val in MeshX:
+        if val < x:
+            xnew.append(val)
+    xlst = []
+    for idx in range(len(xnew)):
+        xlst.append(IntegrateMultiSpline(MeshZ,interpolate(list(loaddataverif[idx]),MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
+    xlstpoly = interpolate(xlst,xnew).abcd
+    return IntegrateMultiSpline(xnew,xlstpoly,n,0)
 
-#print(IntegrateXverif(2.3,1,1))
+print(IntegrateXverif(5,1,0))
 
 
