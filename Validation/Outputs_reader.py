@@ -9,21 +9,6 @@ Jam_Bent_stress_R2 = pd.read_csv('Stress/Jam_Bent_stresses_reg_2.csv',  delimite
 Jam_Straight_stress_R1 = pd.read_csv('Stress/Jam_straight_stresses_reg_1.csv',  delimiter ="\s+" )
 Jam_Straight_stress_R2 = pd.read_csv('Stress/Jam_straight_stresses_reg_2.csv',  delimiter ="\s+" )
 
-# Create dataframes for displacement data
-# Works with nodes
-Bending_disp =  pd.read_csv('Displacement/Bending_disp.csv',  delimiter ="\s+" )
-Bending_disp_assembly =  pd.read_csv('Displacement/Bending_disp_assembly.csv',  delimiter ="\s+" )
-Jam_Bent_disp =  pd.read_csv('Displacement/Jam_Bent_disp.csv',  delimiter ="\s+" )
-Jam_Bent_disp_assembly =  pd.read_csv('Displacement/Jam_Bent_disp_assembly.csv',  delimiter ="\s+" )
-Jam_Straight_disp =  pd.read_csv('Displacement/Jam_Straight_disp.csv',  delimiter ="\s+" )
-Jam_Straight_disp_assembly =  pd.read_csv('Displacement/Jam_Straight_disp_assembly.csv',  delimiter ="\s+" )
-
-# Create dataframes for reaction forces
-# Works with nodes
-Bending_RF_assembly =  pd.read_csv('Reaction_Forces/Bending_RF_assembly.csv',  delimiter ="\s+" )
-Jam_Bent_RF_assembly =  pd.read_csv('Reaction_Forces/Jam_Bent_RF_assembly.csv',  delimiter ="\s+" )
-Jam_Straight_RF_assembly =  pd.read_csv('Reaction_Forces/Jam_Straight_RF_assembly.csv',  delimiter ="\s+" )
-
 # Process Stress data
 # Taking mean of Loc1 and Loc2 for shear and von mises stress.
 Bending_stress_R1['S.Mises.mean'] = Bending_stress_R1[['S.Mises1','S.Mises2']].mean(axis=1)

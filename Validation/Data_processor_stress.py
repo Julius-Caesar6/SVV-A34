@@ -9,12 +9,7 @@ def select_elements(stress_df, Elements):
 def coords_from_nodes (node, inputs):
     return inputs.loc[inputs['Node']==node]
 
-# def coords_from_nodes (node_df, inputs):
-#     TF_df = inputs['Node'].isin(node_df)
-#     return inputs.loc[TF_df]
 
-
-# Stresses
 def Element_to_coordinates(stress_df):
     Elem = select_elements(stress_df, Elements)
     LTx = []
@@ -77,19 +72,20 @@ def Element_to_coordinates(stress_df):
 
 
 
-Bending_s_r1 = Element_to_coordinates(Bending_stress_R1)
-Bending_s_r2 = Element_to_coordinates(Bending_stress_R2)
-Jam_Bent_s_r1 = Element_to_coordinates(Jam_Bent_stress_R1)
-Jam_Bent_s_r2 = Element_to_coordinates(Jam_Bent_stress_R2)
-Jam_Straight_s_r1 = Element_to_coordinates(Jam_Straight_stress_R1)
-Jam_Straight_s_r2 = Element_to_coordinates(Jam_Straight_stress_R2)
-
-Bending_s_r1.to_csv('Bending_sr1.csv')
-Bending_s_r2.to_csv('Bending_sr2.csv')
-Jam_Bent_s_r1.to_csv('Jam_Bent_sr1.csv')
-Jam_Bent_s_r2.to_csv('Jam_Bent_sr2.csv')
-Jam_Straight_s_r1.to_csv('Jam_straight_sr1.csv')
-Jam_Straight_s_r2.to_csv('Jam_straight_sr2.csv')
-
+# Running functions and saving DataFrames to csv files
+# Bending_s_r1 = Element_to_coordinates(Bending_stress_R1)
+# Bending_s_r2 = Element_to_coordinates(Bending_stress_R2)
+# Jam_Bent_s_r1 = Element_to_coordinates(Jam_Bent_stress_R1)
+# Jam_Bent_s_r2 = Element_to_coordinates(Jam_Bent_stress_R2)
+# Jam_Straight_s_r1 = Element_to_coordinates(Jam_Straight_stress_R1)
+# Jam_Straight_s_r2 = Element_to_coordinates(Jam_Straight_stress_R2)
+#
+# Bending_s_r1.to_csv('Bending_sr1.csv')
+# Bending_s_r2.to_csv('Bending_sr2.csv')
+# Jam_Bent_s_r1.to_csv('Jam_Bent_sr1.csv')
+# Jam_Bent_s_r2.to_csv('Jam_Bent_sr2.csv')
+# Jam_Straight_s_r1.to_csv('Jam_straight_sr1.csv')
+# Jam_Straight_s_r2.to_csv('Jam_straight_sr2.csv')
+#
 
 

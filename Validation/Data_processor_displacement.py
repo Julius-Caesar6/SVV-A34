@@ -30,13 +30,15 @@ def prepare_displacementdf_for_plotting(Disp_df):
     return cords[['Node','xnew','ynew','znew']]
 
 
-prepare_displacementdf_for_plotting(Bending_disp).to_csv('Bending_disp.csv')
-prepare_displacementdf_for_plotting(Bending_disp_assembly).to_csv('Bending_disp_assembly.csv')
-
-prepare_displacementdf_for_plotting(Jam_Bent_disp).to_csv('Jam_Bent_disp.csv')
-prepare_displacementdf_for_plotting(Jam_Bent_disp_assembly).to_csv('Jam_Bent_disp_assembly.csv')
-
-prepare_displacementdf_for_plotting(Jam_Straight_disp).to_csv('Jam_straight_disp.csv')
-prepare_displacementdf_for_plotting(Jam_Straight_disp_assembly).to_csv('Jam_straight_disp_assembly.csv')
+# Run plot preparation and save to csv files
+#
+# prepare_displacementdf_for_plotting(Bending_disp).to_csv('Bending_disp.csv')
+# prepare_displacementdf_for_plotting(Bending_disp_assembly).to_csv('Bending_disp_assembly.csv')
+#
+# prepare_displacementdf_for_plotting(Jam_Bent_disp).to_csv('Jam_Bent_disp.csv')
+# prepare_displacementdf_for_plotting(Jam_Bent_disp_assembly).to_csv('Jam_Bent_disp_assembly.csv')
+#
+# prepare_displacementdf_for_plotting(Jam_Straight_disp).to_csv('Jam_straight_disp.csv')
+# prepare_displacementdf_for_plotting(Jam_Straight_disp_assembly).to_csv('Jam_straight_disp_assembly.csv')
 
 

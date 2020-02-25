@@ -59,3 +59,4 @@ def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
 
 plot_displacement_figure(Bending_disp, Bending_disp_assembly)
 plot_stress_figure(Bending_stress_R1, Bending_stress_R2, 'VMises')
+plot_stress_figure(Jam_Bent_stress_R1, Jam_Bent_stress_R2, 'VMises')
