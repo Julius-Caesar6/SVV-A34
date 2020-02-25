@@ -72,7 +72,6 @@ c2x = -np.arange(0,h/2+0.01,0.01)
 c2y = np.sqrt((h/2)**2-c2x*c2x)
 
 plt.plot(spar_xx, spar_yy, 'r')
-
 plt.plot(c1x,c1y,"b")
 plt.plot(c2x,c2y,"b")
 plt.show()
