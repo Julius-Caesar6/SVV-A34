@@ -1,4 +1,3 @@
-
 import numpy as np
 
 class interpolate:
@@ -50,11 +49,3 @@ class interpolate:
             self.abcd[i] = [ai,bi,ci,di]
 
 
-
-
-
-
-#Example 4.2 from the ANA reader
-#data = [0,0.2624,0.6419,1.0296]
-#pos = [0,0.1,0.3,0.6]
-#print(interpolate(data,pos).abcd)

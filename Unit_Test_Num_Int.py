@@ -96,21 +96,25 @@ class convergence_test(unittest.TestCase):
         dx_lst  = [1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01, 0.005, 0.002, 0.001, 0.0005, 0.0002, 0.0001, 0.00005, 0.00002, 0.00001, 0.000005, 0.000002, 0.000001]
         #We want a function that won't be given exactly. 
         xmin    = 1
-        xmax    = 7
+        xmax    = 15
         t_area  = f_convergence(xmax,int_lvl=1) - f_convergence(xmin,int_lvl=1)
         
         i = 0
         for dx in dx_lst:
             num_steps = int((xmax-xmin)/dx)
+            print(num_steps)
             x_lst = np.linspace(xmin,xmax,num=num_steps)
             f_lst = f_convergence(x_lst)
             e_lst.append(abs(comp_num_int(x_lst,f_lst)-t_area))
-        
+
         plt.plot( np.log10(dx_lst), np.log10(e_lst) )
+        #plt.loglog(dx_lst,e_lst)
+        plt.grid(True,which='both')
+        plt.ylabel('Log(Error)')
+        plt.xlabel('Log(x step size)')
         plt.show()
 
-
-
+#cannot use richardson to find error due to wrong convergence rate
 
 if __name__ == '__main__':
     unittest.main()
