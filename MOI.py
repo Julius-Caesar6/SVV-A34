@@ -20,9 +20,6 @@ s = (2*straight +np.pi*h/2)/stringers # distance between stringers
 g = s / (h / 2)
 h1 = g
 
-
-
-
 # stringer op
 z = [-h / 2, -np.cos(h1) * (h / 2)]  # stringer positions on curved section
 y = [0, np.sin(h1) * (h / 2)]  # stringer positions on curved section
@@ -108,13 +105,13 @@ Steiner_straight_y = 2*(straight*t)*((ca-h/2)/2-y_cen)**2
 Izz_total = Izz_circle + Izz_straight + Steiner_z + Steiner_straight_z + Izz_spar #+ Izz_stringer*stringers
 Iyy_total = Iyy_circle +Iyy_straight + Steiner_y  + Steiner_circle_y + Steiner_straight_y+Steiner_spar #+ Iyy_stringer*stringers
 
-print(Izz_total, Iyy_total)
+print('Izz in m^4:    ',Izz_total, 'Iyy in m^4:   ',Iyy_total)
 
 #enclosed area
 Am_cell1 = (np.pi*(h/2)**2)/2
 Am_cell2 = (h*(ca-h/2))/2
 
-print(Am_cell1, Am_cell2)
+print('enclosed area cell I:    ',Am_cell1, 'enclosed area cell II:     ', Am_cell2)
 
 
 

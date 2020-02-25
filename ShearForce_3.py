@@ -4,7 +4,7 @@ from NumericalIntegrator import *
 import numpy as np
 
 z = np.dot(z,-1)
-print(z)
+#print(z)
 Sz = 10
 Sy = 10
 z_sc = np.abs(1)
