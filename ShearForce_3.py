@@ -5,7 +5,7 @@ import numpy as np
 
 z = np.dot(z,-1)
 print(z)
-Sz = 0
+Sz = 1
 Sy = 1
 z_sc = np.abs(1)
 G = 1
