@@ -29,7 +29,7 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     beta = np.radians(beta)
     sf = -1 #sign verification purposes (for displacements in z, - is good) #leave for now
     bcsf = 0 #BC sign verification, extra rot
-    pf = -1  #P sign convention x2,x3
+    pf = -1  #P sign convention x2,x3 #-1V +1M
 
 
     # First equation My:
