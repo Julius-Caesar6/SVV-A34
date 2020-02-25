@@ -25,7 +25,6 @@ class Macaulaytests(unittest.TestCase):
         self.assertEqual(mac.result(5), 1)
         self.assertEqual(mac.result(2), 1)
 
-
     def testintegrate(self):
         #test if integration works
         mac = Macaulay(2,1,2)
