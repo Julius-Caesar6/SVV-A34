@@ -44,10 +44,4 @@ def theta(x):
     return (1/(G*J))*(Iswitch*IntegrateX(x,2,1) -zhat*Iswitch*IntegrateX(x,2,0) + Macaulay(x1,Ry1*zhat,1).result(x) + Macaulay(x2,Ry2*zhat,1).result(x) + Macaulay(x3,Ry3*zhat,1).result(x)  + Macaulay(x2-0.5*xa,Rj*np.sin(beta)*zhat,0).result(x) + Macaulay(x2-0.5*xa,-Rj*np.cos(beta)*ha/2,1).result(x) + Macaulay(x2+0.5*xa,P*np.sin(beta)*(zhat+ ha/2),1).result(x) + Macaulay(x2+0.5*xa,-P*np.cos(beta)*ha/2,1).result(x))+C5
 
 
-def vyder(x):
-    return (-1/(E*Izz))*(-Iswitch*IntegrateX(x,3,0) + Macaulay(x1,-Ry1/2,2).result(x)+ Macaulay(x2,-Ry2/2,2).result(x) +  Macaulay(x3,-Ry3/2,2).result(x)  + Macaulay(x2+0.5*xa,-P*np.sin(beta)/2,2).result(x)  + Macaulay(x2-0.5*xa,-Rj*np.sin(beta)/2,2).result(x)  ) + C1
-
-def vzder(x):
-    return (-1/(E*Iyy)) * ( Macaulay(x1,Rz1/2,2).result(x) + Macaulay(x2,Rz2/2,2).result(x) + Macaulay(x3,Rz3/2,2).result(x) +  Macaulay(x2-0.5*xa,Rj*np.cos(beta)/2,2).result(x) +  Macaulay(x2+0.5*xa,-P*np.cos(beta)/2,2).result(x)   )  + C3
-
 
