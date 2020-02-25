@@ -42,9 +42,9 @@ y2 = []
 for y_coord in y:
     y2.append(y_coord * -1)
 
-print('y',y)
-print('y2',y2)
-print('z',z)
+#print('y',y)
+#print('y2',y2)
+#print('z',z)
 plt.scatter(z2, y2, color = 'green')  # plot under part TEMP_ TURNED OFF
 
 rico = (h / 2) / (ca - h / 2)
@@ -87,6 +87,7 @@ Izz_spar =  1/12*tspar*h**3
 
 d2_y = np.square(y)
 d2_z = np.square(z[1:]-y_cen)
+#print(d2_z, 'd2z')
 
 Steiner_z= 2*A_stringer*(sum(d2_y))
 Steiner_y = A_stringer*(h/2+ y_cen)**2 + 2*A_stringer*(sum(d2_z))
