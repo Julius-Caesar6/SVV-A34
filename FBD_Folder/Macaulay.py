@@ -8,7 +8,7 @@ class Macaulay:
         self.b = b
         self.power = power
 
-    def result(self, x): #FIXME if power=0, does it always return 1 or 0 in case x<a
+    def result(self, x):
         if x < self.a:
             return 0
         else:
