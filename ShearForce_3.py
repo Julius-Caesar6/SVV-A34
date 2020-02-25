@@ -4,23 +4,25 @@ from NumericalIntegrator import *
 import numpy as np
 
 z = np.dot(z,-1)
-print(z)
+#print(z)
 Sz = 0
-Sy = 1
-z_sc = np.abs(1)
-G = 1
+Sy = 0
+z_sc = np.abs(0.8*10**(-2)) #m
+G = 28*10^9
+T = 1
+
 #Shear force analysis
 
 #qb1--------------------------------------------------------------------------------------------------------------------
 #positive z values and positive y values
 range1 = np.linspace(0,np.pi/2,100)
-qb1 = -Sz/Iyy_total * (t*h**2/4 *(np.sin(range1)-0)) - Sy/Izz_total *(t*h**2/4*(-np.cos(range1)+1))
+qb1 = -Sz/Iyy_total * (t*h**2/4 *(np.sin(range1)-0) + A_stringer/2*z[0] ) - Sy/Izz_total *(t*h**2/4*(-np.cos(range1)+1) + A_stringer/2*y[0])
 
 for i in range(len(qb1)):
     #print(i)
     if range1[i] > np.arccos(z[1]*2/h):
         #print('added A1',z[1])
-        qb1[i] = qb1[i] -Sz/Iyy_total * (A_stringer/2*z[0] + A_stringer*z[1]) - Sy/Izz_total *(A_stringer/2*y[0] + A_stringer*y[1])
+        qb1[i] = qb1[i] -Sz/Iyy_total * (A_stringer*z[1]) - Sy/Izz_total *( A_stringer*y[1])
 
 
 
@@ -88,12 +90,12 @@ b = np.array([-Sy*z_sc - 2*integral1 - 2*integral2, -1/(2*Am_cell1)*(integral3/t
 matrix_force = np.linalg.solve(a,b) #0th entry qso1, 1th entry qso2, 2nd entry, dtheta/dx
 
 #Torque analysis
-T = 1
+#T = 1
 #T = 2*Am_cell1*qso1_t + 2*Am_cell2*qso2_t #equation1
 #G*dtheta/dx = 1/(2*Am_cell1)*((qso1_t *np.pi*(h/2)/t + (qso1_t-qso2_t)*h/tspar)) #equation2
 #G*dtheta/dx = 1/(2*Am_cell2)*((qso2_2*straight/t + (qso2_t-qso1_t)*h/tspar)) #equation3
 
-c = np.array([[2*Am_cell1,2*Am_cell2,0], [ 1/(2*Am_cell1)*((np.pi*(h/2)/t) +h/tspar) , 1/(2*Am_cell1)*-h/tspar, -G ] , [1/(2*Am_cell2)*(-h/tspar), 1/(2*Am_cell2)*(h/tspar + 2*straight/t), -G]])
+c = np.array([[2*Am_cell1,2*Am_cell2,0], [ 1/(2*Am_cell1)*((np.pi*(h/2)/t) +h/tspar) , 1/(2*Am_cell1)*(-h/tspar), -G ] , [1/(2*Am_cell2)*(-h/tspar), 1/(2*Am_cell2)*(h/tspar + 2*straight/t), -G]])
 d = np.array([T,0,0])
 
 matrix_torque = np.linalg.solve(c,d) #0th entry is qso1_t, 1 entry is qso2_t , second entry is dtheta/dx
@@ -157,3 +159,7 @@ tau_values.extend(q6_total/t)
 
 #maximum shear stress in the figure
 tau_max = np.max(tau_values)
+
+#polar moment of inertia
+J = T/(G*matrix_torque[2])
+
