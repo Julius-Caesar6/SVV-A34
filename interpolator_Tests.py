@@ -2,7 +2,7 @@ import unittest
 from interpolator import interpolate
 import numpy as np
 import matplotlib.pyplot as plt
-
+''' THIS WONT WORK AS WE ARE DOING A NATURAL CUBIC SPLINE SO IT WILL NOT BE EXACT
 def cubic_funct(a, b, c, d, x):
     return a*x**3 + b*x**2 + c*x + d
 
@@ -20,6 +20,7 @@ class test_interpolate(unittest.TestCase):
         self.assertEqual(abcd[1],b)
         self.assertEqual(abcd[2],c)
         self.assertEqual(abcd[3],d)
+'''
         
 #Example 4.2 from the ANA reader
 #data = [0,0.2624,0.6419,1.0296]
