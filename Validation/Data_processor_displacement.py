@@ -8,7 +8,7 @@ def coords_from_nodes (node, inputs):
     return inputs.loc[inputs['Node']==node]
 
 
-def prepare_displacementdf_for_plotting(Disp_df):
+def prepare_displacementdf_for_plotting(Disp_df, reg2=False):
     X = []
     Y = []
     Z = []
