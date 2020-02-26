@@ -13,52 +13,115 @@ T = 1
 
 #Shear force analysis
 
-#qb1--------------------------------------------------------------------------------------------------------------------
-#positive z values and positive y values
+#qb1_Sy ----------------------------------------------------------------------------------------------------------------
 range1 = np.linspace(0,np.pi/2,100)
-qb1 = -Sz/Iyy_total * (t*h**2/4 *(np.sin(range1)-0) + A_stringer/2*z[0] ) - Sy/Izz_total *(t*h**2/4*(-np.cos(range1)+1) + A_stringer/2*y[0])
+qb1_Sy =  - Sy/Izz_total *(t*h**2/4*(-np.cos(range1)+1) + A_stringer/2*y[0])
+for i in range(len(qb1_Sy)):
+    print(i)
+    if range1[i] > np.arccos(z[1]*2/h):
+        print('added A1',z[1])
+        qb1_Sy[i] = qb1_Sy[i]  - Sy/Izz_total *( A_stringer*y[1])
 
-for i in range(len(qb1)):
+#qb1_Sz----------------------------------------------------------------------------------------------------------------
+qb1_Sz = -Sz/Iyy_total * (t*h**2/4 *(np.sin(range1))+t*h/2*z_sc*range1 + A_stringer/2*(z[0]+z_sc))
+for i in range(len(qb1_Sz)):
     #print(i)
     if range1[i] > np.arccos(z[1]*2/h):
         #print('added A1',z[1])
-        qb1[i] = qb1[i] -Sz/Iyy_total * (A_stringer*z[1]) - Sy/Izz_total *( A_stringer*y[1])
+        qb1_Sz[i] = qb1_Sz[i] -Sz/Iyy_total * (A_stringer*(z[1]+z_sc))
+#qb1_total
+qb1 = qb1_Sy + qb1_Sz
 
-
-
-#qb2 -------------------------------------------------------------------------------------------------------------------
-#positive y, zero z
+#qb2_Sy ----------------------------------------------------------------------------------------------------------------
 range2 = np.linspace(0,h/2,100)
-qb2 = -Sy/Izz_total * tspar * (range2**2/2 -0)
+qb2_Sy = -Sy/Izz_total * tspar * (range2**2/2 -0)
 
-#qb3-------------------------------------------------------------------------------------------------------------------
-# positive y values, negative z values
+#qb_Sz------------------------------------------------------------------------------------------------------------------
+qb2_Sz = 0
+
+#qb2_total -------------------------------------------------------------------------------------------------------------
+qb2 =qb2_Sy + qb2_Sz
+
+#qb3_Sy ---------------------------------------------------------------------------------------------------------------
 range3 = np.linspace(0,straight,100)
-qb3 = qb1[-1] + qb2[-1] - Sz/Iyy_total *( t* (-ca+h/2)/straight*(range3**2/2) ) - Sy/Izz_total*( t*(h/2)*range3 - (t*(h/2))/straight*range3**2/2  )
+#qb3_const = qb1_Sy[-1] + qb2_Sy[-1]
+qb3_Sy = - Sy/Izz_total*( t*(h/2)*range3 - (t*(h/2))/straight*range3**2/2  )
 
 for i in range(len(range3)):
     #print(i)
     for p in range(2,len(z)):
         if range3[i] > z[p]*straight/(-ca + h/2):
             #print('Added A',p,z[p])
-            qb3[i] = qb3[i] - Sz/Iyy_total *( A_stringer*(z[p])) - Sy/Izz_total*( A_stringer*(y[p]))
+            qb3_Sy[i] = qb3_Sy[i] - Sy/Izz_total*( A_stringer*(y[p]))
 
+#qb3_Sz ---------------------------------------------------------------------------------------------------------------
+qb3_Sz = - Sz/Iyy_total *( t* (-ca+h/2)/straight*(range3**2/2) )
 
-#qb4 -------------------------------------------------------------------------------------------------------------------
-#negative values of z, negative values of y
-range4 = np.linspace(0,straight,100)
-qb4 = qb3[::-1]
+for i in range(len(range3)):
+    #print(i)
+    for p in range(2,len(z)):
+        if range3[i] > z[p]*straight/(-ca + h/2):
+            #print('Added A',p,z[p])
+            qb3_Sz[i] = qb3_Sz[i] - Sz/Iyy_total *( A_stringer*(z[p]))
 
-#qb5 -------------------------------------------------------------------------------------------------------------------
-#negative y, zero z
-#range5 = np.linspace(0,h/2,100)
-range5 = np.linspace(-h/2,0,100)
-#qb5 = qb4[-1] - Sy/Izz_total*(tspar*(-h/2*range5 + range5**2/2))
-qb5 = qb2[::-1]
+#qb3_total ------------------------------------------------------------------------------------------------------------
+qb3 = qb1[-1] + qb2[-1] + qb3_Sy + qb3_Sz
 
-#qb6 -------------------------------------------------------------------------------------------------------------------
-range6 = np.linspace(-np.pi/2,0,100)
-qb6 = qb1[::-1]
+# # --------PREVIOUS ----------------PREVIOUS ---------------------------------------------------------------------------
+#
+# #qb1--------------------------------------------------------------------------------------------------------------------
+# #positive z values and positive y values
+# range1 = np.linspace(0,np.pi/2,100)
+# qb1_Sz = -Sz/Iyy_total * (t*h**2/4 *(np.sin(range1)-0) + A_stringer/2*z[0] )
+# qb1_Sy =  - Sy/Izz_total *(t*h**2/4*(-np.cos(range1)+1) + A_stringer/2*y[0])
+# #qb1 = -Sz/Iyy_total * (t*h**2/4 *(np.sin(range1)-0) + A_stringer/2*z[0] ) - Sy/Izz_total *(t*h**2/4*(-np.cos(range1)+1) + A_stringer/2*y[0])
+# qb1 = qb1_Sz + qb1_Sy
+#
+# for i in range(len(qb1)):
+#     #print(i)
+#     if range1[i] > np.arccos(z[1]*2/h):
+#         #print('added A1',z[1])
+#         qb1[i] = qb1[i] -Sz/Iyy_total * (A_stringer*z[1]) - Sy/Izz_total *( A_stringer*y[1])
+#
+#
+#
+# #qb2 -------------------------------------------------------------------------------------------------------------------
+# #positive y, zero z
+# range2 = np.linspace(0,h/2,100)
+# qb2 = -Sy/Izz_total * tspar * (range2**2/2 -0)
+#
+# #qb3-------------------------------------------------------------------------------------------------------------------
+# # positive y values, negative z values
+# range3 = np.linspace(0,straight,100)
+# #qb3 = qb1[-1] + qb2[-1] - Sz/Iyy_total *( t* (-ca+h/2)/straight*(range3**2/2) ) - Sy/Izz_total*( t*(h/2)*range3 - (t*(h/2))/straight*range3**2/2  )
+# qb3_const = qb1[-1] + qb2[-1]
+# qb3_Sz = - Sz/Iyy_total *( t* (-ca+h/2)/straight*(range3**2/2) )
+# qb3_Sy = - Sy/Izz_total*( t*(h/2)*range3 - (t*(h/2))/straight*range3**2/2  )
+# qb3 = qb3_const + qb3_Sz + qb3_Sy
+#
+# for i in range(len(range3)):
+#     #print(i)
+#     for p in range(2,len(z)):
+#         if range3[i] > z[p]*straight/(-ca + h/2):
+#             #print('Added A',p,z[p])
+#             qb3[i] = qb3[i] - Sz/Iyy_total *( A_stringer*(z[p])) - Sy/Izz_total*( A_stringer*(y[p]))
+#
+#
+# #qb4 -------------------------------------------------------------------------------------------------------------------
+# #negative values of z, negative values of y
+# range4 = np.linspace(0,straight,100)
+# qb4 = qb3[::-1]
+#
+# #qb5 -------------------------------------------------------------------------------------------------------------------
+# #negative y, zero z
+# #range5 = np.linspace(0,h/2,100)
+# range5 = np.linspace(-h/2,0,100)
+# #qb5 = qb4[-1] - Sy/Izz_total*(tspar*(-h/2*range5 + range5**2/2))
+# qb5 = qb2[::-1]
+#
+# #qb6 -------------------------------------------------------------------------------------------------------------------
+# range6 = np.linspace(-np.pi/2,0,100)
+# qb6 = qb1[::-1]
 
 
 #moment around point 0 -------------------------------------------------------------------------------------------------
