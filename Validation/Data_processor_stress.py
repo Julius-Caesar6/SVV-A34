@@ -9,7 +9,7 @@ def select_elements(stress_df, Elements):
 def coords_from_nodes (node, inputs):
     return inputs.loc[inputs['Node']==node]
 
-def get_hingeline_Coordinates():
+def get_spar_Coordinates():
     reg_2_elements = select_elements(Bending_stress_R2, Elements)
     nodeslst = []
 
@@ -25,24 +25,27 @@ def get_hingeline_Coordinates():
     for index, row in reg_2_elements.iterrows():
         nodeslst.append(row['NodeLB'])
 
-    spar_nodes_coords = pd.DataFrame(columns=['sparx', 'spary', 'sparz'])
+    spar_nodes_coords = pd.DataFrame(columns=['Node','sparx', 'spary', 'sparz'])
     sparx = []
     spary = []
     sparz = []
+    nodes = []
     for node in nodeslst:
         sparx.append(float(coords_from_nodes(node, inputs)['x']))
         spary.append(float(coords_from_nodes(node, inputs)['y']))
         sparz.append(float(coords_from_nodes(node, inputs)['z']))
+        nodes.append(node)
 
+    spar_nodes_coords['Node'] = nodes
     spar_nodes_coords['sparx'] = sparx
     spar_nodes_coords['spary'] = spary
     spar_nodes_coords['sparz'] = sparz
 
 
     return spar_nodes_coords
-
-hinge_coords = get_hingeline_Coordinates()
-hinge_coords.to_csv('hinge_coordinates.csv')
+#
+spar_coords = get_spar_Coordinates()
+spar_coords.to_csv('spar_coordinates.csv')
 
 
 def Element_to_coordinates(stress_df):

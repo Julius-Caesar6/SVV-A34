@@ -34,6 +34,10 @@ def plot_displacement_figure(disp_df, disp_df_assembly):
     plt.show()
     plt.close()
 
+def plot_spar_displacement_figure():
+
+
+
 def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
     if stress_type == 'Shear':
         type = 'S.S12.mean'
@@ -55,6 +59,7 @@ def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
     ax.set_zlim3d(-600,600)
     plt.show()
     plt.close()
+
 
 
 plot_displacement_figure(Bending_disp, Bending_disp_assembly)
