@@ -23,17 +23,25 @@ Iswitch = 1
 scv = 1  #Th
 scf = 1  #T
 
+
+beta = np.radians(beta)
 def My(x):
     return Macaulay(x1,Rz1,1).result(x) + Macaulay(x2,Rz2,1).result(x) + Macaulay(x3,Rz3,1).result(x) + Macaulay(x2-0.5*xa,Rj*np.cos(beta),1).result(x) + Macaulay(x2+0.5*xa,P*np.cos(beta),1).result(x)
 
 def Mz(x):
     return Macaulay(x1,-Ry1,1).result(x) + Macaulay(x2,-Ry2,1).result(x) + Macaulay(x3,-Ry3,1).result(x) + Macaulay(x2-0.5*xa,-Rj*np.sin(beta),1).result(x) + Macaulay(x2+0.5*xa,-P*np.sin(beta),1).result(x) - Iswitch*IntegrateX(x,2,0)
 
-def Tx(x):
+def Tx_xo(x):
     return Macaulay(x1,Ry1*zhat,0).result(x) + Macaulay(x2,Ry2*zhat,0).result(x) + Macaulay(x3,Ry3*zhat,0).result(x) + Macaulay(x2-0.5*xa,Rj*np.sin(beta)*zhat,0).result(x) + Macaulay(x2-0.5*xa,-Rj*np.cos(beta)*ha/2,0).result(x) + Macaulay(x2+0.5*xa,-P*np.cos(beta)*ha/2,0).result(x) + Macaulay(x2+0.5*xa,P*np.sin(beta)*(zhat),0).result(x) +Iswitch*IntegrateX(x,1,1)-zhat*Iswitch*IntegrateX(x,1,0)
 
 def Tx_x(x):
     return Macaulay(x1,Ry1*zhat,0).result(x) + Macaulay(x2,Ry2*zhat,0).result(x) + Macaulay(x3,Ry3*zhat,0).result(x) + Macaulay(x2-0.5*xa,Rj*np.sin(beta)*(ha/2 - zhat),0).result(x) + Macaulay(x2-0.5*xa,-Rj*np.cos(beta)*ha/2,0).result(x)  +  Macaulay(x2+0.5*xa,-P*np.cos(beta)*ha/2,0).result(x) + Macaulay(x2+0.5*xa,P*np.sin(beta)*(ha/2 - zhat),0).result(x) +Iswitch*IntegrateX(x,1,1)-zhat*Iswitch*IntegrateX(x,1,0)
+
+def Tx_xi(x):
+    return Macaulay(x1, Ry1*-zhat, 0).result(x) + Macaulay(x2, Ry2*-zhat, 0).result(x) + Macaulay(x3,Ry3*-zhat,0).result(x) + Macaulay(x2-(xa/2), Rj*((ha/2)-zhat)*np.sin(beta),0).result(x) + Macaulay(x2-(xa/2),-1*Rj*np.cos(beta)*(ha/2),0).result(x) + Macaulay(x2+(xa/2), -1*P*np.cos(beta)*(ha/2), 0).result(x) + Macaulay(x2+(xa/2), P*np.sin(beta)*((ha/2)-zhat), 0).result(x)
+
+def Tx(x):
+    return Macaulay(x1, Ry1*-zhat, 0).result(x) + Macaulay(x2, Ry2*-zhat, 0).result(x) + Macaulay(x3,Ry3*-zhat,0).result(x) + -1*(Macaulay(x2-(xa/2), Rj*((ha/2)-zhat)*np.sin(beta),0).result(x) + Macaulay(x2-(xa/2),-1*Rj*np.cos(beta)*(ha/2),0).result(x) + Macaulay(x2+(xa/2), -1*P*np.cos(beta)*(ha/2), 0).result(x) + Macaulay(x2+(xa/2), P*np.sin(beta)*((ha/2)-zhat), 0).result(x))
 
 
 def Sy(x): #check

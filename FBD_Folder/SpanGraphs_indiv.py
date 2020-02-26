@@ -4,7 +4,7 @@ from Constants import *
 import matplotlib.pyplot as plt
 
 
-topval = 20
+topval = 100
 x = np.linspace(0.01,la,topval)
 sel = []
 for i in range(len(x)):
