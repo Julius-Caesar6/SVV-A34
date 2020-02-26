@@ -23,8 +23,8 @@ Iswitch = 1
 scv = 1  #Th
 scf = 1  #T
 
-
 beta = np.radians(beta)
+
 def My(x):
     return Macaulay(x1,Rz1,1).result(x) + Macaulay(x2,Rz2,1).result(x) + Macaulay(x3,Rz3,1).result(x) + Macaulay(x2-0.5*xa,Rj*np.cos(beta),1).result(x) + Macaulay(x2+0.5*xa,P*np.cos(beta),1).result(x)
 
@@ -41,7 +41,7 @@ def Tx_xi(x):
     return Macaulay(x1, Ry1*-zhat, 0).result(x) + Macaulay(x2, Ry2*-zhat, 0).result(x) + Macaulay(x3,Ry3*-zhat,0).result(x) + Macaulay(x2-(xa/2), Rj*((ha/2)-zhat)*np.sin(beta),0).result(x) + Macaulay(x2-(xa/2),-1*Rj*np.cos(beta)*(ha/2),0).result(x) + Macaulay(x2+(xa/2), -1*P*np.cos(beta)*(ha/2), 0).result(x) + Macaulay(x2+(xa/2), P*np.sin(beta)*((ha/2)-zhat), 0).result(x)
 
 def Tx(x):
-    return Macaulay(x1, Ry1*-zhat, 0).result(x) + Macaulay(x2, Ry2*-zhat, 0).result(x) + Macaulay(x3,Ry3*-zhat,0).result(x) + -1*(Macaulay(x2-(xa/2), Rj*((ha/2)-zhat)*np.sin(beta),0).result(x) + Macaulay(x2-(xa/2),-1*Rj*np.cos(beta)*(ha/2),0).result(x) + Macaulay(x2+(xa/2), -1*P*np.cos(beta)*(ha/2), 0).result(x) + Macaulay(x2+(xa/2), P*np.sin(beta)*((ha/2)-zhat), 0).result(x))
+    return Macaulay(x1, Ry1*-zhat, 0).result(x) + Macaulay(x2, Ry2*-zhat, 0).result(x) + Macaulay(x3,Ry3*-zhat,0).result(x) + -1*(Macaulay(x2-(xa/2), Rj*((ha/2)-zhat)*np.sin(beta),0).result(x) + Macaulay(x2-(xa/2),-1*Rj*np.cos(beta)*(ha/2),0).result(x) + Macaulay(x2+(xa/2), -1*P*np.cos(beta)*(ha/2), 0).result(x) + Macaulay(x2+(xa/2), P*np.sin(beta)*((ha/2)-zhat), 0).result(x)) +Iswitch*IntegrateX(x,1,1)-zhat*Iswitch*IntegrateX(x,1,0)
 
 
 def Sy(x): #check
@@ -59,8 +59,12 @@ def vz(x):
 # def theta_old(x):
 #     return (1/(G*J))*(Iswitch*IntegrateX(x,2,1) -zhat*Iswitch*IntegrateX(x,2,0) + Macaulay(x1,Ry1*zhat,1).result(x) + Macaulay(x2,Ry2*zhat,1).result(x) + Macaulay(x3,Ry3*zhat,1).result(x)  + Macaulay(x2-0.5*xa,Rj*np.sin(beta)*zhat,0).result(x) + Macaulay(x2-0.5*xa,-Rj*np.cos(beta)*ha/2,1).result(x) + Macaulay(x2+0.5*xa,P*np.sin(beta)*(zhat+ ha/2),1).result(x) + Macaulay(x2+0.5*xa,-P*np.cos(beta)*ha/2,1).result(x))+C5
 
-def theta(x):
+def theta_old2(x):
     return (1/(G*J))*(  Macaulay(x1,Ry1*zhat,1).result(x) +   Macaulay(x2,Ry2*zhat,1).result(x)  +   Macaulay(x3,Ry3*zhat,1).result(x) +   Macaulay(x2-0.5*xa,Rj*np.sin(beta)*zhat,1).result(x)  + Macaulay(x2-0.5*xa,-Rj*np.cos(beta)*ha/2,1).result(x)   + Macaulay(x2+0.5*xa,P*np.sin(beta)*zhat,1).result(x)  + Macaulay(x2+0.5*xa,-P*np.cos(beta)*ha/2,1).result(x) + Iswitch*IntegrateX(x,2,1) - zhat*Iswitch*IntegrateX(x,2,0)       ) + C5
+
+def theta(x):
+    return (1/(G*J))*(  Macaulay(x1, Ry1*-zhat, 1).result(x) + Macaulay(x2, Ry2*-zhat, 1).result(x) + Macaulay(x3,Ry3*-zhat,1).result(x) + -1*(Macaulay(x2-(xa/2), Rj*((ha/2)-zhat)*np.sin(beta),1).result(x) + Macaulay(x2-(xa/2),-1*Rj*np.cos(beta)*(ha/2),1).result(x) + Macaulay(x2+(xa/2), -1*P*np.cos(beta)*(ha/2), 1).result(x) + Macaulay(x2+(xa/2), P*np.sin(beta)*((ha/2)-zhat), 1).result(x)) +Iswitch*IntegrateX(x,2,1)-zhat*Iswitch*IntegrateX(x,2,0))
+
 
 def vyder(x): #CHECK
     return (-1/(E*Izz))*(-Iswitch*IntegrateX(x,3,0) + Macaulay(x1,-Ry1/2,2).result(x)+ Macaulay(x2,-Ry2/2,2).result(x) +  Macaulay(x3,-Ry3/2,2).result(x)  + Macaulay(x2+0.5*xa,-P*np.sin(beta)/2,2).result(x)  + Macaulay(x2-0.5*xa,-Rj*np.sin(beta)/2,2).result(x)  ) + C1
@@ -69,4 +73,3 @@ def vzder(x):  #CHECK
     return (-1/(E*Iyy)) * ( Macaulay(x1,Rz1/2,2).result(x) + Macaulay(x2,Rz2/2,2).result(x) + Macaulay(x3,Rz3/2,2).result(x) +  Macaulay(x2-0.5*xa,Rj*np.cos(beta)/2,2).result(x) +  Macaulay(x2+0.5*xa,P*np.cos(beta)/2,2).result(x)   )  + C3
 
 
-print(Tx(1))

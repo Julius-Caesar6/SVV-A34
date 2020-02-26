@@ -28,7 +28,7 @@ for i in range(len(x)):
     vza.append(vz(x[i]))
     Sza.append(Sz(x[i]))
     Sya.append(Sy(x[i]))
-    thetaa.append(-theta(x[i]))
+    thetaa.append(theta(x[i]))
     vydera.append(vyder(x[i]))
     vzdera.append(vzder(x[i]))
 #
