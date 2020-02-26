@@ -6,7 +6,7 @@ import numpy as np
 z = np.dot(z,-1)
 #print(z)
 Sz = 1
-Sy = 1
+Sy = 0
 z_sc = np.abs(0.8*10**(-2)) #m
 G = 28*10^9
 T = 1
@@ -76,7 +76,7 @@ for i in range(len(range4)):
         #print (p4)
         if range4[i] > (z[6-p4] + ca -h/2)/((ca-h/2)/straight):
             #print('Added A',6-p4,z[6-p4])
-            qb4_Sy[i] = qb4_Sy[i] - Sy/Izz_total*(A_stringer*(y[6-p4]))
+            qb4_Sy[i] = qb4_Sy[i] - Sy/Izz_total*(A_stringer*(-y[6-p4]))
 
 #qb4_Sz ----------------------------------------------------------------------------------------------------------------
 qb4_Sz = -Sz/Iyy_total*(t*(ca-h/2)/straight*range4**2/2 + t*(-ca+h/2)*range4 + t*z_sc*range4)
@@ -108,7 +108,7 @@ for i in range(len(qb6_Sy)):
     #print(i)
     if range6[i] > np.arcsin(z[1]*2/h) -np.pi/2 : #OK
         #print('added A1',z[1])
-        qb6_Sy[i] = qb6_Sy[i]  - Sy/Izz_total *( A_stringer*y[1])
+        qb6_Sy[i] = qb6_Sy[i]  - Sy/Izz_total *( A_stringer*(-y[1]))
 
 #qb6_Sz
 qb6_Sz = -Sz/Iyy_total*(t*h**2/4*(np.sin(range6)+1) +t*h/2*z_sc*(range6+np.pi/2))
@@ -208,7 +208,7 @@ integral10= comp_num_int(np.linspace(-h/2,0,100),qb5) #integral of qb5*dy from -
 
 #solving matrix of 3 equations
 a = np.array( [[2*Am_cell1,2*Am_cell2,0], [1/(2*Am_cell1)*(np.pi*h/4/t + (h/2)/tspar + (h/2)/tspar +(np.pi*h/4)/t), 1/(2*Am_cell1)*(-(h/2)/tspar - (h/2)/tspar), -G],[1/(2*Am_cell2)*((-h/2)/tspar -(h/2)/tspar), 1/(2*Am_cell2)*((h/2)/tspar+ straight/t + straight/t + (h/2)/tspar), -G]])
-b = np.array([-Sy*z_sc - 2*integral1 - 2*integral2, -1/(2*Am_cell1)*(integral3/t + integral4/tspar + integral5/tspar + integral6/tspar), -1/(2*Am_cell2)*(integral7/tspar + integral8/t + integral9/t +integral10/tspar)])
+b = np.array([-Sy*z_sc - integral1 - integral2, -1/(2*Am_cell1)*(integral3/t + integral4/tspar + integral5/tspar + integral6/tspar), -1/(2*Am_cell2)*(integral7/tspar + integral8/t + integral9/t +integral10/tspar)])
 matrix_force = np.linalg.solve(a,b) #0th entry qso1, 1th entry qso2, 2nd entry, dtheta/dx
 
 #Torque analysis
