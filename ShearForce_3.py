@@ -17,16 +17,16 @@ T = 1
 range1 = np.linspace(0,np.pi/2,100)
 qb1_Sy =  - Sy/Izz_total *(t*h**2/4*(-np.cos(range1)+1) + A_stringer/2*y[0])
 for i in range(len(qb1_Sy)):
-    print(i)
-    if range1[i] > np.arccos(z[1]*2/h):
-        print('added A1',z[1])
+    #print(i)
+    if range1[i] > np.arccos(z[1]*2/h): #OK
+        #print('added A1',z[1])
         qb1_Sy[i] = qb1_Sy[i]  - Sy/Izz_total *( A_stringer*y[1])
 
 #qb1_Sz----------------------------------------------------------------------------------------------------------------
 qb1_Sz = -Sz/Iyy_total * (t*h**2/4 *(np.sin(range1))+t*h/2*z_sc*range1 + A_stringer/2*(z[0]+z_sc))
 for i in range(len(qb1_Sz)):
     #print(i)
-    if range1[i] > np.arccos(z[1]*2/h):
+    if range1[i] > np.arccos(z[1]*2/h): #OK
         #print('added A1',z[1])
         qb1_Sz[i] = qb1_Sz[i] -Sz/Iyy_total * (A_stringer*(z[1]+z_sc))
 #qb1_total
@@ -37,7 +37,7 @@ range2 = np.linspace(0,h/2,100)
 qb2_Sy = -Sy/Izz_total * tspar * (range2**2/2 -0)
 
 #qb_Sz------------------------------------------------------------------------------------------------------------------
-qb2_Sz = 0
+qb2_Sz = -Sz/Iyy_total*tspar*z_sc*range2
 
 #qb2_total -------------------------------------------------------------------------------------------------------------
 qb2 =qb2_Sy + qb2_Sz
@@ -50,22 +50,76 @@ qb3_Sy = - Sy/Izz_total*( t*(h/2)*range3 - (t*(h/2))/straight*range3**2/2  )
 for i in range(len(range3)):
     #print(i)
     for p in range(2,len(z)):
-        if range3[i] > z[p]*straight/(-ca + h/2):
+        if range3[i] > z[p]*straight/(-ca + h/2): #OK
             #print('Added A',p,z[p])
             qb3_Sy[i] = qb3_Sy[i] - Sy/Izz_total*( A_stringer*(y[p]))
 
 #qb3_Sz ---------------------------------------------------------------------------------------------------------------
-qb3_Sz = - Sz/Iyy_total *( t* (-ca+h/2)/straight*(range3**2/2) )
+qb3_Sz = - Sz/Iyy_total *( t* (-ca+h/2)/straight*(range3**2/2) + t*z_sc*range3 )
 
 for i in range(len(range3)):
     #print(i)
     for p in range(2,len(z)):
-        if range3[i] > z[p]*straight/(-ca + h/2):
+        if range3[i] > z[p]*straight/(-ca + h/2): #OK
             #print('Added A',p,z[p])
-            qb3_Sz[i] = qb3_Sz[i] - Sz/Iyy_total *( A_stringer*(z[p]))
+            qb3_Sz[i] = qb3_Sz[i] - Sz/Iyy_total *( A_stringer*(z[p] + z_sc))
 
 #qb3_total ------------------------------------------------------------------------------------------------------------
 qb3 = qb1[-1] + qb2[-1] + qb3_Sy + qb3_Sz
+
+#qb4_Sy-----------------------------------------------------------------------------------------------------------------
+range4 = range3
+qb4_Sy = -Sy/Izz_total*(t*(-h/2)/straight*range4**2/2)
+for i in range(len(range4)):
+    #print(i)
+    for p4 in range(6):
+        #print (p4)
+        if range4[i] > (z[6-p4] + ca -h/2)/((ca-h/2)/straight):
+            #print('Added A',6-p4,z[6-p4])
+            qb4_Sy[i] = qb4_Sy[i] - Sy/Izz_total*(A_stringer*(y[6-p4]))
+
+#qb4_Sz ----------------------------------------------------------------------------------------------------------------
+qb4_Sz = -Sz/Iyy_total*(t*(ca-h/2)/straight*range4**2/2 + t*(-ca+h/2)*range4 + t*z_sc*range4)
+for i in range(len(range4)):
+    #print(i)
+    for p4 in range(6):
+        #print (p4)
+        if range4[i] > (z[6-p4] + ca -h/2)/((ca-h/2)/straight):
+            #print('Added A',6-p4,z[6-p4])
+            qb4_Sz[i] = qb4_Sz[i] - Sz/Iyy_total*(A_stringer*(z[6-p4] + z_sc))
+#qb4_total ---------------------------------------------------------------------------------------------------------------
+qb4 = qb4_Sy + qb4_Sz+ qb3[-1]
+
+#qb5_Sy -----------------------------------------------------------------------------------------------------------------
+range5 = np.linspace(-h/2,0,100)
+qb5_Sy = -Sy/Izz_total*(tspar*range5**2/2 - tspar*(-h/2)**2/2)
+
+#qb5_Sz-----------------------------------------------------------------------------------
+qb5_Sz = -Sz/Iyy_total*tspar*z_sc*range5
+
+#qb5_total-----------------------------------------------------------------------------------
+qb5 = qb5_Sy + qb5_Sz - (qb5_Sy[-1]+ qb5_Sz[-1])
+
+#qb6_Sy --------------------------------------------------------------------------------------------------------
+range6 = np.linspace(-np.pi/2,0,100)
+qb6_Sy = -Sy/Izz_total*t*h**2/4*(-np.cos(range6))
+
+for i in range(len(qb6_Sy)):
+    #print(i)
+    if range6[i] > np.arcsin(z[1]*2/h) -np.pi/2 : #OK
+        #print('added A1',z[1])
+        qb6_Sy[i] = qb6_Sy[i]  - Sy/Izz_total *( A_stringer*y[1])
+
+#qb6_Sz
+qb6_Sz = -Sz/Iyy_total*(t*h**2/4*(np.sin(range6)+1) +t*h/2*z_sc*(range6+np.pi/2))
+for i in range(len(qb6_Sz)):
+    #print(i)
+    if range6[i] > np.arcsin(z[1]*2/h) -np.pi/2 : #OK
+        #print('added A1',z[1])
+        qb6_Sz[i] = qb6_Sz[i]  - Sz/Iyy_total *(A_stringer*(z[1]+z_sc))
+
+#qb6_total --------------------------------------------------------------------------------------------------------------
+qb6 = qb6_Sy + qb6_Sz +qb4[-1] - qb5[0]
 
 # # --------PREVIOUS ----------------PREVIOUS ---------------------------------------------------------------------------
 #
