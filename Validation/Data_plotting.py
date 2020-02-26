@@ -18,24 +18,26 @@ Jam_bent_disp_assembly =  pd.read_csv('Displacement_plots/Jam_Bent_disp_assembly
 Jam_straight_disp = pd.read_csv('Displacement_plots/Jam_straight_disp.csv')
 Jam_straight_disp_assembly =  pd.read_csv('Displacement_plots/Jam_straight_disp_assembly.csv')
 
+# Load Spar displacement DataFrames
+Bending_disp_spar = pd.read_csv('Spar_displacement_plots/Bending_disp_spar.csv')
+Jam_bent_disp_spar = pd.read_csv('Spar_displacement_plots/Jam_Bent_disp_spar.csv')
+Jam_straight_disp__spar = pd.read_csv('Spar_displacement_plots/Jam_straight_disp_spar.csv')
+
 def plot_displacement_figure(disp_df, disp_df_assembly):
     fig = plt.figure()
     ax = plt.axes(projection='3d')
 
-    p = ax.scatter(disp_df['xnew'], disp_df['ynew'], disp_df['znew'])
-    q = ax.scatter(disp_df_assembly['xnew'], disp_df_assembly['ynew'], disp_df_assembly['znew'])
+    p = ax.scatter(disp_df['xnew'], disp_df['ynew'])
+    # q = ax.scatter(disp_df_assembly['xnew'], disp_df_assembly['ynew'], disp_df_assembly['znew'])
     ax.set_xlabel('x [mm]')
     ax.set_ylabel('y [mm]')
-    ax.set_zlabel('z [mm]')
+    # ax.set_zlabel('z [mm]')
 
-    # ax.set_xlim3d(0, 2500)
-    # ax.set_ylim3d(-1000,1000)
+    ax.set_xlim3d(0, 2500)
+    ax.set_ylim3d(0,20)
     # ax.set_zlim3d(-600,600)
     plt.show()
     plt.close()
-
-def plot_spar_displacement_figure():
-
 
 
 def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
@@ -62,6 +64,4 @@ def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
 
 
 
-plot_displacement_figure(Bending_disp, Bending_disp_assembly)
-plot_stress_figure(Bending_stress_R1, Bending_stress_R2, 'VMises')
-plot_stress_figure(Jam_Bent_stress_R1, Jam_Bent_stress_R2, 'VMises')
+plot_displacement_figure(Bending_disp_spar, 1)
