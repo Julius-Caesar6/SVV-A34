@@ -23,7 +23,7 @@ nst=13
 d1=0.00681
 d2=0
 d3=0.02030
-theta=m.radians(26) #degrees (please leave)
+theta=m.radians(26)
 P=37900
 E = 73.1*10**9       # E-modulus (Pa)
 G = 28*10**9       # G-modulus (Pa)
@@ -95,8 +95,7 @@ _ = crosssection.J                   # torsional constant
 ######################## Part IV - Deflection calculations #######################################
 ### Definition of additional parameters
 N = 20     # Number of basis functions to use in Rayleigh-Ritz method (total number of coefficients is 3*N)
-E = 73.1*10**9       # E-modulus (Pa)
-G = 28*10**9       # G-modulus (Pa)
+
 
 ### Create the aileron object
 """ Merges the cross-sectional properties with the spanwise properties (length and material properties)"""
