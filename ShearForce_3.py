@@ -118,6 +118,8 @@ for i in range(len(qb6_Sz)):
         #print('added A1',z[1])
         qb6_Sz[i] = qb6_Sz[i]  - Sz/Iyy_total *(A_stringer*(z[1]+z_sc))
 
+qb6_Sz[-1] += -Sz/Iyy_total*A_stringer/2*(z[0]+z_sc)
+
 #qb6_total --------------------------------------------------------------------------------------------------------------
 qb6 = qb6_Sy + qb6_Sz +qb4[-1] - qb5[0]
 
