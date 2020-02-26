@@ -184,7 +184,7 @@ qb6 = qb6_Sy + qb6_Sz +qb4[-1] - qb5[0]
 integral1 = comp_num_int(np.linspace(0,np.pi/2,100),qb1*(h/2)**2) #integral of qb1*(h/2)**2*dTheta from 0 to pi/2
 integral2 =comp_num_int(np.linspace(0,straight,100),qb3*np.cos(alpha)*h/2) #integral of qb3*np.cos(alpha)*h/2*ds from 0 to straight
 
-#0 = Sy*z_sc + 2*integral1 + 2*integral2 + 2*Am_cell1*qso1 + 2*Am_cell2*qso2 #equation1
+#0 = Sy*z_sc + 2*integral1 + 2*integral2 + 2*Am_cell1*qso1 + 2*Am_cell2*qso2 #equation1 #######!!!!!!!!!!!!!!!REMEMBER TO CHANGE
 
 #rate of twist----------------------------------------------------------------------------------------------------------
 #cell 1
