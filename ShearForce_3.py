@@ -5,8 +5,8 @@ import numpy as np
 
 z = np.dot(z,-1)
 #print(z)
-Sz = 0
-Sy = 0
+Sz = 1
+Sy = 1
 z_sc = np.abs(0.8*10**(-2)) #m
 G = 28*10^9
 T = 1
