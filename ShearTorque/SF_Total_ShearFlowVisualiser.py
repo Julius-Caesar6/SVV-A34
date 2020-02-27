@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 import numpy as np
-from ShearForce_3 import *
+from ShearTorque.ShearForce_3 import *
 
 z1 = (h/2)*np.cos(range1)
 y1 = (h/2)*np.sin(range1)
