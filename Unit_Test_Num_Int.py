@@ -2,6 +2,10 @@ import unittest
 from Numint import simpson, trapezoid,  comp_num_int
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.style as style
+style.use('seaborn-talk') #sets the size of the charts
+style.use('ggplot')
+
 
 class int_test(unittest.TestCase):
     def testpolythree(self):
@@ -107,7 +111,7 @@ class convergence_test(unittest.TestCase):
             f_lst = f_convergence(x_lst)
             e_lst.append(abs(comp_num_int(x_lst,f_lst)-t_area))
 
-        plt.plot( np.log10(dx_lst), np.log10(e_lst) )
+        plt.plot( np.log10(dx_lst), np.log10(e_lst) ,'b-')
         #plt.loglog(dx_lst,e_lst)
         plt.grid(True,which='both')
         plt.ylabel('Log(Error)')
