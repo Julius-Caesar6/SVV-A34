@@ -54,8 +54,8 @@ def stress_at_span_coordinate(x,y,z):
 
 
 
-bending_stress = stress_at_span_coordinate(0.6,y,z)
-
+# bending_stress = stress_at_span_coordinate(0.6,y,z)
+# bending_stress.to_csv('Bending_stress_data.csv')
 
 # print(x01stress.max())
 # fig = plt.figure()
