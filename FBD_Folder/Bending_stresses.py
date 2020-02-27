@@ -6,9 +6,7 @@ from mpl_toolkits import mplot3d
 import pandas as pd
 
 def sigmaxx(y,z, x, Iyy, Izz):
-    return (My(x)*z/Iyy) - (Mz(x)*y/Izz) # FIXME check if two terms should be added or subtracted
-
-
+    return (My(x)*z/Iyy) + (Mz(x)*y/Izz)
 
 def setup_aileron_profile():
     straight = np.sqrt((ha / 2) ** 2 + (Ca - ha / 2) ** 2)  # length of straight section
@@ -34,18 +32,10 @@ def setup_aileron_profile():
     z6 = z1[::-1]
     y6 = -y1[::-1]
 
-    #left curve
-    zcl = np.concatenate((z6,z1))
-    ycl = np.concatenate((y6,y1))
+    z = np.concatenate((z1, z2,z3,z4,z5,z6))
+    y = np.concatenate((y1, y2,y3,y4,y5,y6))
 
-    #right closed section
-    zcr = np.concatenate((z2,z3,z4,z5))
-    ycr = np.concatenate((y2,y3,y4,y5))
-
-    z = np.concatenate((zcl, zcr))
-    y = np.concatenate((ycl,ycr))
     return y,z
-
 
 y,z = setup_aileron_profile()
 
@@ -64,33 +54,17 @@ def stress_at_span_coordinate(x,y,z):
 
 
 
-x01stress = stress_at_span_coordinate(0.6,y,z)
+bending_stress = stress_at_span_coordinate(0.6,y,z)
 
 
-#
+# print(x01stress.max())
 # fig = plt.figure()
-#     ax = plt.axes(projection='3d')
-#     p = ax.scat(stress_dfr1['intpointx'], stress_dfr1['intpointy'], stress_dfr1['intpointz'],c=stress_dfr1[type], cmap='jet')
-#     q = ax.scatter(stress_dfr2['intpointx'], stress_dfr2['intpointy'], stress_dfr2['intpointz'], c = stress_dfr2[type], cmap='jet')
-#     clb = fig.colorbar(p)
-#     ax.set_xlabel('x [mm]')
-#     ax.set_ylabel('y [mm]')
-#     ax.set_zlabel('z [mm]')
-#     clb.set_label(stress_type)
-#     ax.set_xlim3d(600, 2000)
-#     ax.set_ylim3d(-200,200)
-#     ax.set_zlim3d(-600,600)
-#     plt.show()
-#     plt.close()
-
-print(x01stress.max())
-fig = plt.figure()
-ax = plt.axes()
-p = ax.scatter(x01stress['z'],x01stress['y'],c=x01stress['sigma'], cmap='jet')   #wing profile
-clb = fig.colorbar(p)
-ax.set_ylabel('y [m]') #TODO Add units
-ax.set_xlabel('z [m]')
-ax.set_xlim(-0.5,0.2)
-clb.set_label('$\sigma_{xx}$ stress [Pa]') #TODO add units
-plt.show()
-plt.close()
+# ax = plt.axes()
+# p = ax.scatter(x01stress['z'],x01stress['y'],c=x01stress['sigma'], cmap='jet')   #wing profile
+# clb = fig.colorbar(p)
+# ax.set_ylabel('y [m]') #TODO Add units
+# ax.set_xlabel('z [m]')
+# ax.set_xlim(-0.5,0.2)
+# clb.set_label('$\sigma_{xx}$ stress [Pa]') #TODO add units
+# plt.show()
+# plt.close()
