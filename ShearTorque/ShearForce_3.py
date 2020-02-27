@@ -1,44 +1,40 @@
 
 from ShearTorque.MOI import *
 from ShearTorque.NumericalIntegrator import *
+from FBD_Folder.Equations import *
 import numpy as np
 
 z = np.dot(z,-1)
-#print(z)
-Sz =1
-Sy =0
-z_sc = np.abs(0.8*10**(-2)) #m
+ShearZ = Sz(0.6)
+Sheary = Sy(0.6)
+z_sc = np.abs(0.0053559) #m
 G = 28*10^9
-T =1
+T = Tx(0.6)
 
 #Shear force analysis
 
 #qb1_Sy ----------------------------------------------------------------------------------------------------------------
 range1 = np.linspace(0,np.pi/2,100)
-qb1_Sy =  - Sy/Izz_total *(t*h**2/4*(-np.cos(range1)+1)+ A_stringer/2*y[0])
+qb1_Sy = - Sheary / Izz_total * (t * h ** 2 / 4 * (-np.cos(range1) + 1) + A_stringer / 2 * y[0])
 
 for i in range(len(qb1_Sy)):
-    #print(i)
     if range1[i] > np.arccos(z[1]*2/h): #OK
-        #print('added A1',z[1])
-        qb1_Sy[i] = qb1_Sy[i]  - Sy/Izz_total *( A_stringer*y[1])
+        qb1_Sy[i] = qb1_Sy[i] - Sheary / Izz_total * (A_stringer * y[1])
 
 #qb1_Sz----------------------------------------------------------------------------------------------------------------
-qb1_Sz = -Sz/Iyy_total * (t*h**2/4 *(np.sin(range1))+t*h/2*z_sc*range1 + A_stringer/2*(z[0]+z_sc))
+qb1_Sz = -ShearZ / Iyy_total * (t * h ** 2 / 4 * (np.sin(range1)) + t * h / 2 * z_sc * range1 + A_stringer / 2 * (z[0] + z_sc))
 for i in range(len(qb1_Sz)):
-    #print(i)
     if range1[i] > np.arccos(z[1]*2/h): #OK
-        #print('added A1',z[1])
-        qb1_Sz[i] = qb1_Sz[i] -Sz/Iyy_total * (A_stringer*(z[1]+z_sc))
+        qb1_Sz[i] = qb1_Sz[i] - ShearZ / Iyy_total * (A_stringer * (z[1] + z_sc))
 #qb1_total
 qb1 = qb1_Sy + qb1_Sz
 
 #qb2_Sy ----------------------------------------------------------------------------------------------------------------
 range2 = np.linspace(0,h/2,100)
-qb2_Sy = -Sy/Izz_total * tspar * (range2**2/2 -0)
+qb2_Sy = -Sheary / Izz_total * tspar * (range2 ** 2 / 2 - 0)
 
 #qb_Sz------------------------------------------------------------------------------------------------------------------
-qb2_Sz = -Sz/Iyy_total*tspar*z_sc*range2
+qb2_Sz = -ShearZ / Iyy_total * tspar * z_sc * range2
 
 #qb2_total -------------------------------------------------------------------------------------------------------------
 qb2 =qb2_Sy + qb2_Sz
@@ -46,82 +42,68 @@ qb2 =qb2_Sy + qb2_Sz
 #qb3_Sy ---------------------------------------------------------------------------------------------------------------
 range3 = np.linspace(0,straight,100)
 #qb3_const = qb1_Sy[-1] + qb2_Sy[-1]
-qb3_Sy = - Sy/Izz_total*( t*(h/2)*range3 - (t*(h/2))/straight*range3**2/2  )
+qb3_Sy = - Sheary / Izz_total * (t * (h / 2) * range3 - (t * (h / 2)) / straight * range3 ** 2 / 2)
 
 for i in range(len(range3)):
-    #print(i)
     for p in range(2,len(z)):
         if range3[i] > z[p]*straight/(-ca + h/2): #OK
-            #print('Added A',p,z[p])
-            qb3_Sy[i] = qb3_Sy[i] - Sy/Izz_total*( A_stringer*(y[p]))
+            qb3_Sy[i] = qb3_Sy[i] - Sheary / Izz_total * (A_stringer * (y[p]))
 
 #qb3_Sz ---------------------------------------------------------------------------------------------------------------
-qb3_Sz = - Sz/Iyy_total *( t* (-ca+h/2)/straight*(range3**2/2) + t*z_sc*range3 )
+qb3_Sz = - ShearZ / Iyy_total * (t * (-ca + h / 2) / straight * (range3 ** 2 / 2) + t * z_sc * range3)
 
 for i in range(len(range3)):
-    #print(i)
     for p in range(2,len(z)):
         if range3[i] > z[p]*straight/(-ca + h/2): #OK
-            #print('Added A',p,z[p])
-            qb3_Sz[i] = qb3_Sz[i] - Sz/Iyy_total *(A_stringer*(z[p] + z_sc))
+            qb3_Sz[i] = qb3_Sz[i] - ShearZ / Iyy_total * (A_stringer * (z[p] + z_sc))
 
 #qb3_total ------------------------------------------------------------------------------------------------------------
 qb3 = qb1[-1] + qb2[-1] + qb3_Sy + qb3_Sz
 
 #qb4_Sy-----------------------------------------------------------------------------------------------------------------
 range4 = range3
-qb4_Sy = -Sy/Izz_total*(t*(-h/2)/straight*range4**2/2)
+qb4_Sy = -Sheary / Izz_total * (t * (-h / 2) / straight * range4 ** 2 / 2)
 for i in range(len(range4)):
-    #print(i)
     for p4 in range(6):
-        #print (p4)
         if range4[i] > (z[6-p4] + ca -h/2)/((ca-h/2)/straight):
-            #print('Added A',6-p4,z[6-p4])
-            qb4_Sy[i] = qb4_Sy[i] - Sy/Izz_total*(A_stringer*(-y[6-p4]))
+            qb4_Sy[i] = qb4_Sy[i] - Sheary / Izz_total * (A_stringer * (-y[6 - p4]))
 
 #qb4_Sz ----------------------------------------------------------------------------------------------------------------
-qb4_Sz = -Sz/Iyy_total*(t*(ca-h/2)/straight*range4**2/2 + t*(-ca+h/2)*range4 + t*z_sc*range4)
+qb4_Sz = -ShearZ / Iyy_total * (t * (ca - h / 2) / straight * range4 ** 2 / 2 + t * (-ca + h / 2) * range4 + t * z_sc * range4)
 for i in range(len(range4)):
-    #print(i)
     for p4 in range(6):
-        #print (p4)
         if range4[i] > (z[6-p4] + ca -h/2)/((ca-h/2)/straight):
-            #print('Added A',6-p4,z[6-p4])
-            qb4_Sz[i] = qb4_Sz[i] - Sz/Iyy_total*(A_stringer*(z[6-p4] + z_sc))
+            qb4_Sz[i] = qb4_Sz[i] - ShearZ / Iyy_total * (A_stringer * (z[6 - p4] + z_sc))
 #qb4_total ---------------------------------------------------------------------------------------------------------------
 qb4 = qb4_Sy + qb4_Sz+ qb3[-1]
 
 #qb5_Sy -----------------------------------------------------------------------------------------------------------------
 range5 = np.linspace(-h/2,0,100)
-qb5_Sy = -Sy/Izz_total*(tspar*range5**2/2 - tspar*(-h/2)**2/2)
+qb5_Sy = -Sheary / Izz_total * (tspar * range5 ** 2 / 2 - tspar * (-h / 2) ** 2 / 2)
 #range5 = np.linspace(0,-h/2,100)
 #qb5_Sy = Sy/Izz_total*(tspar*range5**2/2)
 
 #qb5_Sz-----------------------------------------------------------------------------------
-qb5_Sz = -Sz/Iyy_total*tspar*z_sc*range5
+qb5_Sz = -ShearZ / Iyy_total * tspar * z_sc * range5
 
 #qb5_total-----------------------------------------------------------------------------------
 qb5 = qb5_Sy + qb5_Sz - (qb5_Sy[-1]+ qb5_Sz[-1])
 
 #qb6_Sy --------------------------------------------------------------------------------------------------------
 range6 = np.linspace(-np.pi/2,0,100)
-qb6_Sy = -Sy/Izz_total*t*h**2/4*(-np.cos(range6))
+qb6_Sy = -Sheary / Izz_total * t * h ** 2 / 4 * (-np.cos(range6))
 
 for i in range(len(qb6_Sy)):
-    #print(i)
     if range6[i] > np.arcsin(z[1]*2/h) -np.pi/2 : #OK
-        #print('added A1',z[1])
-        qb6_Sy[i] = qb6_Sy[i]  - Sy/Izz_total *( A_stringer*(-y[1]))
+        qb6_Sy[i] = qb6_Sy[i] - Sheary / Izz_total * (A_stringer * (-y[1]))
 
 #qb6_Sz ------------------------------------------------------------------------------------------------------------------
-qb6_Sz = -Sz/Iyy_total*(t*h**2/4*(np.sin(range6)+1) +t*h/2*z_sc*(range6+np.pi/2))
+qb6_Sz = -ShearZ / Iyy_total * (t * h ** 2 / 4 * (np.sin(range6) + 1) + t * h / 2 * z_sc * (range6 + np.pi / 2))
 for i in range(len(qb6_Sz)):
-    #print(i)
     if range6[i] > np.arcsin(z[1]*2/h) -np.pi/2 : #OK
-        #print('added A1',z[1])
-        qb6_Sz[i] = qb6_Sz[i]  - Sz/Iyy_total *(A_stringer*(z[1]+z_sc))
+        qb6_Sz[i] = qb6_Sz[i] - ShearZ / Iyy_total * (A_stringer * (z[1] + z_sc))
 
-qb6_Sz[-1] += -Sz/Iyy_total*A_stringer/2*(z[0]+z_sc)
+qb6_Sz[-1] += -ShearZ / Iyy_total * A_stringer / 2 * (z[0] + z_sc)
 
 #qb6_total --------------------------------------------------------------------------------------------------------------
 qb6 = qb6_Sy + qb6_Sz +qb4[-1] - qb5[0]
@@ -211,7 +193,7 @@ integral10= comp_num_int(np.linspace(-h/2,0,100),qb5) #integral of qb5*dy from -
 
 #solving matrix of 3 equations
 a = np.array( [[2*Am_cell1,2*Am_cell2,0], [1/(2*Am_cell1)*(np.pi*h/4/t + (h/2)/tspar + (h/2)/tspar +(np.pi*h/4)/t), 1/(2*Am_cell1)*(-(h/2)/tspar - (h/2)/tspar), -G],[1/(2*Am_cell2)*((-h/2)/tspar -(h/2)/tspar), 1/(2*Am_cell2)*((h/2)/tspar+ straight/t + straight/t + (h/2)/tspar), -G]])
-b = np.array([-Sy*z_sc - integral1 - integral2, -1/(2*Am_cell1)*(integral3/t + integral4/tspar + integral5/tspar + integral6/tspar), -1/(2*Am_cell2)*(integral7/tspar + integral8/t + integral9/t +integral10/tspar)])
+b = np.array([-Sheary * z_sc - integral1 - integral2, -1 / (2 * Am_cell1) * (integral3 / t + integral4 / tspar + integral5 / tspar + integral6 / tspar), -1 / (2 * Am_cell2) * (integral7 / tspar + integral8 / t + integral9 / t + integral10 / tspar)])
 matrix_force = np.linalg.solve(a,b) #0th entry qso1, 1th entry qso2, 2nd entry, dtheta/dx
 
 #Torque analysis
@@ -233,35 +215,37 @@ q4_total = qb4 + matrix_force[1] - matrix_torque[1]
 q5_total = qb5 - matrix_force[0] + matrix_force[1] + matrix_torque[0] - matrix_torque[1]
 q6_total = qb6 + matrix_force[0] - matrix_torque[0]
 
+
 #z-y-q values
-q1_zvalues = np.linspace(h/2,0,100)
-q1_yvalues =  np.sqrt((h/2)**2-q1_zvalues**2)
-q2_zvalues =  np.zeros(100)
-q2_yvalues =np.linspace(0,h/2,100)
-q3_zvalues = -np.linspace(0,ca-h/2,100)
-q3_yvalues = graph_straight1
-q4_zvalues = -np.linspace(ca-h/2,0,100)
-q4_yvalues = graph_straight1 -h/2*np.ones(100)
-q5_zvalues = np.zeros(100)
-q5_yvalues = np.linspace(-h/2,0,100)
-q6_zvalues = -np.linspace(0,-h/2,100)
-q6_yvalues = -np.sqrt((h/2)**2-q6_zvalues**2)
+straight = np.sqrt((ha / 2) ** 2 + (Ca - ha / 2) ** 2)  # length of straight section
+range1 = np.linspace(0, np.pi / 2, 100)
+range2 = np.linspace(0, ha / 2, 100)
+range3 = np.linspace(0, straight, 100)
 
-q_zvalues = [] #list if all z values following the shear flow direction as in sketch
-q_zvalues.extend(q1_zvalues)
-q_zvalues.extend(q2_zvalues)
-q_zvalues.extend(q3_zvalues)
-q_zvalues.extend(q4_zvalues)
-q_zvalues.extend(q5_zvalues)
-q_zvalues.extend(q6_zvalues)
+q1_zvalues = (ha/2)*np.cos(range1)
+q1_yvalues = (ha/2)*np.sin(range1)
 
-q_yvalues = [] #list of all y values following the shear flow direction as in sketch
-q_yvalues.extend(q1_yvalues)
-q_yvalues.extend(q2_yvalues)
-q_yvalues.extend(q3_yvalues)
-q_yvalues.extend(q4_yvalues)
-q_yvalues.extend(q5_yvalues)
-q_yvalues.extend(q6_yvalues)
+q2_zvalues =  range2*0
+q2_yvalues =  range2
+
+q3_zvalues = (-Ca + ha/2)*range3/straight
+q3_yvalues = (ha/2 -ha*range3/(2*straight))
+
+q4_zvalues = q3_zvalues[::-1]
+q4_yvalues = -q3_yvalues[::-1]
+
+q5_zvalues = q2_zvalues[::-1]
+q5_yvalues = np.linspace(-ha/2, 0, 100)
+
+q6_zvalues = q1_zvalues[::-1]
+q6_yvalues = -q1_yvalues[::-1]
+
+#list if all z values following the shear flow direction as in sketch
+q_zvalues = np.concatenate((q1_zvalues, q2_zvalues, q3_zvalues, q4_zvalues, q5_zvalues, q6_zvalues))
+
+ #list of all y values following the shear flow direction as in sketch
+q_yvalues = np.concatenate((q1_yvalues, q2_yvalues, q3_yvalues, q4_yvalues, q5_yvalues, q6_yvalues))
+
 
 q_qvalues = [] #list of all q values following the shear flow direction as in sketch
 q_qvalues.extend(q1_total)

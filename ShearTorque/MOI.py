@@ -42,9 +42,8 @@ y2 = []
 for y_coord in y:
     y2.append(y_coord * -1)
 
-#print('y',y)
-#print('y2',y2)
-#print('z',z)
+
+
 plt.scatter(z2, y2, color = 'green')  # plot under part TEMP_ TURNED OFF
 
 rico = (h / 2) / (ca - h / 2)
@@ -71,14 +70,14 @@ c2y = np.sqrt((h/2)**2-c2x*c2x)
 plt.plot(spar_xx, spar_yy, 'r')
 plt.plot(c1x,c1y,"b")
 plt.plot(c2x,c2y,"b")
-plt.show()
+# plt.show()
 
 # moment of inertia
 A_stringer = tst*hst + wst*tst
 
 y_cen = (-(2*(h/2)/(np.pi))*np.pi*(h/2)*t + 2*straight*t*(ca-h/2)/2+sum(A_stringer*np.array(z[1:]))*2+A_stringer*z[0])\
         /(np.pi*(h/2)*t+2*straight*t+tspar*h+stringers*A_stringer)
-# print(y_cen)
+
 
 Izz_stringer = 1/12*tst*hst**3
 Iyy_stringer= 1/12*tst*wst**3
@@ -87,7 +86,6 @@ Izz_spar =  1/12*tspar*h**3
 
 d2_y = np.square(y)
 d2_z = np.square(z[1:]-y_cen)
-print(d2_z, 'd2z')
 
 Steiner_z= 2*A_stringer*(sum(d2_y))
 Steiner_y = A_stringer*(h/2+ y_cen)**2 + 2*A_stringer*(sum(d2_z))
@@ -106,13 +104,13 @@ Steiner_straight_y = 2*(straight*t)*((ca-h/2)/2-y_cen)**2
 Izz_total = Izz_circle + Izz_straight + Steiner_z + Steiner_straight_z + Izz_spar #+ Izz_stringer*stringers
 Iyy_total = Iyy_circle +Iyy_straight + Steiner_y  + Steiner_circle_y + Steiner_straight_y+Steiner_spar #+ Iyy_stringer*stringers
 
-print('Izz in m^4:    ',Izz_total, 'Iyy in m^4:   ',Iyy_total)
+# print('Izz in m^4:    ',Izz_total, 'Iyy in m^4:   ',Iyy_total)
 
 #enclosed area
 Am_cell1 = (np.pi*(h/2)**2)/2
 Am_cell2 = (h*(ca-h/2))/2
 
-print('enclosed area cell I:    ',Am_cell1, 'enclosed area cell II:     ', Am_cell2)
+# print('enclosed area cell I:    ',Am_cell1, 'enclosed area cell II:     ', Am_cell2)
 
 
 
