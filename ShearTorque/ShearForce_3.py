@@ -1,15 +1,15 @@
 
-from MOI import *
-from NumericalIntegrator import *
+from ShearTorque.MOI import *
+from ShearTorque.NumericalIntegrator import *
 import numpy as np
 
 z = np.dot(z,-1)
 #print(z)
-Sz =
-Sy =
+Sz =1
+Sy =0
 z_sc = np.abs(0.8*10**(-2)) #m
 G = 28*10^9
-T =
+T =1
 
 #Shear force analysis
 
