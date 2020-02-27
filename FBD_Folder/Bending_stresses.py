@@ -2,15 +2,10 @@ from FBD_Folder.Equations import *
 import numpy as np
 from FBD_Folder.Constants import *
 import matplotlib.pyplot as plt
-
+import pandas as pd
 
 def sigmaxx(y,z, x, Iyy, Izz):
     return (My(x)*z/Iyy) - (Mz(x)*y/Izz) # FIXME check if two terms should be added or subtracted
-
-
-
-xrange = np.linspace(0, la, 50)
-
 
 
 def setup_aileron_profile():
@@ -18,10 +13,6 @@ def setup_aileron_profile():
     range1 = np.linspace(0,np.pi/2,100)
     range2 = np.linspace(0,ha/2,100)
     range3 = np.linspace(0,straight,100)
-    range4 = range3
-    range5 = np.linspace(-ha/2,0,100)
-    range6 = np.linspace(-np.pi/2,0,100)
-
 
     z1 = (ha/2)*np.cos(range1)
     y1 = (ha/2)*np.sin(range1)
@@ -54,12 +45,27 @@ def setup_aileron_profile():
     return y,z
 
 
+y,z = setup_aileron_profile()
 
 
+
+def stress_at_span_coordinate(x,y,z):
+    sigx = []
+    for i in range(len(y)):
+        sigx.append(sigmaxx(y[i], z[i], x, Iyy, Izz))
+
+
+    df = pd.DataFrame(sigx, columns=['sigma'])
+    df['y'] = y
+    df['z'] = z
+    return df
+
+
+
+x01stress = stress_at_span_coordinate(0.1,y,z)
 
 
 
 fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.plot(z,y,0,color='r')   #wing profile
+ax.plot(x01stress['z'],x01stress['y'],c=x01stress['sigma'])   #wing profile
 plt.show()
