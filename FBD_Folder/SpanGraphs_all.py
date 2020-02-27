@@ -1,4 +1,4 @@
-from Equations import *
+from Equations import *  #correct one!
 import numpy as np
 from Constants import *
 import matplotlib.pyplot as plt
