@@ -4,13 +4,13 @@ from Constants import *
 import matplotlib.pyplot as plt
 
 
-topval = 40
+topval = 150
 x = np.linspace(0.01,la,topval)
 sel = []
 for i in range(len(x)):
     if int(i%(5/(100/topval))) == 0:
         print(int(100*i/topval),'%')
-    sel.append(vy(x[i]))
+    sel.append(vz(x[i]))
 
 #
 # print(Tx(0.1))
