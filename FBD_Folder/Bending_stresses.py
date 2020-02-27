@@ -2,6 +2,7 @@ from FBD_Folder.Equations import *
 import numpy as np
 from FBD_Folder.Constants import *
 import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d
 import pandas as pd
 
 def sigmaxx(y,z, x, Iyy, Izz):
@@ -65,7 +66,30 @@ def stress_at_span_coordinate(x,y,z):
 x01stress = stress_at_span_coordinate(0.1,y,z)
 
 
+#
+# fig = plt.figure()
+#     ax = plt.axes(projection='3d')
+#     p = ax.scat(stress_dfr1['intpointx'], stress_dfr1['intpointy'], stress_dfr1['intpointz'],c=stress_dfr1[type], cmap='jet')
+#     q = ax.scatter(stress_dfr2['intpointx'], stress_dfr2['intpointy'], stress_dfr2['intpointz'], c = stress_dfr2[type], cmap='jet')
+#     clb = fig.colorbar(p)
+#     ax.set_xlabel('x [mm]')
+#     ax.set_ylabel('y [mm]')
+#     ax.set_zlabel('z [mm]')
+#     clb.set_label(stress_type)
+#     ax.set_xlim3d(600, 2000)
+#     ax.set_ylim3d(-200,200)
+#     ax.set_zlim3d(-600,600)
+#     plt.show()
+#     plt.close()
+
 
 fig = plt.figure()
-ax.plot(x01stress['z'],x01stress['y'],c=x01stress['sigma'])   #wing profile
+ax = plt.axes()
+p = ax.scatter(x01stress['z'],x01stress['y'],c=x01stress['sigma'], cmap='jet')   #wing profile
+clb = fig.colorbar(p)
+ax.set_ylabel('y [mm]')
+ax.set_xlabel('z [mm]')
+ax.set_xlim(-0.5,0.2)
+clb.set_label('$\sigma_x$ stress')
 plt.show()
+plt.close()
