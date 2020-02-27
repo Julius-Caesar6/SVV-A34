@@ -9,6 +9,7 @@ def sigmaxx(y,z, x, Iyy, Izz):
     return (My(x)*z/Iyy) - (Mz(x)*y/Izz) # FIXME check if two terms should be added or subtracted
 
 
+
 def setup_aileron_profile():
     straight = np.sqrt((ha / 2) ** 2 + (Ca - ha / 2) ** 2)  # length of straight section
     range1 = np.linspace(0,np.pi/2,100)
@@ -63,7 +64,7 @@ def stress_at_span_coordinate(x,y,z):
 
 
 
-x01stress = stress_at_span_coordinate(0.1,y,z)
+x01stress = stress_at_span_coordinate(0.6,y,z)
 
 
 #
@@ -82,14 +83,14 @@ x01stress = stress_at_span_coordinate(0.1,y,z)
 #     plt.show()
 #     plt.close()
 
-
+print(x01stress.max())
 fig = plt.figure()
 ax = plt.axes()
 p = ax.scatter(x01stress['z'],x01stress['y'],c=x01stress['sigma'], cmap='jet')   #wing profile
 clb = fig.colorbar(p)
-ax.set_ylabel('y [mm]')
-ax.set_xlabel('z [mm]')
+ax.set_ylabel('y [m]') #TODO Add units
+ax.set_xlabel('z [m]')
 ax.set_xlim(-0.5,0.2)
-clb.set_label('$\sigma_x$ stress')
+clb.set_label('$\sigma_{xx}$ stress [Pa]') #TODO add units
 plt.show()
 plt.close()
