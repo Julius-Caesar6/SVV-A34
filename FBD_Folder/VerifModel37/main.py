@@ -94,7 +94,7 @@ _ = crosssection.J                   # torsional constant
 
 ######################## Part IV - Deflection calculations #######################################
 ### Definition of additional parameters
-N = 30      # Number of basis functions to use in Rayleigh-Ritz method (total number of coefficients is 3*N)
+N = 20     # Number of basis functions to use in Rayleigh-Ritz method (total number of coefficients is 3*N)
 
 
 ### Create the aileron object
