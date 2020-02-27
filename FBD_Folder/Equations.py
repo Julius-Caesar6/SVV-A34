@@ -56,3 +56,4 @@ def vzder(x):  #CHECK
     return (-1/(E*Iyy)) * ( Macaulay(x1,Rz1/2,2).result(x) + Macaulay(x2,Rz2/2,2).result(x) + Macaulay(x3,Rz3/2,2).result(x) +  Macaulay(x2-0.5*xa,Rj*np.cos(beta)/2,2).result(x) +  Macaulay(x2+0.5*xa,P*np.cos(beta)/2,2).result(x)   )  + C3
 
 
+print(vz(x3))
