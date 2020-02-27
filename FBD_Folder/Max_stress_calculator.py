@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 bending_stress = pd.read_csv('Bending_stress_data.csv')
 
-
+print(q_qvalues)
 
 def prepare_Von_mises_plot():
     # Shear stress
