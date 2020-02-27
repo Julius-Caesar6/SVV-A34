@@ -24,14 +24,12 @@ y6 = -y1[::-1]
 #left curve
 zcl = np.concatenate((z6,z1))
 ycl = np.concatenate((y6,y1))
-qbl = np.concatenate((qb6,qb1))
-#qbl = qbl-qb3[-1]
+qbl = np.concatenate((q6_total,q1_total))
 
 #right closed section
 zcr = np.concatenate((z2,z3,z4,z5))
 ycr = np.concatenate((y2,y3,y4,y5))
-qbr = np.concatenate((qb2,qb3,qb4,qb5))
-#qbr = qbr-qb3[-1]
+qbr = np.concatenate((q2_total,q3_total,q4_total,q5_total))
 
 plt.close() #removes previous
 
