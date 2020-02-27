@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 xshow = True  #show x1,x2, etc
 
-topval = 30
+topval = 100
 x = np.linspace(0.01,la,topval)
 Txa = []
 Mya = []

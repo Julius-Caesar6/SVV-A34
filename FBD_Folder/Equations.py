@@ -35,10 +35,10 @@ def Tx(x):
     return Macaulay(x1, Ry1*-zhat, 0).result(x) + Macaulay(x2, Ry2*-zhat, 0).result(x) + Macaulay(x3,Ry3*-zhat,0).result(x) + -1*(Macaulay(x2-(xa/2), Rj*((ha/2)-zhat)*np.sin(beta),0).result(x) + Macaulay(x2-(xa/2),-1*Rj*np.cos(beta)*(ha/2),0).result(x) + Macaulay(x2+(xa/2), -1*P*np.cos(beta)*(ha/2), 0).result(x) + Macaulay(x2+(xa/2), P*np.sin(beta)*((ha/2)-zhat), 0).result(x)) +Iswitch*IntegrateX(x,1,1)-zhat*Iswitch*IntegrateX(x,1,0)
 
 def Sy(x): #check
-    return Macaulay(x1,-Ry1,0).result(x) + Macaulay(x2,-Ry2,0).result(x) + Macaulay(x3,-Ry3,0).result(x) + Macaulay(x2-0.5*xa,-Rj*np.sin(beta),0).result(x) + Macaulay(x2+0.5*xa,-P*np.sin(beta),0).result(x) - Iswitch*IntegrateX(x,1,0)
+    return Macaulay(x1,-Ry1,0).result(x) + Macaulay(x2,-Ry2,0).result(x) + Macaulay(x3,-Ry3,0).result(x) + Macaulay(x2-0.5*xa,-Rj*np.sin(beta),0).result(x) + Macaulay(x2+0.5*xa,-P*np.sin(beta),0).result(x) -  Iswitch*IntegrateX(x,2,0)
 
 def Sz(x): #check
-    return Macaulay(x1,Rz1,0).result(x) + Macaulay(x2,Rz2,0).result(x) + Macaulay(x3,Rz3,0).result(x) + Macaulay(x2-0.5*xa,Rj*np.cos(beta),0).result(x) + Macaulay(x2+0.5*xa,P*np.cos(beta),0).result(x)
+    return Macaulay(x1,Rz1,0).result(x) + Macaulay(x2,Rz2,0).result(x) + Macaulay(x3,Rz3,0).result(x) + Macaulay(x2-0.5*xa,Rj*np.cos(beta),0).result(x) + Macaulay(x2+0.5*xa,P*np.cos(beta),0).result(x) + Iswitch*IntegrateX(x,2,0)
 
 def vy(x):
     return (-1/(E*Izz))*(-Iswitch*IntegrateX(x,4,0) + Macaulay(x1,-Ry1/6,3).result(x)+ Macaulay(x2,-Ry2/6,3).result(x) +  Macaulay(x3,-Ry3/6,3).result(x)  + Macaulay(x2+0.5*xa,-P*np.sin(beta)/6,3).result(x)  + Macaulay(x2-0.5*xa,-Rj*np.sin(beta)/6,3).result(x)  ) + C1*x + C2
@@ -56,4 +56,4 @@ def vzder(x):  #CHECK
     return (-1/(E*Iyy)) * ( Macaulay(x1,Rz1/2,2).result(x) + Macaulay(x2,Rz2/2,2).result(x) + Macaulay(x3,Rz3/2,2).result(x) +  Macaulay(x2-0.5*xa,Rj*np.cos(beta)/2,2).result(x) +  Macaulay(x2+0.5*xa,P*np.cos(beta)/2,2).result(x)   )  + C3
 
 
-print(vz(x3))
+print(Sz(la))
