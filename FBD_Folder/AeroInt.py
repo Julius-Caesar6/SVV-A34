@@ -100,6 +100,3 @@ def IntegrateX(x,n,zp):  #standard z once then x [n] times
 #
 # print(IntegrateXverif(5.4,1,0))
 
-
-
-print(IntegrateX(la,1,0))
