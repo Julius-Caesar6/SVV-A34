@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 import numpy as np
-from ShearForce_3 import *
+from ShearTorque.ShearForce_3 import *
 
 z1 = (h/2)*np.cos(range1)
 y1 = (h/2)*np.sin(range1)
@@ -25,13 +25,13 @@ y6 = -y1[::-1]
 zcl = np.concatenate((z6,z1))
 ycl = np.concatenate((y6,y1))
 qbl = np.concatenate((qb6,qb1))
-#qbl = qbl-qb3[-1]
+qbl = qbl-qb3[-1]
 
 #right closed section
 zcr = np.concatenate((z2,z3,z4,z5))
 ycr = np.concatenate((y2,y3,y4,y5))
 qbr = np.concatenate((qb2,qb3,qb4,qb5))
-#qbr = qbr-qb3[-1]
+qbr = qbr-qb3[-1]
 
 plt.close() #removes previous
 
