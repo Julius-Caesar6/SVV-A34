@@ -4,7 +4,7 @@ from Constants import *
 from interpolator import *
 
 loaddata = np.genfromtxt('aerodynamicloadcrj700.dat',delimiter=',')  #
-loaddata = np.matrix.transpose(loaddata) #CHEEEEEEEEEEEEEEEEEEEEEEEECK
+loaddata = 1000*np.matrix.transpose(loaddata) #Conversion from [kN] to [m]
 
 loaddataverif = np.genfromtxt('verif.dat',delimiter=',')
 
@@ -47,6 +47,7 @@ def IntegrateMultiSpline(ChordMesh,lstlst,nint,zp1):
     Integral = 0
     for i in range(len(ChordMesh)-1):
         Integral = Integral + IntegratePoly(lstlst[i],nint,ChordMesh[i],ChordMesh[i+1],zp1)
+    #print(Integral)
     return Integral
 
 
@@ -96,7 +97,9 @@ def IntegrateX(x,n,zp):  #standard z once then x [n] times
 #         xlst.append(IntegrateMultiSpline(MeshZ,interpolate(list(loaddataverif[idx]),MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
 #     xlstpoly = interpolate(xlst,xnew).abcd
 #     return IntegrateMultiSpline(xnew,xlstpoly,n,0)
+#
+# print(IntegrateXverif(5.4,1,0))
 
-#print(IntegrateXverif(5.4,2,1))
 
 
+print(IntegrateX(la,1,0))
