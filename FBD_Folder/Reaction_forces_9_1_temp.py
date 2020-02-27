@@ -53,12 +53,12 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
     # Fourth equation Ry = 0:
     row4 = [0,1,0,1,0,1,np.sin(beta),0,0,0,0,0]
     #b:
-    brow4 = -P*np.sin(beta)
+    brow4 = -P*np.sin(beta) - IntegrateX(la,1,0)
 
     # Fifth equation Rz = 0:
     row5 = [1,0,1,0,1,0,np.cos(beta),0,0,0,0,0]
     #b:
-    brow5 = -P*np.cos(beta) - IntegrateX(la,1,0)
+    brow5 = -P*np.cos(beta)
 
     # Sixth equation Vy(x1) - theta(x1)zhat
     row6 = [0,0,0,0,0,0,0, x1, 1, 0, 0, 0]
