@@ -43,7 +43,7 @@ def reaction_solver(zhat, c, ha, d1, d2, d3, x1, x2, x3, xa, la, beta, P, E, Izz
    # Second equation Mz:
     row2 = [0, Macaulay(x1, -1, 1).result(la), 0, Macaulay(x2, -1 ,1).result(la), 0, Macaulay(x3,-1,1).result(la), Macaulay(x2-(xa/2), -np.sin(beta), 1).result(la), 0, 0, 0, 0, 0]
     #b:
-    brow2 = Macaulay(x2+(xa/2),P*np.sin(beta), 1).result(la) + IntegrateX(la,2,0)
+    brow2 = Macaulay(x2+(xa/2),P*np.sin(beta), 1).result(la) - IntegrateX(la,2,0)
 
     # Third equation Tx:
     row3 = [0, Macaulay(x1,-zhat,0).result(la), 0, Macaulay(x2, -zhat, 0).result(la), 0, Macaulay(x3, -zhat, 0).result(la), Macaulay(x2-(xa/2), ((ha/2) - zhat)*np.sin(beta), 0).result(la) + Macaulay(x2-(xa/2),-np.cos(beta)*ha/2,0).result(la), 0, 0, 0, 0, 0]

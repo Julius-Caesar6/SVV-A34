@@ -10,7 +10,7 @@ sel = []
 for i in range(len(x)):
     if int(i%(5/(100/topval))) == 0:
         print(int(100*i/topval),'%')
-    sel.append(Mz(x[i]))
+    sel.append(Sy2(x[i]))
 
 #
 # print(Tx(0.1))

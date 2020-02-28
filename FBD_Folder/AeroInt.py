@@ -4,7 +4,7 @@ from Constants import *
 from interpolator import *
 
 loaddata = np.genfromtxt('aerodynamicloadcrj700.dat',delimiter=',')  #
-loaddata = -1000*np.matrix.transpose(loaddata) #Conversion from [kN] to [m] AND sign convention
+loaddata = 1000*np.matrix.transpose(loaddata) #Conversion from [kN] to [m] AND sign convention
 
 loaddataverif = np.genfromtxt('verif.dat',delimiter=',')
 
