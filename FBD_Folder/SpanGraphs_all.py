@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 xshow = True  #show x1,x2, etc
 
-topval = 40
+topval = 150
 x = np.linspace(0.01,la,topval)
 Txa = []
 Mya = []
@@ -71,7 +71,7 @@ axs3[0, 1].set_title("""Torque""")
 
 if xshow == True:
     for ax in axs.flat:
-        ax.set(xlabel='x-label', ylabel='y-label')
+        ax.set(xlabel='x', ylabel='y-label')
         ax.axvline(x1, label='x1', color='r', linestyle='--',linewidth=0.5)
         ax.axvline(x2, label='x2', color='r', linestyle='--',linewidth=0.5)
         ax.axvline(x3, label='x3', color='r', linestyle='--',linewidth=0.5)

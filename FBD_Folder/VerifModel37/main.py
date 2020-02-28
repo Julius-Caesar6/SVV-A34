@@ -135,16 +135,16 @@ aileron.plotphi()           # Plot the twist distribution, the torque and the di
 ## For custom post-processing of the solution
 x = np.linspace(0,la,num = 10)  # Subsequent functions accept numpy-arrays
 # Compute the deflections
-_, _, _ = aileron.eval(x)       # Compute the three deflections
-_, _, _ = aileron.fdeval(x)     # Compute their their first order derivative
+vyVM, vzVM, thetaVM = aileron.eval(x)       # Compute the three deflections
+vyderVM, vzderVM, _ = aileron.fdeval(x)     # Compute their their first order derivative
 _, _, _ = aileron.sdeval(x)     # Compute their their second order derivative
 _, _, _ = aileron.tdeval(x)     # Compute their their third order derivative
 # Compute the loading
-_ = aileron.Sy(x)               # Compute the shear force in y
-_ = aileron.Sz(x)               # Compute the shear force in z
-_ = aileron.My(x)               # Compute the moment around the y-axis
-_ = aileron.Mz(x)               # Compute the moment around the z-axis
-_ = aileron.T(x)                # Compute the torque
+SyVM = aileron.Sy(x)               # Compute the shear force in y
+SzVM = aileron.Sz(x)               # Compute the shear force in z
+MyVM = aileron.My(x)               # Compute the moment around the y-axis
+MzVM = aileron.Mz(x)               # Compute the moment around the z-axis
+TxVm = aileron.T(x)                # Compute the torque
 _ = aileron.tau(x)              # Compute the distributed torque
 
 ## Value of the total potential energy
@@ -186,7 +186,7 @@ _ = aileron.sol.coef        # Resulting coefficients, collected in bar(alpha) (a
 Stressobject = Stress.Stressstate(crosssection)
 
 ### Define the forces and moments for which you want to know the stress distributions
-x = 0.6
+x = 0.8
 Sy = aileron.Sy(x)
 Sz = aileron.Sz(x)
 My = aileron.My(x)
