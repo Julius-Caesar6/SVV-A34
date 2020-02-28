@@ -1,10 +1,9 @@
-from ShearTorque.ShearForce_3 import q_qvalues, q_yvalues, q_zvalues, tau_values
+from FBD_Folder.ShearForce_3 import q_qvalues, q_yvalues, q_zvalues, tau_values
 import pandas as pd
 import matplotlib.pyplot as plt
 
 bending_stress = pd.read_csv('Bending_stress_data.csv')
 
-print(q_qvalues)
 
 def prepare_Von_mises_plot():
     # Shear stress
@@ -12,7 +11,6 @@ def prepare_Von_mises_plot():
     shearstress['shearstress'] = tau_values
     shearstress['y'] = q_yvalues
     shearstress['z'] = q_zvalues
-    print(shearstress)
     # Bending stress
     stress = bending_stress
     stress['shearstress'] = shearstress['shearstress']
@@ -25,7 +23,7 @@ def prepare_Von_mises_plot():
     for index, row in stress.iterrows():
         VMises.append(Von_mises_stress(row['sigma'], row['shearstress']))
 
-
+    print(stress.max())
     stress['V.Mises'] = VMises
     return stress
 
