@@ -61,7 +61,7 @@ def Mz0(x):
     return Macaulay(x1,-Ry1,1).result(x) + Macaulay(x2,-Ry2,1).result(x) + Macaulay(x3,-Ry3,1).result(x) + Macaulay(x2-0.5*xa,-Rj*np.sin(beta),1).result(x) + Macaulay(x2+0.5*xa,-P*np.sin(beta),1).result(x)
 
 def Sy(x):
-    return (-Mz0(x)+Mz0(x+dx))/dx  - Iswitch*IntegrateX(x,1,0) +  2*Iswitch*IntegrateX(la,1,0)*Macaulay(x2,1,0).result(x)
+    return (-Mz0(x)+Mz0(x+dx))/dx  - Iswitch*IntegrateX(x,1,0)# -  Iswitch*IntegrateX(la,1,0)*Macaulay(x2,1,0).result(x)
 
 def Sz(x):
     return (-My(x)+My(x+dx))/dx
