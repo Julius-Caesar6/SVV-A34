@@ -42,22 +42,27 @@ def plot_displacement_figure(disp_df, disp_df_assembly):
     plt.show()
     plt.close()
 
-def plot_displacement_figure_2D(disp_df, disp_df_assembly):
+
+def plot_displacement_figure_2D(disp_df, disp_df_assembly, title, xmin, xmax, ymin, ymax):
     fig = plt.figure()
     ax = plt.axes()
     
     p = ax.plot(disp_df['xnew'], disp_df['ynew'],'b.')
     # q = ax.scatter(disp_df_assembly['xnew'], disp_df_assembly['ynew'], disp_df_assembly['znew'])
+    ax.set_title(title)
     ax.set_xlabel('x [mm]')
     ax.set_ylabel('y [mm]')
     # ax.set_zlabel('z [mm]')
 
-    ax.set_xlim(0, 2500)
-    ax.set_ylim(0,20)
+    ax.set_xlim(xmin, xmax)
+    ax.set_ylim(ymin,ymax)
     # ax.set_zlim3d(-600,600)
     plt.show()
     plt.close()
 
+plot_displacement_figure_2D(Jam_straight_disp__spar,1, 'Jammed-straight hingeline deflection', 0, 2700, -2,2)
+plot_displacement_figure_2D(Bending_disp_spar, 1, 'Bending hingeline deflection', 0,2700, 0,20)
+plot_displacement_figure_2D(Jam_bent_disp_spar,1, 'Jammed-bent hingeline deflection', 0,2700,-5,20)
 
 def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
     if stress_type == 'Shear':
@@ -83,11 +88,11 @@ def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
 
 
 
-plot_displacement_figure(Jam_bent_disp, 1)
-
-
-plot_displacement_figure_2D(Bending_disp_spar,1)
-plot_displacement_figure_2D(Jam_bent_disp,1)
-plot_displacement_figure_2D(Jam_straight_disp,1)
+# plot_displacement_figure(Jam_bent_disp, 1)
+#
+#
+# plot_displacement_figure_2D(Bending_disp_spar,1)
+# plot_displacement_figure_2D(Jam_bent_disp,1)
+# plot_displacement_figure_2D(Jam_straight_disp,1)
 
 #plot_stress_figure(Jam_Straight_stress_R1,Jam_Straight_stress_R2,'VMises')
