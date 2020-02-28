@@ -3,16 +3,12 @@ from Validation.Inputs_reader import inputs
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 
-
 Bending_disp = pd.read_csv('Displacement/Bending_disp.csv', delimiter='\s+')
 Bending_disp_assembly =  pd.read_csv('Displacement/Bending_disp_assembly.csv', delimiter='\s+')
 Jam_bent_disp = pd.read_csv('Displacement/Jam_Bent_disp.csv', delimiter='\s+')
 Jam_bent_disp_assembly =  pd.read_csv('Displacement/Jam_Bent_disp_assembly.csv', delimiter='\s+')
 Jam_straight_disp = pd.read_csv('Displacement/Jam_straight_disp.csv', delimiter='\s+')
 Jam_straight_disp_assembly =  pd.read_csv('Displacement/Jam_straight_disp_assembly.csv', delimiter='\s+')
-
-
-
 
 def coords_from_nodes (node, inputs):
     return inputs.loc[inputs['Node']==node]

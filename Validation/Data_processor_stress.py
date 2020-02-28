@@ -43,7 +43,7 @@ def get_spar_Coordinates():
 
 
     return spar_nodes_coords
-#
+
 spar_coords = get_spar_Coordinates()
 spar_coords.to_csv('spar_coordinates.csv')
 

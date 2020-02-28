@@ -30,24 +30,6 @@ Own_model_hingeline_disp_Jam_straight = pd.read_csv('737hingelinedeflectionsJam_
 Own_model_hingeline_disp_Jam_Bent = pd.read_csv('737hingelinedeflectionsJam_bent.csv')
 Own_model_hingeline_disp_Bending = pd.read_csv('737hingelinedeflectionsBending.csv')
 
-
-def plot_displacement_figure(disp_df, disp_df_assembly):
-    fig = plt.figure()
-    ax = plt.axes(projection='3d')
-
-    p = ax.scatter(disp_df['xnew'], disp_df['ynew'])
-    # q = ax.scatter(disp_df_assembly['xnew'], disp_df_assembly['ynew'], disp_df_assembly['znew'])
-    ax.set_xlabel('x [mm]')
-    ax.set_ylabel('y [mm]')
-    # ax.set_zlabel('z [mm]')
-
-    ax.set_xlim3d(0, 2500)
-    ax.set_ylim3d(0,20)
-    # ax.set_zlim3d(-600,600)
-    plt.show()
-    plt.close()
-
-
 def plot_displacement_figure_2D(disp_df, disp_df_assembly, title, xmin, xmax, ymin, ymax):
     fig = plt.figure()
     ax = plt.axes()
@@ -68,8 +50,8 @@ def plot_displacement_figure_2D(disp_df, disp_df_assembly, title, xmin, xmax, ym
 
 
 plot_displacement_figure_2D(Bending_disp_spar, Own_model_hingeline_disp_Bending, 'Bending hingeline deflection', 0, 2700, -0.5,20)
-# plot_displacement_figure_2D(Bending_disp_spar, 0, 'Bending hingeline deflection', 0,2700, 0,20)
-# plot_displacement_figure_2D(Jam_bent_disp_spar,0, 'Jammed-bent hingeline deflection', 0,2700,-5,20)
+plot_displacement_figure_2D(Bending_disp_spar, 0, 'Bending hingeline deflection', 0,2700, 0,20)
+plot_displacement_figure_2D(Jam_bent_disp_spar,0, 'Jammed-bent hingeline deflection', 0,2700,-5,20)
 
 def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
     if stress_type == 'Shear':
@@ -79,7 +61,6 @@ def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
 
     fig = plt.figure()
     ax = plt.axes(projection='3d')
-    # ax.set_aspect('equal')
     p = ax.scatter(stress_dfr1['intpointx'], stress_dfr1['intpointy'], stress_dfr1['intpointz'],c=stress_dfr1[type], cmap='jet')
     q = ax.scatter(stress_dfr2['intpointx'], stress_dfr2['intpointy'], stress_dfr2['intpointz'], c = stress_dfr2[type], cmap='jet')
     clb = fig.colorbar(p)
@@ -92,14 +73,3 @@ def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
     ax.set_zlim3d(-600,600)
     plt.show()
     plt.close()
-
-
-
-# plot_displacement_figure(Jam_bent_disp, 1)
-#
-#
-# plot_displacement_figure_2D(Bending_disp_spar,1)
-# plot_displacement_figure_2D(Jam_bent_disp,1)
-# plot_displacement_figure_2D(Jam_straight_disp,1)
-
-#plot_stress_figure(Jam_Straight_stress_R1,Jam_Straight_stress_R2,'VMises')
