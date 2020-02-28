@@ -21,35 +21,41 @@ topval = 60
 x = np.linspace(0.0,la,topval)
 sel = []
 
-for i in range(len(x)):
-    if int(i%(5/(100/topval))) == 0:
-        print(int(100*i/topval),'%')
-    sel.append(Sz(x[i]))  #HERE
-
-plt.axvline(x1,color='r',linestyle='--',linewidth=0.5)
-plt.axvline(x2,color='r',linestyle='--',linewidth=0.5)
-plt.axvline(x3,color='r',linestyle='--',linewidth=0.5)
-plt.axvline(x2-0.5*xa,color='g',linestyle='--',linewidth=0.5)
-plt.axvline(x2+0.5*xa,color='g',linestyle='--',linewidth=0.5)
-
-plt.title('Shear Force in z') #HERE
-plt.xlabel('x [m]')
-plt.ylabel('S [N]')  #HERE
-
+# for i in range(len(x)):
+#     if int(i%(5/(100/topval))) == 0:
+#         print(int(100*i/topval),'%')
+#     sel.append(Sz(x[i]))  #HERE
+#
+# plt.axvline(x1,color='r',linestyle='--',linewidth=0.5)
+# plt.axvline(x2,color='r',linestyle='--',linewidth=0.5)
+# plt.axvline(x3,color='r',linestyle='--',linewidth=0.5)
+# plt.axvline(x2-0.5*xa,color='g',linestyle='--',linewidth=0.5)
+# plt.axvline(x2+0.5*xa,color='g',linestyle='--',linewidth=0.5)
+#
+# plt.title('Shear Force in z') #HERE
+# plt.xlabel('x [m]')
+# plt.ylabel('S [N]')  #HERE
+#
 xVM = np.linspace(0,la,10)
-
-
-
-plt.plot(x,sel,label='Numerical Model z displacement')
-plt.plot(xVM,SzVM,'r+',label='Verification Model z displacement') #HERE
-
-plt.show()
+#
+#
+#
+# plt.plot(x,sel,label='Numerical Model z displacement')
+# plt.plot(xVM,SzVM,'r+',label='Verification Model z displacement') #HERE
+#
+# plt.show()
 
 MSEvy = 0
 
+lst = []
 
-for p in range(10):
-    MSEvy = MSEvy + ((vyVM[p]-vy(xVM[p]))**2)
+
+for p in range(0,10):
+    MSEvy = MSEvy + ((MyVM[p]-My(xVM[p]))**2)
+    lst.append(100*np.abs((vyVM[p]-vy(xVM[p])))/vyVM[p])
 
 
 print(MSEvy*10)  #*10 because *100/10 for % and n=10
+
+print(lst)
+print(max(lst))
