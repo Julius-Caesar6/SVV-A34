@@ -68,16 +68,19 @@ def IntegrateX(x,n,zp):  #standard z once then x [n] times
     for val in MeshX:
         if val < x:
             xnew.append(val)
-    xlst = []
-    for idx in range(len(xnew)):
-        xlst.append(IntegrateMultiSpline(MeshZ,interpolate(list(loaddata[idx]),MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
-    xlstpoly = interpolate(xlst,xnew).abcd
-    return IntegrateMultiSpline(xnew,xlstpoly,n,0)   #check not 0* (ask max)  #-1 due to aero loading sign convention (this function only used for aero)
+    if x < MeshX[1] :
+        return 0
+    if x >= MeshX[1]:
+        xlst = []
+        for idx in range(len(xnew)):
+            xlst.append(IntegrateMultiSpline(MeshZ,interpolate(list(loaddata[idx]),MeshZ).abcd,1,zp))  #integrating along z for all chordwise data lines until x position
+        xlstpoly = interpolate(xlst,xnew).abcd
+        return IntegrateMultiSpline(xnew,xlstpoly,n,0)   #check not 0* (ask max)  #-1 due to aero loading sign convention (this function only used for aero)
 
 
 
 
-
+print(IntegrateX(55,1,0))
 
 
 
