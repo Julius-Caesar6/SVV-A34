@@ -25,6 +25,7 @@ Jam_straight_disp_assembly =  pd.read_csv('Displacement_plots/Jam_straight_disp_
 Bending_disp_spar = pd.read_csv('Spar_displacement_plots/Bending_disp_spar.csv')
 Jam_bent_disp_spar = pd.read_csv('Spar_displacement_plots/Jam_Bent_disp_spar.csv')
 Jam_straight_disp__spar = pd.read_csv('Spar_displacement_plots/Jam_straight_disp_spar.csv')
+Own_model_hingeline_disp = pd.read_csv('737hingelinedeflections.csv')
 
 def plot_displacement_figure(disp_df, disp_df_assembly):
     fig = plt.figure()
@@ -47,11 +48,12 @@ def plot_displacement_figure_2D(disp_df, disp_df_assembly, title, xmin, xmax, ym
     fig = plt.figure()
     ax = plt.axes()
     
-    p = ax.plot(disp_df['xnew'], disp_df['ynew'],'b.')
-    # q = ax.scatter(disp_df_assembly['xnew'], disp_df_assembly['ynew'], disp_df_assembly['znew'])
+    p = ax.plot(disp_df['xnew'], disp_df['ynew'],'b.', label='Validation data')
+    q = ax.plot(disp_df_assembly['xvalues']*1000, disp_df_assembly['vzdisp']*1000, 'r.', label='Our data')
     ax.set_title(title)
     ax.set_xlabel('x [mm]')
     ax.set_ylabel('y [mm]')
+    ax.legend()
     # ax.set_zlabel('z [mm]')
 
     ax.set_xlim(xmin, xmax)
@@ -60,9 +62,11 @@ def plot_displacement_figure_2D(disp_df, disp_df_assembly, title, xmin, xmax, ym
     plt.show()
     plt.close()
 
-plot_displacement_figure_2D(Jam_straight_disp__spar,1, 'Jammed-straight hingeline deflection', 0, 2700, -2,2)
-plot_displacement_figure_2D(Bending_disp_spar, 1, 'Bending hingeline deflection', 0,2700, 0,20)
-plot_displacement_figure_2D(Jam_bent_disp_spar,1, 'Jammed-bent hingeline deflection', 0,2700,-5,20)
+
+
+plot_displacement_figure_2D(Jam_straight_disp__spar, Own_model_hingeline_disp, 'Jammed-straight hingeline deflection', 0, 2700, -2,2)
+# plot_displacement_figure_2D(Bending_disp_spar, 0, 'Bending hingeline deflection', 0,2700, 0,20)
+# plot_displacement_figure_2D(Jam_bent_disp_spar,0, 'Jammed-bent hingeline deflection', 0,2700,-5,20)
 
 def plot_stress_figure(stress_dfr1, stress_dfr2, stress_type):
     if stress_type == 'Shear':
