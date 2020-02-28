@@ -6,12 +6,12 @@ import numpy as np
 import pandas as pd
 
 z = np.dot(z,-1)
-ShearZ =  Sz(0.6)
-Sheary = Sy(0.6)
+ShearZ =  Sz(0.8)
+Sheary = Sy(0.8)
 z_sc = np.abs(0.0053559) #m
 G = 28*10^9
-T = Tx(0.6)
-
+T = Tx(0.8)
+print(Sheary, ShearZ, T)
 #Shear force analysis
 #qb1_Sy ----------------------------------------------------------------------------------------------------------------
 range1 = np.linspace(0,np.pi/2,100)

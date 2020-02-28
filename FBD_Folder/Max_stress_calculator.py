@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from FBD_Folder.Bending_stresses import *
 
 bending_stress = pd.read_csv('Bending_stress_data.csv')
-
+bending_stress = stress_at_span_coordinate(0.8,y,z)
 
 def prepare_Von_mises_plot():
     # Shear stress

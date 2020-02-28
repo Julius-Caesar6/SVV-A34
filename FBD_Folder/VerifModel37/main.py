@@ -187,13 +187,13 @@ _ = aileron.sol.coef        # Resulting coefficients, collected in bar(alpha) (a
 Stressobject = Stress.Stressstate(crosssection)
 
 ### Define the forces and moments for which you want to know the stress distributions
-x = 0.6
+x = 0.8
 Sy = aileron.Sy(x)
 Sz = aileron.Sz(x)
 My = aileron.My(x)
 Mz = aileron.Mz(x)
 T = aileron.T(x)
-
+print(Sy, Sz, T)
 ### Primary functions
 """"The following line should never be disabled, as its results are used in the auxiliary functions"""
 Stressobject.compute_unitstressdistributions()
