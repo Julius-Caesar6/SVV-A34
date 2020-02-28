@@ -1,12 +1,13 @@
 from FBD_Folder.Equations import *
 import numpy as np
 from FBD_Folder.Constants import *
+from FBD_Folder.ShearForce_3 import z_sc
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 import pandas as pd
 
 def sigmaxx(y,z, x, Iyy, Izz):
-    return (My(x)*z/Iyy) + (Mz(x)*y/Izz)
+    return (My(x)*(z+z_sc)/Iyy) + (Mz(x)*y/Izz)
 
 def setup_aileron_profile():
     straight = np.sqrt((ha / 2) ** 2 + (Ca - ha / 2) ** 2)  # length of straight section

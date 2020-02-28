@@ -1,16 +1,16 @@
 
-from ShearTorque.MOI import *
-from ShearTorque.NumericalIntegrator import *
+from FBD_Folder.MOI import *
+from FBD_Folder.NumericalIntegrator import *
 from FBD_Folder.Equations import *
 import numpy as np
+import pandas as pd
 
 z = np.dot(z,-1)
-ShearZ = Sz(0.6)
-Sheary = Sy(0.6)
+ShearZ =  Sz(0.8)
+Sheary = Sy(0.8)
 z_sc = np.abs(0.0053559) #m
 G = 28*10^9
-T = Tx(0.6)
-
+T = Tx(0.8)
 #Shear force analysis
 
 #qb1_Sy ----------------------------------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ qb2_Sy = -Sheary / Izz_total * tspar * (range2 ** 2 / 2 - 0)
 qb2_Sz = -ShearZ / Iyy_total * tspar * z_sc * range2
 
 #qb2_total -------------------------------------------------------------------------------------------------------------
-qb2 =qb2_Sy + qb2_Sz
+qb2 = qb2_Sy + qb2_Sz
 
 #qb3_Sy ---------------------------------------------------------------------------------------------------------------
 range3 = np.linspace(0,straight,100)
@@ -208,13 +208,12 @@ d = np.array([T,0,0])
 matrix_torque = np.linalg.solve(c,d) #0th entry is qso1_t, 1 entry is qso2_t , second entry is dtheta/dx
 
 #total shear flow distributions
-q1_total= qb1 + matrix_force[0] - matrix_torque[0]
-q2_total= qb2 - matrix_force[0] + matrix_force[1] + matrix_torque[0] - matrix_torque[1]
+q1_total = qb1 + matrix_force[0] - matrix_torque[0]
+q2_total = -qb2 - matrix_force[0] + matrix_force[1] + matrix_torque[0] - matrix_torque[1]
 q3_total = qb3 + matrix_force[1] - matrix_torque[1]
 q4_total = qb4 + matrix_force[1] - matrix_torque[1]
 q5_total = qb5 - matrix_force[0] + matrix_force[1] + matrix_torque[0] - matrix_torque[1]
 q6_total = qb6 + matrix_force[0] - matrix_torque[0]
-
 
 #z-y-q values
 straight = np.sqrt((ha / 2) ** 2 + (Ca - ha / 2) ** 2)  # length of straight section
@@ -235,7 +234,7 @@ q4_zvalues = q3_zvalues[::-1]
 q4_yvalues = -q3_yvalues[::-1]
 
 q5_zvalues = q2_zvalues[::-1]
-q5_yvalues = np.linspace(-ha/2, 0, 100)
+q5_yvalues = np.linspace(0, -ha/2, 100)
 
 q6_zvalues = q1_zvalues[::-1]
 q6_yvalues = -q1_yvalues[::-1]
@@ -254,7 +253,6 @@ q_qvalues.extend(q3_total)
 q_qvalues.extend(q4_total)
 q_qvalues.extend(q5_total)
 q_qvalues.extend(q6_total)
-
 
 #maximum stress
 # tau= qmax/tmin

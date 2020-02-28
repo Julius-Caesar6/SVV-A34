@@ -1,4 +1,4 @@
-from ShearTorque.ShearForce_3 import *
+from FBD_Folder.ShearForce_3 import *
 
 z1 = (h/2)*np.cos(range1)
 y1 = (h/2)*np.sin(range1)

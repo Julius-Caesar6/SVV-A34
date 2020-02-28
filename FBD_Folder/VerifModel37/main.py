@@ -186,7 +186,7 @@ _ = aileron.sol.coef        # Resulting coefficients, collected in bar(alpha) (a
 Stressobject = Stress.Stressstate(crosssection)
 
 ### Define the forces and moments for which you want to know the stress distributions
-x = 0.6
+x = 0.8
 Sy = aileron.Sy(x)
 Sz = aileron.Sz(x)
 My = aileron.My(x)
@@ -228,7 +228,7 @@ Stressobject.Tq3f = solution[1]
 Stressobject.Tq4f = solution[1]
 Stressobject.Tq5f = -solution[0] + solution[1]
 Stressobject.Tq6f = solution[0]
-
+print(f'torues:{solution[0], solution[1]}')
 ### Auxiliary functions
 Stressobject.compute_stressdistributions(Sy,Sz,My,Mz,T)
 
@@ -262,7 +262,7 @@ _ = Stressobject.sigma4f(s)         # Compute the direct stress distribution in 
 _ = Stressobject.vm4(s)             # Compute the Von Mises stress distribution in region 4
 _, _ = Stressobject.coord4(s)       # Compute the z,y-coordinates for region 4
 
-y = np.linspace(0,ha/2.,num = 100)
+y = np.linspace(0,-ha/2.,num = 100)
 _ = Stressobject.q5f(y)             # Compute the shear flow distribution in region 5
 _ = Stressobject.sigma5f(y)         # Compute the direct stress distribution in region 5
 _ = Stressobject.vm5(y)             # Compute the Von Mises stress distribution in region 5
