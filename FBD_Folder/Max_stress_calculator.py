@@ -23,7 +23,7 @@ def prepare_Von_mises_plot():
     for index, row in stress.iterrows():
         VMises.append(Von_mises_stress(row['sigma'], row['shearstress']))
 
-
+    print(stress.max())
     stress['V.Mises'] = VMises
     return stress
 

@@ -228,7 +228,7 @@ Stressobject.Tq3f = solution[1]
 Stressobject.Tq4f = solution[1]
 Stressobject.Tq5f = -solution[0] + solution[1]
 Stressobject.Tq6f = solution[0]
-print(f'torues:{solution[0], solution[1]}')
+
 ### Auxiliary functions
 Stressobject.compute_stressdistributions(Sy,Sz,My,Mz,T)
 
