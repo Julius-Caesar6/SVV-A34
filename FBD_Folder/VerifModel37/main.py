@@ -147,6 +147,7 @@ MzVM = aileron.Mz(x)               # Compute the moment around the z-axis
 TxVm = aileron.T(x)                # Compute the torque
 _ = aileron.tau(x)              # Compute the distributed torque
 
+
 ## Value of the total potential energy
 _ = aileron.cPI()               # Compute the total potential energy of the beam for the computed solution.
 i,k = 0, 1.01                   # Parameters for next line
@@ -192,7 +193,7 @@ Sz = aileron.Sz(x)
 My = aileron.My(x)
 Mz = aileron.Mz(x)
 T = aileron.T(x)
-
+print(Sy, Sz, T)
 ### Primary functions
 """"The following line should never be disabled, as its results are used in the auxiliary functions"""
 Stressobject.compute_unitstressdistributions()

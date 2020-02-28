@@ -11,8 +11,8 @@ Sheary = Sy(0.8)
 z_sc = np.abs(0.0053559) #m
 G = 28*10^9
 T = Tx(0.8)
+print(Sheary, ShearZ, T)
 #Shear force analysis
-
 #qb1_Sy ----------------------------------------------------------------------------------------------------------------
 range1 = np.linspace(0,np.pi/2,100)
 qb1_Sy = - Sheary / Izz_total * (t * h ** 2 / 4 * (-np.cos(range1) + 1) + A_stringer / 2 * y[0])

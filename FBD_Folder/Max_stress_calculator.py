@@ -1,9 +1,10 @@
 from FBD_Folder.ShearForce_3 import q_qvalues, q_yvalues, q_zvalues, tau_values
 import pandas as pd
 import matplotlib.pyplot as plt
+from FBD_Folder.Bending_stresses import *
 
 bending_stress = pd.read_csv('Bending_stress_data.csv')
-
+bending_stress = stress_at_span_coordinate(0.8,y,z)
 
 def prepare_Von_mises_plot():
     # Shear stress
@@ -23,16 +24,18 @@ def prepare_Von_mises_plot():
     for index, row in stress.iterrows():
         VMises.append(Von_mises_stress(row['sigma'], row['shearstress']))
 
-    print(stress.max())
     stress['V.Mises'] = VMises
     return stress
 
-stress =prepare_Von_mises_plot()
+
+stress = prepare_Von_mises_plot()
+
 
 fig2 = plt.figure()
 ax2 = plt.axes()
 p = ax2.scatter(stress['z'], stress['y'],c=stress['shearflow'], cmap='jet')   #wing profile
 clb = fig2.colorbar(p)
+ax2.set_title('Shear flow distribution')
 ax2.set_ylabel('y [m]')
 ax2.set_xlabel('z [m]')
 ax2.set_xlim(-0.5,0.2)
@@ -44,11 +47,12 @@ fig3 = plt.figure()
 ax3 = plt.axes()
 p = ax3.scatter(stress['z'], stress['y'],c=stress['sigma'], cmap='jet')   #wing profile
 clb = fig3.colorbar(p)
+ax3.set_title('Direct stress')
 ax3.set_ylabel('y [m]')
 ax3.set_xlabel('z [m]')
 ax3.set_xlim(-0.5,0.2)
 ax3.invert_xaxis()
-clb.set_label(' Direct stress [Pa]') #TODO add units
+clb.set_label(' Direct stress [Pa]')
 plt.show()
 
 
@@ -56,11 +60,12 @@ fig = plt.figure()
 ax = plt.axes()
 p = ax.scatter(stress['z'], stress['y'],c=stress['V.Mises'], cmap='jet')   #wing profile
 clb = fig.colorbar(p)
+ax.set_title('Von Mises stress')
 ax.set_ylabel('y [m]')
 ax.set_xlabel('z [m]')
 ax.set_xlim(-0.5,0.2)
 ax.invert_xaxis()
-clb.set_label(' Von Mises stress [Pa]') #TODO add units
+clb.set_label(' Von Mises stress [Pa]')
 plt.show()
 
 
