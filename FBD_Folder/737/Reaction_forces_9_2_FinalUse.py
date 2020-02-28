@@ -1,7 +1,7 @@
-from FBD_Folder.Macaulay import Macaulay
+from Macaulay import Macaulay
 import numpy as np
 from AeroInt import *
-from FBD_Folder.Constants import *
+from Constants import *
 from pandas import *
 
 #Solving reaction forces using Ax = b

@@ -10,7 +10,7 @@ sel = []
 for i in range(len(x)):
     if int(i%(5/(100/topval))) == 0:
         print(int(100*i/topval),'%')
-    sel.append(Sy(x[i]))
+    sel.append(vz(x[i]))
 
 #
 # print(Tx(0.1))
@@ -26,7 +26,7 @@ plt.axvline(x3,label='x3',color='r',linestyle='--',linewidth=0.5)
 plt.axvline(x2-0.5*xa,label='x_j',color='g',linestyle='--',linewidth=0.5)
 plt.axvline(x2+0.5*xa,label='x_P',color='g',linestyle='--',linewidth=0.5)
 
-plt.title('Shear Force in z')
+plt.title('Title')
 plt.xlabel('x [m]')
 plt.ylabel('S [N]')
 plt.plot(x,sel)

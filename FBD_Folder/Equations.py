@@ -68,3 +68,5 @@ def Sz(x):
 
 
 print(Mz(la),My(la),Tx(la),vy(x1),vy(x2),vy(x3),vz(x1),vz(x2),vz(x3))
+
+print(Tx(0.695))

@@ -1,5 +1,5 @@
-from FBD_Folder.Macaulay import Macaulay
-from FBD_Folder.Constants import *
+from Macaulay import Macaulay
+from Constants import *
 from AeroInt import *
 from FBDvalues import *   #make sure not V
 
