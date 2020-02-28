@@ -3,10 +3,13 @@ from MeshSpaceXZ import *
 from Constants import *
 from interpolator import *
 
-loaddata = np.genfromtxt('aerodynamicloadcrj700.dat',delimiter=',')  #
+loaddata = np.genfromtxt('aeroload.dat',delimiter=',')  #
 loaddata = 1000*np.matrix.transpose(loaddata) #Conversion from [kN] to [m] AND sign convention
 
-loaddataverif = np.genfromtxt('verif.dat',delimiter=',')
+for i in range(41):
+    for j in range(81):
+        loaddata[i,j] = -5.54*1000
+
 
 
 
@@ -77,10 +80,6 @@ def IntegrateX(x,n,zp):  #standard z once then x [n] times
         xlstpoly = interpolate(xlst,xnew).abcd
         return IntegrateMultiSpline(xnew,xlstpoly,n,0)   #check not 0* (ask max)  #-1 due to aero loading sign convention (this function only used for aero)
 
-
-
-
-print(IntegrateX(55,1,0))
 
 
 
