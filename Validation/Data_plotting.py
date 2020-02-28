@@ -26,8 +26,10 @@ Bending_disp_spar = pd.read_csv('Spar_displacement_plots/Bending_disp_spar.csv')
 Jam_bent_disp_spar = pd.read_csv('Spar_displacement_plots/Jam_Bent_disp_spar.csv')
 Jam_straight_disp__spar = pd.read_csv('Spar_displacement_plots/Jam_straight_disp_spar.csv')
 
-Own_model_hingeline_disp_Jam_straight = pd.read_csv('737hingelinedeflections.csv')
+Own_model_hingeline_disp_Jam_straight = pd.read_csv('737hingelinedeflectionsJam_straight.csv')
 Own_model_hingeline_disp_Jam_Bent = pd.read_csv('737hingelinedeflectionsJam_bent.csv')
+Own_model_hingeline_disp_Bending = pd.read_csv('737hingelinedeflectionsBending.csv')
+
 
 def plot_displacement_figure(disp_df, disp_df_assembly):
     fig = plt.figure()
@@ -65,7 +67,7 @@ def plot_displacement_figure_2D(disp_df, disp_df_assembly, title, xmin, xmax, ym
     plt.close()
 
 
-plot_displacement_figure_2D(Jam_bent_disp_spar, Own_model_hingeline_disp_Jam_Bent, 'Jammed-bent hingeline deflection', 0, 2700, -0.5,20)
+plot_displacement_figure_2D(Bending_disp_spar, Own_model_hingeline_disp_Bending, 'Bending hingeline deflection', 0, 2700, -0.5,20)
 # plot_displacement_figure_2D(Bending_disp_spar, 0, 'Bending hingeline deflection', 0,2700, 0,20)
 # plot_displacement_figure_2D(Jam_bent_disp_spar,0, 'Jammed-bent hingeline deflection', 0,2700,-5,20)
 
