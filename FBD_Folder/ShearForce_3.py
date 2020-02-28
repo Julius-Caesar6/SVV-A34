@@ -6,13 +6,13 @@ import numpy as np
 import pandas as pd
 
 z = np.dot(z,-1)
-ShearZ =  Sz(0.8)
-Sheary = Sy(0.8)
+ShearZ =  Sz(0.6)
+Sheary = Sy(0.6)
 z_sc = np.abs(0.0053559) #m
 G = 28*10^9
-T = Tx(0.8)
-#Shear force analysis
+T = Tx(0.6)
 
+#Shear force analysis
 #qb1_Sy ----------------------------------------------------------------------------------------------------------------
 range1 = np.linspace(0,np.pi/2,100)
 qb1_Sy = - Sheary / Izz_total * (t * h ** 2 / 4 * (-np.cos(range1) + 1) + A_stringer / 2 * y[0])

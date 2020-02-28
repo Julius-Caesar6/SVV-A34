@@ -147,6 +147,7 @@ _ = aileron.Mz(x)               # Compute the moment around the z-axis
 _ = aileron.T(x)                # Compute the torque
 _ = aileron.tau(x)              # Compute the distributed torque
 
+
 ## Value of the total potential energy
 _ = aileron.cPI()               # Compute the total potential energy of the beam for the computed solution.
 i,k = 0, 1.01                   # Parameters for next line
@@ -186,7 +187,7 @@ _ = aileron.sol.coef        # Resulting coefficients, collected in bar(alpha) (a
 Stressobject = Stress.Stressstate(crosssection)
 
 ### Define the forces and moments for which you want to know the stress distributions
-x = 0.8
+x = 0.6
 Sy = aileron.Sy(x)
 Sz = aileron.Sz(x)
 My = aileron.My(x)
